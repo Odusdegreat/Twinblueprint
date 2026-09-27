@@ -26,7 +26,7 @@ const sections = [
   {
     title: "Cookies and Tracking Technologies",
     content:
-      "We use cookies and similar tracking technologies to collect usage information and improve your browsing experience. You can control cookies through your browser settings, though some features may not function properly without them.",
+      "We use cookies and similar tracking technologies to collect usage information and improve your browsing experience. You can control cookies through your browser settings, though some features may not function properly without them. We also record anonymous page views and button clicks (page address, button text and referring website) in our own hosting provider, Lovable Cloud, to understand how the site is used. This does not use cookies or identify you personally.",
   },
   {
     title: "Your Rights",

@@ -1,9 +1,10 @@
 import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
-import { track } from "@/lib/analytics";
+import { installClickTracking, track } from "@/lib/analytics";
 
 const RouteTracker = () => {
   const location = useLocation();
+  useEffect(() => installClickTracking(), []);
   useEffect(() => {
     track("page_view", { path: location.pathname });
     if (location.pathname.startsWith("/blog/")) {
