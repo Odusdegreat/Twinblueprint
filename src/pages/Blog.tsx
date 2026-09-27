@@ -1,196 +1,81 @@
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
+import { useNavigate, Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { Calendar, User, Check } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { useDemoDialogStore } from "@/stores/demoDialogStore";
-import { toast } from "@/components/ui/sonner";
+import { useToast } from "@/hooks/use-toast";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import SEO from "@/components/SEO";
+import PageNav from "@/components/PageNav";
+import BookDemoDialog from "@/components/BookDemoDialog";
+import { blogPosts as posts } from "./BlogPost";
+import { FaBuilding, FaChartLine, FaVrCardboard } from "react-icons/fa";
+import blogPlanningImg from "@/assets/blog-planning-approval.jpg";
+import blogBimImg from "@/assets/blog-bim-visualisation.jpg";
+import blogImmersiveImg from "@/assets/blog-immersive-property.jpg";
 
-import { FaBuilding, FaChartLine, FaComments, FaRobot, FaLeaf, FaVrCardboard } from "react-icons/fa";
-
-const blogPosts = [
+const featured = [
   {
-    id: 1,
-    title: "How Architectural Visualisation is Transforming Planning Approvals",
-    excerpt: "Discover why planning authorities are embracing photorealistic architectural renders as the new standard for development applications.",
-    category: "Industry Trends",
-    author: "Sarah Mitchell",
-    date: "March 15, 2026",
-    readTime: "8 min read",
-    icon: FaBuilding,
-    gradient: "from-blue-600 to-cyan-500",
-  },
-  {
-    id: 2,
-    title: "The ROI of Early Visualisation: A Developer's Guide",
-    excerpt: "Learn how investing in planning visualisation early in the project lifecycle can save months and millions in approval delays.",
-    category: "Business Strategy",
-    author: "James Chen",
-    date: "March 8, 2026",
-    readTime: "6 min read",
+    slug: "planning-approval-digital-twin",
     icon: FaChartLine,
-    gradient: "from-green-600 to-emerald-500",
+    gradient: "from-blue-600 to-cyan-500",
+    image: blogPlanningImg,
+    alt: "Planning officers reviewing a Digital Twin model of a city district to support planning approval",
   },
   {
-    id: 3,
-    title: "Stakeholder Communication: From Drawings to Digital Experiences",
-    excerpt: "Explore how interactive digital twins bridge the communication gap between architects, planners, and community stakeholders.",
-    category: "Communication",
-    author: "Emma Rodriguez",
-    date: "February 28, 2026",
-    readTime: "7 min read",
-    icon: FaComments,
-    gradient: "from-purple-600 to-pink-500",
-  },
-  {
-    id: 4,
-    title: "The Future of Architectural Visualisation",
-    excerpt: "A deep dive into emerging technologies like AI-powered rendering and real-time collaboration in architectural visualisation.",
-    category: "Technology",
-    author: "David Park",
-    date: "February 20, 2026",
-    readTime: "10 min read",
-    icon: FaRobot,
-    gradient: "from-orange-600 to-amber-500",
-  },
-  {
-    id: 5,
-    title: "Environmental Impact Visualisation: Making Sustainability Visible",
-    excerpt: "How contextual renders help communicate environmental considerations and sustainability features to all stakeholders.",
-    category: "Sustainability",
-    author: "Lisa Thompson",
-    date: "February 12, 2026",
-    readTime: "9 min read",
-    icon: FaLeaf,
-    gradient: "from-teal-600 to-green-500",
-  },
-  {
-    id: 6,
-    title: "Case Study: Virtual Site Walkthroughs During the Planning Process",
-    excerpt: "An in-depth look at how virtual walkthroughs have revolutionized the way planners review and evaluate proposals.",
-    category: "Case Studies",
-    author: "Michael Brown",
-    date: "February 5, 2026",
-    readTime: "5 min read",
-    icon: FaVrCardboard,
-    gradient: "from-indigo-600 to-blue-500",
-  },
-  {
-    id: 7,
-    title: "Maximizing Marketing Impact with Hyper-Realistic Renders",
-    excerpt: "Learn how high-quality photorealistic renders can transform your property marketing and accelerate sales.",
-    category: "Marketing",
-    author: "Anna Wilson",
-    date: "January 28, 2026",
-    readTime: "6 min read",
+    slug: "bim-visualisation-construction",
     icon: FaBuilding,
-    gradient: "from-pink-600 to-rose-500",
+    gradient: "from-green-600 to-emerald-500",
+    image: blogBimImg,
+    alt: "Engineer reviewing BIM visualisation of a bridge infrastructure project on site",
   },
   {
-    id: 8,
-    title: "VR and AR: The New Frontier in Property Sales",
-    excerpt: "How virtual and augmented reality are changing the way developers showcase off-plan properties.",
-    category: "Technology",
-    author: "Chris Lee",
-    date: "January 20, 2026",
-    readTime: "8 min read",
+    slug: "interactive-immersive-property-visualisation",
     icon: FaVrCardboard,
-    gradient: "from-cyan-600 to-blue-500",
-  },
-  {
-    id: 9,
-    title: "Community Engagement: Winning Over Local Stakeholders",
-    excerpt: "Best practices for presenting development proposals to community groups and gaining public support.",
-    category: "Communication",
-    author: "Rachel Green",
-    date: "January 12, 2026",
-    readTime: "7 min read",
-    icon: FaComments,
-    gradient: "from-violet-600 to-purple-500",
+    gradient: "from-purple-600 to-pink-500",
+    image: blogImmersiveImg,
+    alt: "Interactive immersive property visualisation of a residential development on a large screen",
   },
 ];
 
-const categories = ["Twinblueprint Trending"];
 
 const Blog = () => {
   const { setOpen } = useDemoDialogStore();
+  const { toast } = useToast();
   const navigate = useNavigate();
   const [subscribeEmail, setSubscribeEmail] = useState("");
   const [subscribed, setSubscribed] = useState(false);
-  const [selectedCategory, setSelectedCategory] = useState("Twinblueprint Trending");
-
-  const filteredPosts = blogPosts;
 
   const handleSubscribe = (e: React.FormEvent) => {
     e.preventDefault();
     if (subscribeEmail) {
       setSubscribed(true);
-      toast.success("Subscribed!", { description: "You'll receive our latest updates." });
+      toast({ title: "Subscribed", description: "You will receive our latest Digital Twin insights." });
       setSubscribeEmail("");
     }
   };
 
   return (
     <>
-      <SEO
-        title="Blog | Architectural Visualisation & Digital Twin Insights | Twinblueprint"
-        description="Insights, trends and best practices in architectural visualisation, digital twin technology, BIM visualisation and the future of development approvals."
-        path="/blog"
-        jsonLd={[
-          {
-            "@context": "https://schema.org",
-            "@type": "Blog",
-            name: "Twinblueprint Blog",
-            url: "https://meta-view-creator.lovable.app/blog",
-            publisher: {
-              "@type": "Organization",
-              name: "Twinblueprint",
-              logo: { "@type": "ImageObject", url: "https://meta-view-creator.lovable.app/og-image.jpg" },
-            },
-            blogPost: blogPosts.map((p) => ({
-              "@type": "BlogPosting",
-              headline: p.title,
-              description: p.excerpt,
-              image: "https://meta-view-creator.lovable.app/og-image.jpg",
-              datePublished: new Date(p.date).toISOString(),
-              dateModified: new Date(p.date).toISOString(),
-              articleSection: p.category,
-              author: {
-                "@type": "Person",
-                name: p.author,
-                url: `https://meta-view-creator.lovable.app/about#${p.author.toLowerCase().replace(/\s+/g, "-")}`,
-              },
-              publisher: {
-                "@type": "Organization",
-                name: "Twinblueprint",
-                logo: { "@type": "ImageObject", url: "https://meta-view-creator.lovable.app/og-image.jpg" },
-              },
-              mainEntityOfPage: {
-                "@type": "WebPage",
-                "@id": `https://meta-view-creator.lovable.app/blog#post-${p.id}`,
-              },
-            })),
-          },
-          {
-            "@context": "https://schema.org",
-            "@type": "BreadcrumbList",
-            itemListElement: [
-              { "@type": "ListItem", position: 1, name: "Home", item: "https://meta-view-creator.lovable.app/" },
-              { "@type": "ListItem", position: 2, name: "Blog", item: "https://meta-view-creator.lovable.app/blog" },
-            ],
-          },
-        ]}
-
-      />
+      <Helmet>
+        <title>Digital Twin & Visualisation Insights | Twinblueprint Blog</title>
+        <meta
+          name="description"
+          content="Expert insights on Digital Twin visualisation, BIM, planning approval support and immersive property visualisation for construction, property and planning teams."
+        />
+        <link rel="canonical" href="/blog" />
+        <meta property="og:title" content="Digital Twin & Visualisation Insights | Twinblueprint Blog" />
+        <meta property="og:url" content="/blog" />
+        <meta property="og:image" content="/og-image.jpg" />
+        <meta name="twitter:image" content="/og-image.jpg" />
+        <meta name="twitter:card" content="summary_large_image" />
+      </Helmet>
       <Navbar />
       <main>
-        <section className="bg-hero pt-32 pb-20 md:pt-40 md:pb-28">
+        <section className="bg-hero pt-20 pb-8 md:pt-24 md:pb-10">
           <div className="container">
             <motion.div
               initial={{ opacity: 0, y: 30 }}
@@ -199,115 +84,89 @@ const Blog = () => {
               className="max-w-3xl mx-auto text-center"
             >
               <h1 className="text-4xl md:text-5xl lg:text-6xl leading-tight text-hero-foreground mb-6">
-                Our <span className="text-gradient">Blog</span>
+                Digital Twin <span className="text-gradient">Insights</span>
               </h1>
-              <p className="text-hero-muted text-base md:text-lg leading-relaxed text-pretty max-w-2xl mx-auto">
-                Insights, trends, best practices in architectural visualisation, Digital Twin technology, BIM visualisation, Immersive property visualisation, and the future of development approvals.
+              <p className="text-hero-muted text-lg md:text-xl leading-relaxed">
+                Practical perspectives on Digital Twin technology, BIM visualisation, planning approval support and immersive property visualisation for the built environment.
               </p>
             </motion.div>
           </div>
         </section>
 
-        <section className="section-padding bg-background">
+        <section className="py-5 md:py-6 bg-background">
           <div className="container">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="flex flex-wrap gap-3 justify-center mb-12"
+              className="flex flex-wrap gap-2 justify-center mb-4"
             >
-              {categories.map((cat) => (
-                <Badge
-                  key={cat}
-                  variant={selectedCategory === cat ? "default" : "outline"}
-                  className="cursor-pointer px-4 py-2 text-sm"
-                  onClick={() => setSelectedCategory(cat)}
-                >
-                  {cat}
-                </Badge>
-              ))}
+              <Badge variant="default" className="px-4 py-2 text-sm">Featured Articles</Badge>
             </motion.div>
 
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {filteredPosts.map((post, index) => (
-                <motion.article
-                  key={post.id}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: index * 0.1 }}
-                  className="bg-card rounded-2xl border border-border overflow-hidden hover:border-primary/50 transition-colors group cursor-pointer"
-                >
-                  <div className={`h-48 bg-gradient-to-br ${post.gradient} flex items-center justify-center overflow-hidden`}>
-                    <post.icon className="w-16 h-16 text-white/80" />
-                  </div>
-
-                  <div className="p-6">
-                    <h3 className="text-xl font-bold text-foreground mb-3 group-hover:text-primary transition-colors">
-                      {post.title}
-                    </h3>
-
-                    <p className="text-muted-foreground text-sm mb-4 leading-relaxed">
-                      {post.excerpt}
-                    </p>
-
-                    <div className="flex items-center gap-3 mb-4 pb-4 border-b border-border/60">
-                      <div
-                        aria-hidden="true"
-                        className={`h-9 w-9 rounded-full bg-gradient-to-br ${post.gradient} flex items-center justify-center text-white text-xs font-bold shrink-0`}
-                      >
-                        {post.author.split(" ").map((n) => n[0]).join("").slice(0, 2)}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 max-w-md md:max-w-none mx-auto">
+              {featured.map((f, index) => {
+                const post = posts[f.slug];
+                const Icon = f.icon;
+                return (
+                  <motion.article
+                    key={f.slug}
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: index * 0.1 }}
+                    className="bg-card rounded-2xl border border-border overflow-hidden hover:border-primary/50 transition-colors group cursor-pointer flex flex-col"
+                    onClick={() => navigate(`/blog/${f.slug}`)}
+                  >
+                    <div className={`relative aspect-[16/9] sm:aspect-[3/2] md:aspect-auto md:h-36 bg-gradient-to-br ${f.gradient} overflow-hidden`}>
+                      <img
+                        src={f.image}
+                        alt={f.alt}
+                        width={1280}
+                        height={720}
+                        loading="lazy"
+                        className="absolute inset-0 h-full w-full object-cover object-center transition-transform duration-500 group-hover:scale-105"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-background/10 to-transparent" />
+                      <Icon className="absolute bottom-3 left-3 w-7 h-7 text-primary-foreground/90 drop-shadow" />
+                    </div>
+                    <div className="p-4 sm:p-5 flex flex-col flex-1">
+                      <Badge className="self-start mb-2 bg-primary/10 text-primary border-0">{post.category}</Badge>
+                      <h2 className="text-lg sm:text-xl font-bold text-foreground mb-2 leading-snug text-balance group-hover:text-primary transition-colors">
+                        {post.title}
+                      </h2>
+                      <p className="text-muted-foreground text-[0.9375rem] sm:text-sm mb-3 leading-relaxed flex-1 line-clamp-3">
+                        {post.intro.slice(0, 140)}…
+                      </p>
+                      <div className="flex flex-wrap items-center gap-x-4 gap-y-1 text-xs text-muted-foreground mb-4">
+                        <span className="inline-flex items-center gap-1.5"><Calendar className="h-4 w-4 shrink-0" /> {post.date}</span>
+                        <span className="inline-flex items-center gap-1.5"><User className="h-4 w-4 shrink-0" /> {post.author} · {post.readTime}</span>
                       </div>
-                      <div className="text-xs text-muted-foreground leading-tight">
-                        <div className="font-medium text-foreground">{post.author}</div>
-                        <div className="flex items-center gap-1.5">
-                          <Calendar className="h-3 w-3" />
-                          <span>{post.date}</span>
-                          <span aria-hidden="true">·</span>
-                          <span>{post.readTime}</span>
-                        </div>
+                      <div className="flex flex-col sm:flex-row gap-2">
+                        <Button
+                          variant="outline"
+                          className="flex-1 h-11 border-primary/20 text-primary hover:bg-primary hover:text-primary-foreground"
+                          asChild
+                        >
+                          <Link to={`/blog/${f.slug}`}>Read article</Link>
+                        </Button>
+                        <Button
+                          variant="outline"
+                          className="flex-1 h-11 border-primary/20 text-primary hover:bg-primary hover:text-primary-foreground"
+                          onClick={(e) => { e.stopPropagation(); setOpen(true); }}
+                        >
+                          Book a Demo
+                        </Button>
                       </div>
                     </div>
-
-                    <div className="flex gap-2">
-                      <Button
-                        variant="outline"
-                        size="sm"
-                        className="flex-1 border-primary/20 text-primary hover:bg-primary hover:text-primary-foreground"
-                        onClick={() => navigate("/case-studies")}
-                      >
-                        View Case Studies
-                      </Button>
-                      <Button
-                        variant="outline"
-                        size="sm"
-                        className="flex-1 border-primary/20 text-primary hover:bg-primary hover:text-primary-foreground"
-                        onClick={() => setOpen(true)}
-                      >
-                        Book a Demo
-                      </Button>
-                    </div>
-                  </div>
-                </motion.article>
-              ))}
-            </div>
-
-            <div className="mt-16 max-w-3xl mx-auto text-center border-t border-border pt-12">
-              <h2 className="text-2xl md:text-3xl text-foreground mb-4">Keep exploring</h2>
-              <p className="text-muted-foreground text-base leading-relaxed">
-                Browse our{" "}
-                <Link to="/services" className="text-primary underline-offset-4 hover:underline">architectural visualisation services</Link>,
-                see{" "}
-                <Link to="/case-studies" className="text-primary underline-offset-4 hover:underline">real-world case studies</Link>,
-                or learn about{" "}
-                <Link to="/how-it-works" className="text-primary underline-offset-4 hover:underline">our four-step delivery process</Link>.
-              </p>
+                  </motion.article>
+                );
+              })}
             </div>
           </div>
         </section>
 
-
-        <section className="bg-hero section-padding">
+        <section className="bg-hero py-10 md:py-12">
           <div className="container">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -316,24 +175,22 @@ const Blog = () => {
               className="text-center max-w-2xl mx-auto"
             >
               <h2 className="text-3xl md:text-4xl text-hero-foreground mb-6">
-                Stay updated on the latest in visualisation
+                Stay Ahead On Digital Twin And Visualisation
               </h2>
               <p className="text-hero-muted text-lg mb-8 leading-relaxed">
-                Subscribe to our newsletter for insights and trends in architectural visualisation.
+                Monthly insights on planning approval support, BIM visualisation and immersive property visualisation straight to your inbox.
               </p>
               <form className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto" onSubmit={handleSubscribe}>
                 {subscribed ? (
                   <div className="flex items-center gap-2 text-green-400 justify-center">
                     <Check className="h-5 w-5" />
-                    <span>Thanks for subscribing!</span>
+                    <span>Thanks for subscribing.</span>
                   </div>
                 ) : (
                   <>
-                    <Label htmlFor="newsletter-email" className="sr-only">Email address</Label>
-                    <Input
-                      id="newsletter-email"
+                    <input
                       type="email"
-                      placeholder="Enter your email"
+                      placeholder="Work email"
                       value={subscribeEmail}
                       onChange={(e) => setSubscribeEmail(e.target.value)}
                       required
@@ -349,7 +206,9 @@ const Blog = () => {
           </div>
         </section>
       </main>
+      <PageNav />
       <Footer />
+      <BookDemoDialog />
     </>
   );
 };

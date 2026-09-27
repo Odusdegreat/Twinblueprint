@@ -14,6 +14,9 @@ import PrivacyPolicy from "./pages/PrivacyPolicy";
 import Terms from "./pages/Terms";
 import NotFound from "./pages/NotFound";
 import LearnMoreCaseStudy from "./pages/LearnMoreCaseStudy";
+import BlogPost from "./pages/BlogPost";
+import RouteTracker from "./components/RouteTracker";
+import { Toaster } from "@/components/ui/toaster";
 import { AuthProvider } from "./hooks/useAuth";
 import { crmPath, isCrmHost, isCrmOnlyHost } from "./lib/crm-base";
 import CrmHostRedirect from "./components/CrmHostRedirect";
@@ -35,11 +38,11 @@ const queryClient = new QueryClient();
 
 const App = () => (
   <QueryClientProvider client={queryClient}>
-    <AuthProvider><TooltipProvider><Sonner /><BrowserRouter>
+    <AuthProvider><TooltipProvider><Toaster /><Sonner /><BrowserRouter>
       <Routes>
         {!isCrmOnlyHost() && <>
         <Route path="/" element={<Index />} /><Route path="/services" element={<Services />} /><Route path="/case-studies" element={<CaseStudies />} />
-        <Route path="/case-studies/:id" element={<LearnMoreCaseStudy />} /><Route path="/blog" element={<Blog />} /><Route path="/about" element={<About />} />
+        <Route path="/case-studies/:id" element={<LearnMoreCaseStudy />} /><Route path="/blog" element={<Blog />} /><Route path="/blog/:slug" element={<BlogPost />} /><Route path="/about" element={<About />} />
         <Route path="/how-it-works" element={<HowItWorks />} /><Route path="/faq" element={<FAQ />} /><Route path="/privacy-policy" element={<PrivacyPolicy />} /><Route path="/terms" element={<Terms />} />
         {!isCrmHost() && <Route path="/crm/*" element={<CrmHostRedirect />} />}
         </>}
@@ -49,7 +52,7 @@ const App = () => (
         </Route></Route>
         </>}
         <Route path="*" element={<NotFound />} />
-      </Routes><BookDemoDialog />
+      </Routes><RouteTracker /><BookDemoDialog />
     </BrowserRouter></TooltipProvider></AuthProvider>
   </QueryClientProvider>
 );

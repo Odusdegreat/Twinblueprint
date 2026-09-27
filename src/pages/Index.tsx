@@ -1,41 +1,61 @@
+import { Helmet } from "react-helmet-async";
 import Navbar from "@/components/Navbar";
 import HeroSection from "@/components/HeroSection";
-import TrustStrip from "@/components/TrustStrip";
 import ProblemSection from "@/components/ProblemSection";
 import SolutionSection from "@/components/SolutionSection";
-import TestimonialsSection from "@/components/TestimonialsSection";
+import IndustriesSection from "@/components/IndustriesSection";
+import BuiltForSection from "@/components/BuiltForSection";
 import CaseStudiesSection from "@/components/CaseStudiesSection";
 import HowItWorksSection from "@/components/HowItWorksSection";
 import CTASection from "@/components/CTASection";
 import Footer from "@/components/Footer";
-import MobileStickyCTA from "@/components/MobileStickyCTA";
-import SEO from "@/components/SEO";
+import PageNav from "@/components/PageNav";
+import BookDemoDialog from "@/components/BookDemoDialog";
 
 const Index = () => {
   return (
     <>
-      <SEO
-        title="Twinblueprint | Immersive Property Visualisation & Digital Twins"
-        description="Digital visualisation for property, infrastructure and planning projects. Speed up approvals and align every stakeholder with photorealistic renders and immersive walkthroughs."
-        path="/"
-        jsonLd={{
+      <Helmet>
+        <title>Digital Twin & Architectural Visualisation | Twinblueprint</title>
+        <meta
+          name="description"
+          content="Digital Twin technology and photorealistic architectural visualisation that accelerate planning approvals, align stakeholders and reduce construction project risk."
+        />
+        <link rel="canonical" href="/" />
+        <meta property="og:title" content="Digital Twin & Architectural Visualisation | Twinblueprint" />
+        <meta
+          property="og:description"
+          content="Accelerate planning approvals and de risk delivery with Digital Twin solutions for construction, infrastructure and urban planning teams."
+        />
+        <meta property="og:url" content="/" />
+        <meta property="og:image" content="/og-image.jpg" />
+        <meta name="twitter:image" content="/og-image.jpg" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <script type="application/ld+json">{JSON.stringify({
           "@context": "https://schema.org",
-          "@type": "WebSite",
+          "@type": "Organization",
           name: "Twinblueprint",
-          url: "https://meta-view-creator.lovable.app/",
-        }}
-      />
+          url: "/",
+          description:
+            "Digital Twin, architectural visualisation and immersive property visualisation specialists for construction, infrastructure and urban planning.",
+          areaServed: "Worldwide",
+          sameAs: [],
+        })}</script>
+      </Helmet>
       <Navbar />
-      <HeroSection />
-      <TrustStrip />
-      <ProblemSection />
-      <SolutionSection />
-      <TestimonialsSection />
-      <CaseStudiesSection />
-      <HowItWorksSection />
-      <CTASection />
+      <main>
+        <HeroSection />
+        <ProblemSection />
+        <SolutionSection />
+        <BuiltForSection />
+        <IndustriesSection />
+        <CaseStudiesSection />
+        <HowItWorksSection />
+        <CTASection />
+      </main>
+      <PageNav />
       <Footer />
-      <MobileStickyCTA />
+      <BookDemoDialog />
     </>
   );
 };
