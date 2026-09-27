@@ -1,4 +1,4 @@
-﻿import { useState } from "react";
+import { useState } from "react";
 import { Area, AreaChart, CartesianGrid, Line, LineChart, XAxis, YAxis } from "recharts";
 import { Eye, MousePointer2, TrendingUp, Users } from "lucide-react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
@@ -8,6 +8,7 @@ import { Badge } from "@/components/ui/badge";
 import { useFunnel, useKpis, useWeeklyAnalytics } from "@/hooks/use-analytics";
 import { QueryStatus, EmptyState } from "@/crm/components/QueryStatus";
 import { MetricCard, SelectField } from "@/crm/components/CrmPageUi";
+import VisitorStats from "@/crm/components/VisitorStats";
 
 const chartConfig = { leads: { label: "Leads", color: "hsl(var(--primary))" }, opens: { label: "Opens", color: "#22c7b5" }, clicks: { label: "Clicks", color: "#f5a20a" } };
 const percent = (value: string | number) => `${String(value).replace(/%$/, "")}%`;
@@ -20,6 +21,7 @@ export default function Analytics() {
   const trend = weekly.data?.weekly ?? [];
   return <div className="mx-auto max-w-7xl space-y-8 px-5 py-7 sm:px-8">
     <header className="flex flex-wrap items-end justify-between gap-5"><div><p className="mb-2 text-xs font-medium uppercase tracking-widest text-primary">Performance</p><h1 className="text-3xl font-semibold tracking-tight">Analytics</h1><p className="mt-2 text-sm text-muted-foreground">Understand lead growth, engagement, and pipeline conversion.</p></div><div className="w-44"><SelectField label="Trend period" value={weeks} onChange={setWeeks} options={[4, 8, 12, 26, 52].map(value => ({ value: String(value), label: `Last ${value} weeks` }))} /></div></header>
+    <VisitorStats />
     <QueryStatus query={kpis} />
     {kpis.data && <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4"><MetricCard icon={TrendingUp} label="Lead growth" value={percent(kpis.data.lead_growth)} /><MetricCard icon={Users} label="Qualified rate" value={percent(kpis.data.qualified_rate)} /><MetricCard icon={Eye} label="Email open rate" value={percent(kpis.data.email_open_rate)} /><MetricCard icon={MousePointer2} label="Click through" value={percent(kpis.data.click_through)} /></div>}
     <div className="grid gap-5 lg:grid-cols-2">
