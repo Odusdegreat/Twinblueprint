@@ -1,31 +1,33 @@
 import { motion } from "framer-motion";
+import { Helmet } from "react-helmet-async";
+import { Link } from "react-router-dom";
 import { FaArrowRight, FaTrophy, FaUsers, FaGlobe, FaLightbulb } from "react-icons/fa";
 import { Button } from "@/components/ui/button";
 import { useDemoDialogStore } from "@/stores/demoDialogStore";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import SEO from "@/components/SEO";
+import PageNav from "@/components/PageNav";
 
 const teamMembers = [
   {
     name: "Sarah Chen",
     role: "Founder & CEO",
-    bio: "20+ years in architectural visualisation and immersive technology. Former head of visualisation at a major UK architecture firm.",
+    bio: "20+ years in architectural visualisation and Digital Twin technology. Former head of visualisation at a major UK architecture firm.",
   },
   {
     name: "James Murphy",
     role: "Chief Technology Officer",
-    bio: "Expert in photorealistic rendering and real-time visualisation. Previously led visualisation tech at a FTSE 100 company.",
+    bio: "Expert in photorealistic rendering and real time Digital Twin platforms. Previously led visualisation engineering at a FTSE 100 company.",
   },
   {
     name: "Emma Lewis",
     role: "Head of Client Success",
-    bio: "10+ years in client relations and project management. Passionate about delivering exceptional outcomes.",
+    bio: "10+ years in client relations and project management for AEC clients. Focused on measurable delivery outcomes.",
   },
   {
     name: "David Patel",
     role: "Lead Visualisation Artist",
-    bio: "Award-winning visualisation artist specialising in architectural rendering and digital twins. Master's in Digital Architecture.",
+    bio: "Award winning visualisation artist specialising in architectural and infrastructure projects. Master's in Digital Architecture.",
   },
 ];
 
@@ -38,7 +40,7 @@ const values = [
   {
     icon: FaTrophy,
     title: "Excellence",
-    description: "We're committed to delivering the highest quality visualisations that exceed expectations.",
+    description: "We're committed to delivering the highest quality visualizations that exceed expectations.",
   },
   {
     icon: FaUsers,
@@ -48,7 +50,7 @@ const values = [
   {
     icon: FaGlobe,
     title: "Sustainability",
-    description: "We're dedicated to supporting sustainable development through better visualisation and communication.",
+    description: "We're dedicated to supporting sustainable development through better visualization and communication.",
   },
 ];
 
@@ -57,15 +59,30 @@ const About = () => {
 
   return (
     <>
-      <SEO
-        title="About Twinblueprint | Digital Twin & Visualisation Specialists"
-        description="Twinblueprint helps property, infrastructure and planning teams accelerate approvals through immersive visualisation, digital twins and stakeholder engagement."
-        path="/about"
-      />
+      <Helmet>
+        <title>About Twinblueprint | Digital Twin & Visualisation Specialists</title>
+        <meta
+          name="description"
+          content="Meet the Twinblueprint team - Digital Twin, BIM visualisation and immersive property visualisation specialists serving construction, infrastructure and planning teams."
+        />
+        <link rel="canonical" href="/about" />
+        <meta property="og:title" content="About Twinblueprint" />
+        <meta property="og:url" content="/about" />
+        <meta property="og:image" content="/og-image.jpg" />
+        <meta name="twitter:image" content="/og-image.jpg" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <script type="application/ld+json">{JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "AboutPage",
+          name: "About Twinblueprint",
+          url: "/about",
+          isPartOf: { "@type": "WebSite", name: "Twinblueprint", url: "/" },
+        })}</script>
+      </Helmet>
       <Navbar />
       <main>
         {/* Hero Section */}
-        <section className="bg-hero pt-32 pb-20 md:pt-40 md:pb-28">
+        <section className="bg-hero pt-20 pb-8 md:pt-24 md:pb-10">
           <div className="container">
             <motion.div
               initial={{ opacity: 0, y: 30 }}
@@ -77,30 +94,35 @@ const About = () => {
                 About <span className="text-gradient">Twinblueprint</span>
               </h1>
               <p className="text-hero-muted text-lg md:text-xl leading-relaxed">
-                Transforming how the world visualises architectural, construction, infrastructure, property development, and urban planning projects through cutting-edge immersive visualisation technology.
+                We help construction companies, property developers, architects, infrastructure organisations and urban planning teams communicate complex projects clearly through Digital Twin and immersive visualisation.
+              </p>
+              <p className="text-hero-muted mt-4 text-sm">
+                <Link to="/services" className="text-primary hover:underline">Explore our services</Link>
+                {" · "}
+                <Link to="/case-studies" className="text-primary hover:underline">Read case studies</Link>
+                {" · "}
+                <Link to="/blog" className="text-primary hover:underline">Latest insights</Link>
               </p>
             </motion.div>
           </div>
         </section>
 
         {/* Mission & Vision */}
-        <section className="section-padding bg-background">
+        <section className="py-8 md:py-10 bg-background">
           <div className="container">
-            <div className="grid md:grid-cols-2 gap-12">
+            <div className="grid md:grid-cols-2 gap-8">
               <motion.div
                 initial={{ opacity: 0, x: -30 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.7 }}
               >
-                <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
-                  Our Mission
-                </h2>
+                <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">Our Mission</h2>
                 <p className="text-muted-foreground text-lg leading-relaxed mb-4">
-                  To revolutionize the architectural industry by making photorealistic digital twins accessible and affordable for developers, architects, and urban planners worldwide.
+                  To make Digital Twin and photorealistic visualisation a standard part of how the built environment plans, approves and delivers projects.
                 </p>
                 <p className="text-muted-foreground text-lg leading-relaxed">
-                  We believe that better visualisation leads to better decision-making, faster approvals, and ultimately, better buildings and cities.
+                  Better visualisation leads to better decisions, faster approvals and lower risk delivery for developers, councils and communities alike.
                 </p>
               </motion.div>
 
@@ -114,10 +136,10 @@ const About = () => {
                   Our Vision
                 </h2>
                 <p className="text-muted-foreground text-lg leading-relaxed mb-4">
-                  To be the global leader in architectural visualisation, setting new standards for quality, innovation, and client service.
+                  To be the global leader in architectural visualization, setting new standards for quality, innovation, and client service.
                 </p>
                 <p className="text-muted-foreground text-lg leading-relaxed">
-                  A world where every architectural project can be visualized with stunning clarity before a single brick is laid, enabling confident decision-making and faster approvals.
+                  A world where every architectural project can be visualized with stunning clarity before a single brick is laid, enabling confident decision making and faster approvals.
                 </p>
               </motion.div>
             </div>
@@ -125,13 +147,13 @@ const About = () => {
         </section>
 
         {/* Core Values */}
-        <section className="section-padding bg-muted">
+        <section className="py-8 md:py-10 bg-muted">
           <div className="container">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="text-center max-w-2xl mx-auto mb-16"
+              className="text-center max-w-2xl mx-auto mb-6"
             >
               <h2 className="text-3xl md:text-4xl text-foreground mb-4">Our Core Values</h2>
               <p className="text-muted-foreground text-lg">
@@ -170,7 +192,7 @@ const About = () => {
         
 
         {/* Company Stats */}
-        <section className="section-padding bg-muted">
+        <section className="py-8 md:py-10 bg-muted">
           <div className="container">
             <div className="grid md:grid-cols-4 gap-8 text-center">
               {[
@@ -197,7 +219,7 @@ const About = () => {
         </section>
 
         {/* CTA Section */}
-        <section className="bg-hero section-padding">
+        <section className="bg-hero py-10 md:py-12">
           <div className="container">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -206,7 +228,7 @@ const About = () => {
               className="text-center max-w-2xl mx-auto"
             >
               <h2 className="text-3xl md:text-4xl text-hero-foreground mb-6">
-                Let's create something amazing together
+                Let's Create Something Amazing Together
               </h2>
               <p className="text-hero-muted text-lg mb-8 leading-relaxed">
                 Ready to transform your project with a stunning virtual project environment?
@@ -222,6 +244,7 @@ const About = () => {
           </div>
         </section>
       </main>
+      <PageNav />
       <Footer />
     </>
   );

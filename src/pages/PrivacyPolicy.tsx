@@ -1,6 +1,5 @@
 import { motion } from "framer-motion";
 import Navbar from "@/components/Navbar";
-import SEO from "@/components/SEO";
 import Footer from "@/components/Footer";
 
 const sections = [
@@ -12,7 +11,7 @@ const sections = [
   {
     title: "How We Use Your Information",
     content:
-      "We use the information we collect to: provide, maintain, and improve our services; process transactions and send related information; send promotional communications (with your consent); respond to your comments, questions, and requests; monitor and analyse usage patterns and trends; and detect, investigate, and prevent fraudulent or unauthorized activities.",
+      "We use the information we collect to: provide, maintain, and improve our services; process transactions and send related information; send promotional communications (with your consent); respond to your comments, questions, and requests; monitor and analyze usage patterns and trends; and detect, investigate, and prevent fraudulent or unauthorized activities.",
   },
   {
     title: "Information Sharing and Disclosure",
@@ -22,12 +21,12 @@ const sections = [
   {
     title: "Data Security",
     content:
-      "We implement appropriate technical and organisational security measures to protect your personal information against unauthorized access, alteration, disclosure, or destruction. However, no method of transmission over the Internet or electronic storage is 100% secure, and we cannot guarantee absolute security.",
+      "We implement appropriate technical and organizational security measures to protect your personal information against unauthorized access, alteration, disclosure, or destruction. However, no method of transmission over the Internet or electronic storage is 100% secure, and we cannot guarantee absolute security.",
   },
   {
     title: "Cookies and Tracking Technologies",
     content:
-      "We use cookies and similar tracking technologies to collect usage information and improve your browsing experience. You can control cookies through your browser settings, though some features may not function properly without them.",
+      "We use cookies and similar tracking technologies to collect usage information and improve your browsing experience. You can control cookies through your browser settings, though some features may not function properly without them. We also record anonymous page views and button clicks (page address, button text and referring website) in our own hosting provider, Lovable Cloud, to understand how the site is used. This does not use cookies or identify you personally.",
   },
   {
     title: "Your Rights",
@@ -35,9 +34,9 @@ const sections = [
       "Depending on your location, you may have the right to: access the personal information we hold about you; request correction of inaccurate information; request deletion of your personal information; object to or restrict certain processing; data portability; and withdraw consent at any time.",
   },
   {
-    title: "Third-Party Links",
+    title: "Third Party Links",
     content:
-      "Our website may contain links to third-party websites, services, or applications. We are not responsible for the privacy practices of these third parties, and we encourage you to review their privacy policies before providing any personal information.",
+      "Our website may contain links to third party websites, services, or applications. We are not responsible for the privacy practices of these third parties, and we encourage you to review their privacy policies before providing any personal information.",
   },
   {
     title: "Children's Privacy",
@@ -59,11 +58,6 @@ const sections = [
 const PrivacyPolicy = () => {
   return (
     <>
-      <SEO
-        title="Privacy Policy | Twinblueprint"
-        description="How Twinblueprint collects, uses and protects personal information across our visualisation and digital twin services."
-        path="/privacy-policy"
-      />
       <Navbar />
       <main>
         <section className="bg-hero pt-32 pb-20 md:pt-40 md:pb-28">

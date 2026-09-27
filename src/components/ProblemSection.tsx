@@ -20,13 +20,13 @@ const problems = [
 ];
 
 const ProblemSection = () => (
-  <section className="section-padding bg-muted">
+  <section className="py-6 md:py-8 bg-muted">
     <div className="container">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
-        className="text-center max-w-2xl mx-auto mb-16"
+        className="text-center max-w-2xl mx-auto mb-6"
       >
         <h2 className="text-3xl md:text-4xl text-foreground mb-4">Are your Project Drawings giving Every Stakeholder Real Clarity?</h2>
         <p className="text-muted-foreground text-lg">

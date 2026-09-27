@@ -1,23 +1,39 @@
 import { motion } from "framer-motion";
 
 const steps = [
-  { number: "01", title: "Share Your Plans", desc: "Send us your blueprints, CAD files, or even sketches. We work with what you have." },
-  { number: "02", title: "We Build the Digital Twin", desc: "Our team creates a photorealistic digital twin and interactive walkthroughs of your project." },
-  { number: "03", title: "Review & Refine", desc: "We collaborate with you to perfect every detail until it matches your vision." },
-  { number: "04", title: "Present & Win", desc: "Use your immersive visuals to win approvals, impress investors, and sell off-plan." },
+  { number: "01", title: "Discovery", desc: "We scope your project, stakeholders and approval pathway to define the right visualisation strategy." },
+  { number: "02", title: "Project Development", desc: "Our team builds your Digital Twin from drawings, BIM and site data with photorealistic detail." },
+  { number: "03", title: "Review & Collaboration", desc: "You review interactive models with our team and refine the experience until it represents your project accurately." },
+  { number: "04", title: "Delivery & Support", desc: "Receive walkthroughs, renders and immersive assets ready for planning, investor and public consultation use." },
 ];
 
 const HowItWorksSection = () => (
-  <section id="how-it-works" className="section-padding bg-background">
+  <section id="how-it-works" className="py-6 md:py-8 bg-background">
     <div className="container">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
-        className="text-center max-w-2xl mx-auto mb-16"
+        className="text-center max-w-2xl mx-auto mb-6"
       >
-        <p className="text-primary font-semibold text-sm uppercase tracking-wider mb-3">How It Works</p>
-        <h2 className="text-3xl md:text-4xl text-foreground">From blueprint to breathtaking in 4 steps</h2>
+        <p className="text-primary font-semibold text-sm uppercase tracking-wider mb-3">Our Process</p>
+        <h2 className="text-3xl md:text-4xl text-foreground">A Four Step Process Built for Construction and Planning Teams</h2>
+      </motion.div>
+
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        className="max-w-4xl mx-auto mb-8 rounded-2xl overflow-hidden border border-border shadow-lg bg-card"
+      >
+        <video
+          src="/assets/videos/twinblueprintmeta.mp4"
+          controls
+          playsInline
+          preload="metadata"
+          className="w-full h-auto block"
+          aria-label="How Twinblueprint works"
+        />
       </motion.div>
 
       <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">

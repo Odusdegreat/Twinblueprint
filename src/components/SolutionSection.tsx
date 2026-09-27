@@ -9,7 +9,7 @@ const features = [
 ];
 
 const SolutionSection = () => (
-  <section id="services" className="section-padding bg-background">
+  <section id="services" className="py-6 md:py-8 bg-background">
     <div className="container">
       <motion.div
         initial={{ opacity: 0, y: 20 }}

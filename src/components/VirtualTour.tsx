@@ -50,33 +50,27 @@ const ResizeHandler = () => {
 
 const VirtualTour = () => {
   return (
-    <div
-      role="img"
-      aria-label="Interactive virtual tour of a building interior - drag to look around, scroll to zoom"
-      className="w-full h-full"
+    <Canvas
+      camera={{ position: [0, 0, 0.1], fov: 75 }}
+      gl={{ antialias: true }}
+      dpr={[1, 2]}
+      style={{ width: '100%', height: '100%' }}
     >
-      <Canvas
-        camera={{ position: [0, 0, 0.1], fov: 75 }}
-        gl={{ antialias: true }}
-        dpr={[1, 2]}
-        style={{ width: '100%', height: '100%' }}
-      >
-        <ResizeHandler />
-        <Suspense fallback={null}>
-          <PanoramaSphere />
-        </Suspense>
-        <OrbitControls
-          enableZoom={true}
-          enablePan={false}
-          rotateSpeed={-0.4}
-          minDistance={0.1}
-          maxDistance={5}
-          zoomSpeed={0.6}
-          autoRotate
-          autoRotateSpeed={0.3}
-        />
-      </Canvas>
-    </div>
+      <ResizeHandler />
+      <Suspense fallback={null}>
+        <PanoramaSphere />
+      </Suspense>
+      <OrbitControls
+        enableZoom={true}
+        enablePan={false}
+        rotateSpeed={-0.4}
+        minDistance={0.1}
+        maxDistance={5}
+        zoomSpeed={0.6}
+        autoRotate
+        autoRotateSpeed={0.3}
+      />
+    </Canvas>
   );
 };
 
