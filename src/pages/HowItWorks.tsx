@@ -1,19 +1,21 @@
 import { motion } from "framer-motion";
-import { FaArrowRight, FaCheckCircle } from "react-icons/fa";
+import { Link } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
+import { FaArrowRight } from "react-icons/fa";
 import { CheckCircle2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useDemoDialogStore } from "@/stores/demoDialogStore";
 import Navbar from "@/components/Navbar";
+import propertyTourVideo from "@/assets/meta-dology-property-tours.mp4.asset.json";
 import Footer from "@/components/Footer";
-import SEO from "@/components/SEO";
-import propertyTourVideo from "@/assets/property-tour.mp4.asset.json";
+import PageNav from "@/components/PageNav";
 
 const steps = [
   {
     number: "01",
     title: "Discovery",
     description:
-      "We start by understanding your project, stakeholders and approval pathway. Together we define how Immersive Property Visualisation outputs will support your planning, investment and delivery goals.",
+      "We start by understanding your project, stakeholders and approval pathway. Together we define how Digital Twin and visualisation outputs will support your planning, investment and delivery goals.",
     details: [
       "Project scope and stakeholder mapping",
       "Planning and approval pathway review",
@@ -25,7 +27,7 @@ const steps = [
     number: "02",
     title: "Project Development",
     description:
-      "Our specialists build your Immersive Property Visualisation from architectural, engineering and site data. Every model is constructed with accurate geometry, materiality and context.",
+      "Our specialists build your Digital Twin from architectural, engineering and site data. Every model is constructed with accurate geometry, materiality and context.",
     details: [
       "BIM and CAD integration",
       "Photorealistic materials and lighting",
@@ -37,24 +39,24 @@ const steps = [
     number: "03",
     title: "Review & Collaboration",
     description:
-      "You review your Immersive Property Visualisation with our team in structured sessions. We refine detail, resolve design questions and align the model with stakeholder requirements.",
+      "You review your Digital Twin with our team in structured sessions. We refine detail, resolve design questions and align the model with stakeholder requirements.",
     details: [
       "Collaborative review sessions",
       "Design and constructability feedback",
       "Iterative refinements",
-      "Sign-off ready outputs",
+      "Sign off ready outputs",
     ],
   },
   {
     number: "04",
     title: "Delivery & Support",
     description:
-      "We deliver planning-ready visuals, virtual walkthroughs and immersive assets in the formats your teams need. Ongoing support keeps your Immersive Property Visualisation current across the project lifecycle.",
+      "We deliver planning ready visuals, virtual walkthroughs and immersive assets in the formats your teams need. Ongoing support keeps your Digital Twin current across the project lifecycle.",
     details: [
-      "High-resolution renders and stills",
+      "High resolution renders and stills",
       "Interactive web walkthroughs",
-      "VR and presentation-ready exports",
-      "Long-term model updates",
+      "VR and presentation ready exports",
+      "Long term model updates",
     ],
   },
 ];
@@ -62,9 +64,10 @@ const steps = [
 const benefits = [
   "Faster planning approvals",
   "Stronger stakeholder engagement",
+  "Reduced project and delivery risk",
   "Earlier design validation",
   "Improved investor confidence",
-  "Sell off-plan properties 60% faster",
+  "Better public consultation outcomes",
 ];
 
 const HowItWorks = () => {
@@ -72,14 +75,29 @@ const HowItWorks = () => {
 
   return (
     <>
-      <SEO
-        title="How It Works | Our Visualisation Process | Twinblueprint"
-        description="A four-step process from concept to construction. Discovery, project development, review and delivery of immersive property visualisation that accelerates approvals."
-        path="/how-it-works"
-      />
+      <Helmet>
+        <title>How it Works | Our Digital Twin Delivery Process | Twinblueprint</title>
+        <meta
+          name="description"
+          content="Our four step Digital Twin delivery process - Discovery, Project Development, Review & Collaboration, Delivery & Support - built for construction, infrastructure and planning teams."
+        />
+        <link rel="canonical" href="/how-it-works" />
+        <meta property="og:title" content="How it Works | Twinblueprint" />
+        <meta property="og:url" content="/how-it-works" />
+        <meta property="og:image" content="/og-image.jpg" />
+        <meta name="twitter:image" content="/og-image.jpg" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <script type="application/ld+json">{JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "WebPage",
+          name: "Our Digital Twin Delivery Process",
+          url: "/how-it-works",
+          isPartOf: { "@type": "WebSite", name: "Twinblueprint", url: "/" },
+        })}</script>
+      </Helmet>
       <Navbar />
       <main>
-        <section className="bg-hero pt-32 pb-20 md:pt-40 md:pb-28">
+        <section className="bg-hero pt-20 pb-8 md:pt-24 md:pb-10">
           <div className="container">
             <motion.div
               initial={{ opacity: 0, y: 30 }}
@@ -91,47 +109,48 @@ const HowItWorks = () => {
                 How It <span className="text-gradient">Works</span>
               </h1>
               <p className="text-hero-muted text-lg md:text-xl leading-relaxed">
-                A four-step process from concept to construction, built for architecture, construction, infrastructure, and planning teams. We translate complex projects into Immersive Property Visualisation that accelerates approvals and facilitates stakeholder alignment.
+                A four step process built for construction, infrastructure and planning teams. We translate complex projects into Digital Twins that accelerate approvals and align every stakeholder.
               </p>
             </motion.div>
           </div>
         </section>
 
-        <section className="bg-background pt-12 md:pt-16">
+        <section className="py-8 md:py-10 bg-background">
           <div className="container">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="max-w-4xl mx-auto"
+              className="text-center max-w-2xl mx-auto mb-5"
             >
-              <div className="text-center mb-8">
-                <h2 className="text-3xl md:text-4xl text-foreground mb-3">
-                  See It In Action
-                </h2>
-                <p className="text-muted-foreground text-lg">
-                  Discover how immersive property tours transform off-plan sales and stakeholder engagement.
-                </p>
-              </div>
-              <div className="relative rounded-2xl overflow-hidden shadow-2xl border border-border aspect-video bg-muted">
-                <video
-                  src={propertyTourVideo.url}
-                  controls
-                  playsInline
-                  preload="metadata"
-                  className="w-full h-full object-cover"
-                  aria-label="The future of property tours: immersive 3D walkthrough demonstration"
-                >
-                  Your browser does not support the video tag.
-                </video>
-              </div>
+              <p className="text-primary font-semibold text-sm uppercase tracking-wider mb-3">See It In Action</p>
+              <h2 className="text-3xl md:text-4xl text-foreground mb-4">The Future of Property Tours</h2>
+              <p className="text-muted-foreground text-lg">
+                Watch how our Digital Twin technology brings off plan developments to life with hyperreal 3D experiences.
+              </p>
+            </motion.div>
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="max-w-4xl mx-auto rounded-2xl overflow-hidden border border-border shadow-lg bg-card"
+            >
+              <video
+                src={propertyTourVideo.url}
+                controls
+                playsInline
+                preload="metadata"
+                className="w-full h-auto block"
+                aria-label="Meta-Dology property tour demonstration video"
+              />
             </motion.div>
           </div>
         </section>
 
-        <section className="section-padding bg-background">
+        <section id="process" className="py-8 md:py-10 bg-background scroll-mt-24">
+
           <div className="container">
-            <div className="grid lg:grid-cols-2 gap-16">
+            <div className="grid lg:grid-cols-2 gap-6">
               {steps.map((step, i) => (
                 <motion.div
                   key={step.number}
@@ -139,7 +158,7 @@ const HowItWorks = () => {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.7, delay: i * 0.1 }}
-                  className="bg-card rounded-2xl p-8 border border-border"
+                  className="bg-card rounded-2xl p-6 border border-border"
                 >
                   <div className="flex items-start gap-6">
                     <span className="text-5xl font-extrabold text-primary/20 font-heading leading-none">
@@ -168,19 +187,19 @@ const HowItWorks = () => {
           </div>
         </section>
 
-        <section className="section-padding bg-muted">
+        <section className="py-8 md:py-10 bg-muted">
           <div className="container">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="text-center max-w-2xl mx-auto mb-16"
+              className="text-center max-w-2xl mx-auto mb-6"
             >
               <h2 className="text-3xl md:text-4xl text-foreground mb-4">
-                Why Choose Our Process
+                Why our Process Delivers
               </h2>
               <p className="text-muted-foreground text-lg">
-                Our streamlined approach delivers measurable results for property developers and architects.
+                Measurable outcomes for property developers, infrastructure clients and planning authorities.
               </p>
             </motion.div>
 
@@ -202,7 +221,7 @@ const HowItWorks = () => {
           </div>
         </section>
 
-        <section className="bg-hero section-padding">
+        <section className="bg-hero py-10 md:py-12">
           <div className="container">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -211,22 +230,30 @@ const HowItWorks = () => {
               className="text-center max-w-2xl mx-auto"
             >
               <h2 className="text-3xl md:text-4xl text-hero-foreground mb-6">
-                Ready to get started?
+                Transform the way you Communicate Projects
               </h2>
               <p className="text-hero-muted text-lg mb-8 leading-relaxed">
-                Let's discuss your project and show you what's possible with stunning Immersive Property Visualisation.
+                Talk to our Digital Twin specialists about your next development, infrastructure scheme or master planning project.
               </p>
               <Button
                 size="lg"
                 className="bg-primary text-primary-foreground hover:bg-primary/90 rounded-full px-8 text-base"
                 onClick={() => setOpen(true)}
               >
-                Book a Demo <FaArrowRight className="ml-2 h-4 w-4" />
+                Book a Discovery Consultation <FaArrowRight className="ml-2 h-4 w-4" />
               </Button>
+              <p className="mt-5 text-xs text-hero-muted">30-min call · NDA on request · Response within one working day</p>
+              <p className="mt-6 text-sm text-hero-muted">
+                See it in practice in our{" "}
+                <Link to="/case-studies" className="text-primary hover:underline">case studies</Link>
+                {" "}or explore the{" "}
+                <Link to="/services" className="text-primary hover:underline">full service catalogue</Link>.
+              </p>
             </motion.div>
           </div>
         </section>
       </main>
+      <PageNav />
       <Footer />
     </>
   );

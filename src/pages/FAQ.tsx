@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
+import { Helmet } from "react-helmet-async";
+import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
@@ -11,7 +13,7 @@ import {
 import { useDemoDialogStore } from "@/stores/demoDialogStore";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import SEO from "@/components/SEO";
+import PageNav from "@/components/PageNav";
 
 const faqs = [
   {
@@ -22,22 +24,22 @@ const faqs = [
   {
     question: "How long does a typical project take?",
     answer:
-      "Turnaround times vary based on project complexity. A single-property visualisation typically takes 5-7 business days, while larger developments may take 2-4 weeks. We always agree on deadlines upfront and offer rush delivery for urgent requirements.",
+      "Turnaround times vary based on project complexity. A single property visualization typically takes 5-7 business days, while larger developments may take 2-4 weeks. We always agree on deadlines upfront and offer rush delivery for urgent requirements.",
   },
   {
-    question: "Can I request changes to the visualisation?",
+    question: "Can I request changes to the visualization?",
     answer:
       "Absolutely. We include multiple revision rounds in every project. You'll have opportunities to request changes to materials, lighting, surrounding landscaping, and any other elements until you're completely satisfied with the result.",
   },
   {
     question: "What's included in the final deliverables?",
     answer:
-      "Each project includes high-resolution images (print-ready), interactive 3D walkthroughs, VR-ready exports if requested, and a comprehensive usage license. Marketing teams love the versatility of having assets ready for web, print, and immersive presentations.",
+      "Each project includes high resolution images (print ready), interactive 3D walkthroughs, VR ready exports if requested, and a comprehensive usage license. Marketing teams love the versatility of having assets ready for web, print, and immersive presentations.",
   },
   {
     question: "Do you offer ongoing support after project delivery?",
     answer:
-      "Yes. We provide 30 days of complimentary support after delivery for any adjustments you might need. For ongoing projects or long-term partnerships, we also offer retainer arrangements with priority turnaround and dedicated account management.",
+      "Yes. We provide 30 days of complimentary support after delivery for any adjustments you might need. For ongoing projects or long term partnerships, we also offer retainer arrangements with priority turnaround and dedicated account management.",
   },
   {
     question: "How do you handle confidentiality?",
@@ -45,14 +47,9 @@ const faqs = [
       "We take confidentiality seriously. All project files are stored securely and never shared with third parties. We can sign NDAs and have strict internal policies to ensure your project's intellectual property remains protected throughout and after our engagement.",
   },
   {
-    question: "What's your pricing structure?",
-    answer:
-      "Pricing depends on property type, complexity, and deliverables required. We offer competitive rates for single properties and attractive volume discounts for developers with multiple units. Contact us for a customised quote based on your specific requirements.",
-  },
-  {
     question: "Can you match existing brand guidelines?",
     answer:
-      "Yes. We can match any brand guidelines, colour palettes, or style preferences. Just provide your brand assets and we'll ensure consistency across all visualisations, whether for internal presentations or external marketing materials.",
+      "Yes. We can match any brand guidelines, color palettes, or style preferences. Just provide your brand assets and we'll ensure consistency across all visualizations, whether for internal presentations or external marketing materials.",
   },
 ];
 
@@ -62,11 +59,14 @@ const FAQ = () => {
 
   return (
     <>
-      <SEO
-        title="FAQ | Architectural Visualisation Questions | Twinblueprint"
-        description="Answers to common questions about our architectural visualisation services, accepted file formats, timelines, revisions, pricing and confidentiality."
-        path="/faq"
-        jsonLd={{
+      <Helmet>
+        <title>FAQ | Digital Twin & Visualisation Questions | Twinblueprint</title>
+        <meta
+          name="description"
+          content="Answers to common questions about Digital Twin, BIM visualisation, planning approval support, file formats, timelines and confidentiality."
+        />
+        <link rel="canonical" href="/faq" />
+        <script type="application/ld+json">{JSON.stringify({
           "@context": "https://schema.org",
           "@type": "FAQPage",
           mainEntity: faqs.map((f) => ({
@@ -74,8 +74,8 @@ const FAQ = () => {
             name: f.question,
             acceptedAnswer: { "@type": "Answer", text: f.answer },
           })),
-        }}
-      />
+        })}</script>
+      </Helmet>
       <Navbar />
       <main>
         <section className="bg-hero pt-32 pb-20 md:pt-40 md:pb-28">
@@ -90,7 +90,7 @@ const FAQ = () => {
                 Frequently Asked <span className="text-gradient">Questions</span>
               </h1>
               <p className="text-hero-muted text-lg md:text-xl leading-relaxed">
-                Find answers to common questions about our architectural visualisation services, process, and deliverables.
+                Answers to common questions about our Digital Twin, architectural visualisation and planning support services, deliverables and process.
               </p>
             </motion.div>
           </div>
@@ -144,19 +144,26 @@ const FAQ = () => {
                 Still have questions?
               </h2>
               <p className="text-muted-foreground text-lg mb-8">
-                Can't find the answer you're looking for? Our team is happy to help with any questions you might have.
+                Can't find the answer you're looking for? Our team would be happy to help with any questions you might have.
               </p>
               <Button
                 size="lg"
                 className="bg-primary text-primary-foreground hover:bg-primary/90 rounded-full px-8 text-base"
                 onClick={() => setOpen(true)}
               >
-                Contact Us <ArrowRight className="ml-2 h-4 w-4" />
+                Book a Discovery Consultation <ArrowRight className="ml-2 h-4 w-4" />
               </Button>
+              <p className="mt-5 text-sm text-muted-foreground">
+                Or jump to our{" "}
+                <Link to="/services" className="text-primary hover:underline">services</Link>,{" "}
+                <Link to="/case-studies" className="text-primary hover:underline">case studies</Link>,{" "}
+                or <Link to="/blog" className="text-primary hover:underline">blog</Link>.
+              </p>
             </motion.div>
           </div>
         </section>
       </main>
+      <PageNav />
       <Footer />
     </>
   );
