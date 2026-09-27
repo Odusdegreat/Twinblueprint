@@ -27,9 +27,9 @@ const Index = () => {
       />
       <Navbar />
       <HeroSection />
-      <TrustStrip />
       <ProblemSection />
       <SolutionSection />
+      <TrustStrip />
       <TestimonialsSection />
       <CaseStudiesSection />
       <HowItWorksSection />

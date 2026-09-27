@@ -4,18 +4,18 @@ import { FaHardHat, FaClock, FaCommentSlash } from "react-icons/fa";
 const problems = [
   {
     icon: FaHardHat,
-    title: "Planning Approval Challenges",
-    description: "Traditional 2D plans often fail to communicate scale, context, and design intent, increasing the likelihood of planning queries, revisions, and approval delays.",
+    title: "Planning Approval Risk",
+    description: "Traditional 2D drawings rarely communicate scale, context or design intent. This drives planning queries, rework and rejected applications.",
   },
   {
     icon: FaClock,
     title: "Extended Approval Timelines",
-    description: "When stakeholders cannot easily interpret project documentation, approval processes become longer and more complex.",
+    description: "When planning officers, councils and committees cannot quickly interpret a development, decisions stall and programmes slip.",
   },
   {
     icon: FaCommentSlash,
     title: "Stakeholder Misalignment",
-    description: "Different project stakeholders often interpret plans differently, creating uncertainty, additional revisions, and delayed decision-making.",
+    description: "Investors, residents and project teams interpret the same drawings differently. The result is repeated revisions and delayed sign off.",
   },
 ];
 
@@ -28,9 +28,9 @@ const ProblemSection = () => (
         viewport={{ once: true }}
         className="text-center max-w-2xl mx-auto mb-16"
       >
-        <h2 className="text-3xl md:text-4xl text-foreground mb-4">Are technical drawings giving every stakeholder the clarity they need?</h2>
+        <h2 className="text-3xl md:text-4xl text-foreground mb-4">Are your Project Drawings giving Every Stakeholder Real Clarity?</h2>
         <p className="text-muted-foreground text-lg">
-          Miscommunication and delayed decisions can add cost, risk and time to development programmes.
+          Unclear communication adds cost, risk and time to construction, infrastructure and urban planning programmes.
         </p>
       </motion.div>
 
