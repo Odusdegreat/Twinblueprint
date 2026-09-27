@@ -3,15 +3,13 @@ import Navbar from "@/components/Navbar";
 import HeroSection from "@/components/HeroSection";
 import ProblemSection from "@/components/ProblemSection";
 import SolutionSection from "@/components/SolutionSection";
-import IndustriesSection from "@/components/IndustriesSection";
 import BuiltForSection from "@/components/BuiltForSection";
+import IndustriesSection from "@/components/IndustriesSection";
 import CaseStudiesSection from "@/components/CaseStudiesSection";
 import HowItWorksSection from "@/components/HowItWorksSection";
 import CTASection from "@/components/CTASection";
 import Footer from "@/components/Footer";
 import PageNav from "@/components/PageNav";
-import TrustStrip from "@/components/TrustStrip";
-import TestimonialsSection from "@/components/TestimonialsSection";
 
 const Index = () => {
   return (
@@ -48,8 +46,6 @@ const Index = () => {
         <HeroSection />
         <ProblemSection />
         <SolutionSection />
-        <TrustStrip />
-        <TestimonialsSection />
         <BuiltForSection />
         <IndustriesSection />
         <CaseStudiesSection />
