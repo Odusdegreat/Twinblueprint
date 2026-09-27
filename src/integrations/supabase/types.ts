@@ -14,13 +14,39 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      visitor_events: {
+        Row: {
+          created_at: string
+          event: string
+          id: string
+          label: string | null
+          path: string | null
+          properties: Json
+        }
+        Insert: {
+          created_at?: string
+          event: string
+          id?: string
+          label?: string | null
+          path?: string | null
+          properties?: Json
+        }
+        Update: {
+          created_at?: string
+          event?: string
+          id?: string
+          label?: string | null
+          path?: string | null
+          properties?: Json
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      visitor_summary: { Args: { _days?: number }; Returns: Json }
     }
     Enums: {
       [_ in never]: never
