@@ -20,22 +20,6 @@ const HowItWorksSection = () => (
         <h2 className="text-3xl md:text-4xl text-foreground">A Four Step Process Built for Construction and Planning Teams</h2>
       </motion.div>
 
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        className="max-w-4xl mx-auto mb-8 rounded-2xl overflow-hidden border border-border shadow-lg bg-card"
-      >
-        <video
-          src="/assets/videos/twinblueprintmeta.mp4"
-          controls
-          playsInline
-          preload="metadata"
-          className="w-full h-auto block"
-          aria-label="How Twinblueprint works"
-        />
-      </motion.div>
-
       <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
         {steps.map((s, i) => (
           <motion.div
