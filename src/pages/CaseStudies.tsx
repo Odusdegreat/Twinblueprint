@@ -10,7 +10,8 @@ import Footer from "@/components/Footer";
 import PageNav from "@/components/PageNav";
 import BookDemoDialog from "@/components/BookDemoDialog";
 import ExploreLinks from "@/components/ExploreLinks";
-import { blogPosts } from "./BlogPost";
+import { useQuery } from "@tanstack/react-query";
+import { articlesApi, formatArticleDate, calculateReadTime } from "@/lib/articlesApi";
 
 import heroImage from "@/assets/case-studies-hero.jpg";
 import csMegaProjects from "@/assets/cs-mega-projects.jpg";
@@ -56,16 +57,6 @@ const audienceStudies = [
   },
 ];
 
-
-const latestPosts = [
-  "planning-approval-digital-twin",
-  "bim-visualisation-construction",
-  "interactive-immersive-property-visualisation",
-]
-  .map((slug) => blogPosts[slug])
-  .filter(Boolean);
-
-
 const specialties = [
   { icon: Building2, image: csMegaProjects, imageAlt: "Aerial view of a multi phase mega development under construction with tower cranes", title: "Mega Projects", description: "Large scale, multi phase developments where digital twins drive alignment, planning and stakeholder buy in." },
   { icon: Trophy, image: csStadiums, imageAlt: "Modern stadium exterior at dusk with sweeping roof structure", title: "Stadiums", description: "Immersive walkthroughs for sports and event venues from fan experience to operational planning." },
@@ -73,7 +64,6 @@ const specialties = [
   { icon: Factory, image: csIndustrialParks, imageAlt: "Aerial view of a logistics and industrial park with warehouses and loading docks", title: "Industrial Parks", description: "Warehouse, logistics and tenant space planning with simulation led optimisation." },
   { icon: TreePine, image: csLifestyleEstates, imageAlt: "Aerial view of a golf and resort lifestyle estate with fairways and villas", title: "Lifestyle Estates", description: "Golf, residential and resort estates brought to life for investors, buyers and overseas markets." },
   { icon: Landmark, image: csGovernment, imageAlt: "Civic government building exterior with a public square", title: "Government & Council", description: "Infrastructure and public sector projects accelerated through visual clarity and approvals." },
-
 ];
 
 const successStories = [
@@ -178,10 +168,27 @@ const successStories = [
   },
 ];
 
-
+type BlogPostPreview = {
+  slug: string;
+  title: string;
+  category: string;
+  excerpt: string;
+  seo_description: string;
+  published_at: string;
+  content: string;
+};
 
 const CaseStudies = () => {
   const { setOpen } = useDemoDialogStore();
+
+  const { data: articlesData, isLoading: articlesLoading } = useQuery({
+    queryKey: ["articles", { page: 1, limit: 3 }],
+    queryFn: () => articlesApi.list({ page: 1, limit: 3 }),
+    staleTime: 5 * 60 * 1000,
+    select: (data) => data.articles.filter((a) => a.status === "published").slice(0, 3),
+  });
+
+  const latestPosts = articlesData ?? [];
 
   return (
     <>
@@ -242,7 +249,6 @@ const CaseStudies = () => {
               className="text-center max-w-2xl mx-auto mb-6"
             >
               <h2 className="text-3xl md:text-4xl text-foreground">Our Areas of Speciality at a Glance</h2>
-
             </motion.div>
 
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -271,7 +277,6 @@ const CaseStudies = () => {
                     <p className="text-muted-foreground leading-relaxed text-sm">{s.description}</p>
                   </div>
                 </motion.div>
-
               ))}
             </div>
           </div>
@@ -329,8 +334,6 @@ const CaseStudies = () => {
           </div>
         </section>
 
-
-
         {/* Tailored case studies by audience */}
         <section className="py-8 md:py-10 bg-background">
           <div className="container">
@@ -343,7 +346,7 @@ const CaseStudies = () => {
               <p className="text-primary font-semibold text-sm uppercase tracking-wider mb-3">By Audience</p>
               <h2 className="text-3xl md:text-4xl text-foreground mb-4">Case Studies Tailored to your Team</h2>
               <p className="text-muted-foreground text-lg">
-                Measurable outcomes for residential developers, planning authorities and BIM &amp; design teams.
+                Measurable outcomes for residential developers, planning authorities and BIM & design teams.
               </p>
             </motion.div>
 
@@ -378,7 +381,6 @@ const CaseStudies = () => {
                     </Link>
                   </div>
                 </motion.article>
-
               ))}
             </div>
           </div>
@@ -400,33 +402,57 @@ const CaseStudies = () => {
               </p>
             </motion.div>
 
-            <div className="grid md:grid-cols-3 gap-6">
-              {latestPosts.map((post, i) => (
-                <motion.article
-                  key={post.slug}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: i * 0.08 }}
-                  className="rounded-2xl border border-border bg-card p-7 flex flex-col hover:border-primary/50 transition-all"
-                >
-                  <Badge className="self-start mb-4 bg-primary/10 text-primary border-0">{post.category}</Badge>
-                  <h3 className="text-lg font-bold text-foreground mb-3">
-                    <Link to={`/blog/${post.slug}`} className="hover:text-primary transition-colors">
-                      {post.title}
-                    </Link>
-                  </h3>
-                  <p className="text-sm text-muted-foreground leading-relaxed mb-4">{post.metaDescription}</p>
-                  <p className="text-xs text-muted-foreground mb-5">{post.date} · {post.readTime}</p>
-                  <Link
-                    to={`/blog/${post.slug}`}
-                    className="mt-auto text-sm font-semibold text-primary hover:underline inline-flex items-center"
+            {articlesLoading ? (
+              <div className="grid md:grid-cols-3 gap-6">
+                {[1, 2, 3].map((i) => (
+                  <motion.article
+                    key={i}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: i * 0.08 }}
+                    className="rounded-2xl border border-border bg-card p-7 flex flex-col animate-pulse"
                   >
-                    Read article <ArrowRight className="ml-2 h-4 w-4" />
-                  </Link>
-                </motion.article>
-              ))}
-            </div>
+                    <div className="h-6 w-24 bg-muted rounded self-start mb-4" />
+                    <div className="h-5 w-3/4 bg-muted rounded mb-3" />
+                    <div className="h-4 w-full bg-muted rounded mb-2" />
+                    <div className="h-4 w-1/2 bg-muted rounded mb-4" />
+                    <div className="h-3 w-1/3 bg-muted rounded mt-auto" />
+                  </motion.article>
+                ))}
+              </div>
+            ) : latestPosts.length === 0 ? (
+              <div className="text-center py-8">
+                <p className="text-muted-foreground">No articles available yet.</p>
+              </div>
+            ) : (
+              <div className="grid md:grid-cols-3 gap-6">
+                {latestPosts.map((post, i) => (
+                  <motion.article
+                    key={post.slug}
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: i * 0.08 }}
+                    className="rounded-2xl border border-border bg-card p-7 flex flex-col hover:border-primary/50 transition-all"
+                  >
+                    <Badge className="self-start mb-4 bg-primary/10 text-primary border-0">{post.category}</Badge>
+                    <h3 className="text-lg font-bold text-foreground mb-3">
+                      <Link to={`/blog/${post.slug}`} className="hover:text-primary transition-colors">
+                        {post.title}
+                      </Link>
+                    </h3>
+                    <p className="text-sm text-muted-foreground leading-relaxed mb-4">{post.seo_description || post.excerpt}</p>
+                    <p className="text-xs text-muted-foreground mb-5">{formatArticleDate(post.published_at)} · {calculateReadTime(post.content)}</p>
+                    <Link
+                      to={`/blog/${post.slug}`}
+                      className="mt-auto text-sm font-semibold text-primary hover:underline inline-flex items-center"
+                    >
+                      Read article <ArrowRight className="ml-2 h-4 w-4" />
+                    </Link>
+                  </motion.article>
+                ))}
+              </div>
+            )}
 
             <div className="text-center mt-10">
               <Link to="/blog" className="text-primary font-semibold hover:underline">

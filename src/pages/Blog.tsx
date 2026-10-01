@@ -1,8 +1,8 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Helmet } from "react-helmet-async";
 import { useNavigate, Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import { Calendar, User, Check } from "lucide-react";
+import { Calendar, User, Check, Loader2, AlertCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { useDemoDialogStore } from "@/stores/demoDialogStore";
@@ -11,36 +11,49 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import PageNav from "@/components/PageNav";
 import BookDemoDialog from "@/components/BookDemoDialog";
-import { blogPosts as posts } from "./BlogPost";
-import { FaBuilding, FaChartLine, FaVrCardboard } from "react-icons/fa";
-import blogPlanningImg from "@/assets/blog-planning-approval.jpg";
-import blogBimImg from "@/assets/blog-bim-visualisation.jpg";
-import blogImmersiveImg from "@/assets/blog-immersive-property.jpg";
+import { useQuery } from "@tanstack/react-query";
+import { articlesApi, formatArticleDate, calculateReadTime, getArticleExcerpt } from "@/lib/articlesApi";
+import { FaBuilding, FaChartLine, FaVrCardboard, FaFileAlt } from "react-icons/fa";
 
-const featured = [
-  {
-    slug: "planning-approval-digital-twin",
-    icon: FaChartLine,
-    gradient: "from-blue-600 to-cyan-500",
-    image: blogPlanningImg,
-    alt: "Planning officers reviewing a Digital Twin model of a city district to support planning approval",
-  },
-  {
-    slug: "bim-visualisation-construction",
-    icon: FaBuilding,
-    gradient: "from-green-600 to-emerald-500",
-    image: blogBimImg,
-    alt: "Engineer reviewing BIM visualisation of a bridge infrastructure project on site",
-  },
-  {
-    slug: "interactive-immersive-property-visualisation",
-    icon: FaVrCardboard,
-    gradient: "from-purple-600 to-pink-500",
-    image: blogImmersiveImg,
-    alt: "Interactive immersive property visualisation of a residential development on a large screen",
-  },
-];
+const ICON_MAP: Record<string, typeof FaChartLine> = {
+  "planning": FaChartLine,
+  "approval": FaChartLine,
+  "digital twin": FaChartLine,
+  "bim": FaBuilding,
+  "visualisation": FaBuilding,
+  "construction": FaBuilding,
+  "immersive": FaVrCardboard,
+  "property": FaVrCardboard,
+  "interactive": FaVrCardboard,
+};
 
+const GRADIENT_MAP: Record<string, string> = {
+  "planning": "from-blue-600 to-cyan-500",
+  "approval": "from-blue-600 to-cyan-500",
+  "digital twin": "from-blue-600 to-cyan-500",
+  "bim": "from-green-600 to-emerald-500",
+  "visualisation": "from-green-600 to-emerald-500",
+  "construction": "from-green-600 to-emerald-500",
+  "immersive": "from-purple-600 to-pink-500",
+  "property": "from-purple-600 to-pink-500",
+  "interactive": "from-purple-600 to-pink-00",
+};
+
+function getIconForCategory(category: string) {
+  const lower = category.toLowerCase();
+  for (const [key, icon] of Object.entries(ICON_MAP)) {
+    if (lower.includes(key)) return icon;
+  }
+  return FaFileAlt;
+}
+
+function getGradientForCategory(category: string) {
+  const lower = category.toLowerCase();
+  for (const [key, gradient] of Object.entries(GRADIENT_MAP)) {
+    if (lower.includes(key)) return gradient;
+  }
+  return "from-gray-600 to-gray-500";
+}
 
 const Blog = () => {
   const { setOpen } = useDemoDialogStore();
@@ -48,6 +61,14 @@ const Blog = () => {
   const navigate = useNavigate();
   const [subscribeEmail, setSubscribeEmail] = useState("");
   const [subscribed, setSubscribed] = useState(false);
+
+  const { data, isLoading, isError, error } = useQuery({
+    queryKey: ["articles", { page: 1, limit: 10 }],
+    queryFn: () => articlesApi.list({ page: 1, limit: 10 }),
+    staleTime: 5 * 60 * 1000,
+  });
+
+  const featuredArticles = data?.articles.slice(0, 3) ?? [];
 
   const handleSubscribe = (e: React.FormEvent) => {
     e.preventDefault();
@@ -104,65 +125,113 @@ const Blog = () => {
               <Badge variant="default" className="px-4 py-2 text-sm">Featured Articles</Badge>
             </motion.div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 max-w-md md:max-w-none mx-auto">
-              {featured.map((f, index) => {
-                const post = posts[f.slug];
-                const Icon = f.icon;
-                return (
+            {isLoading ? (
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 max-w-md md:max-w-none mx-auto">
+                {[1, 2, 3].map((i) => (
                   <motion.article
-                    key={f.slug}
+                    key={i}
                     initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: index * 0.1 }}
-                    className="bg-card rounded-2xl border border-border overflow-hidden hover:border-primary/50 transition-colors group cursor-pointer flex flex-col"
-                    onClick={() => navigate(`/blog/${f.slug}`)}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: i * 0.1 }}
+                    className="bg-card rounded-2xl border border-border overflow-hidden flex flex-col animate-pulse"
                   >
-                    <div className={`relative aspect-[16/9] sm:aspect-[3/2] md:aspect-auto md:h-36 bg-gradient-to-br ${f.gradient} overflow-hidden`}>
-                      <img
-                        src={f.image}
-                        alt={f.alt}
-                        width={1280}
-                        height={720}
-                        loading="lazy"
-                        className="absolute inset-0 h-full w-full object-cover object-center transition-transform duration-500 group-hover:scale-105"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-background/10 to-transparent" />
-                      <Icon className="absolute bottom-3 left-3 w-7 h-7 text-primary-foreground/90 drop-shadow" />
-                    </div>
-                    <div className="p-4 sm:p-5 flex flex-col flex-1">
-                      <Badge className="self-start mb-2 bg-primary/10 text-primary border-0">{post.category}</Badge>
-                      <h2 className="text-lg sm:text-xl font-bold text-foreground mb-2 leading-snug text-balance group-hover:text-primary transition-colors">
-                        {post.title}
-                      </h2>
-                      <p className="text-muted-foreground text-[0.9375rem] sm:text-sm mb-3 leading-relaxed flex-1 line-clamp-3">
-                        {post.intro.slice(0, 140)}…
-                      </p>
-                      <div className="flex flex-wrap items-center gap-x-4 gap-y-1 text-xs text-muted-foreground mb-4">
-                        <span className="inline-flex items-center gap-1.5"><Calendar className="h-4 w-4 shrink-0" /> {post.date}</span>
-                        <span className="inline-flex items-center gap-1.5"><User className="h-4 w-4 shrink-0" /> {post.author} · {post.readTime}</span>
-                      </div>
-                      <div className="flex flex-col sm:flex-row gap-2">
-                        <Button
-                          variant="outline"
-                          className="flex-1 h-11 border-primary/20 text-primary hover:bg-primary hover:text-primary-foreground"
-                          asChild
-                        >
-                          <Link to={`/blog/${f.slug}`}>Read article</Link>
-                        </Button>
-                        <Button
-                          variant="outline"
-                          className="flex-1 h-11 border-primary/20 text-primary hover:bg-primary hover:text-primary-foreground"
-                          onClick={(e) => { e.stopPropagation(); setOpen(true); }}
-                        >
-                          Book a Demo
-                        </Button>
+                    <div className="aspect-[16/9] sm:aspect-[4/3] md:aspect-auto md:h-56 md:min-h-[280px] bg-muted" />
+                    <div className="p-4 sm:p-5 flex flex-col flex-1 space-y-3">
+                      <div className="h-6 w-24 bg-muted rounded self-start" />
+                      <div className="h-5 w-3/4 bg-muted rounded" />
+                      <div className="h-5 w-full bg-muted rounded" />
+                      <div className="h-4 w-1/2 bg-muted rounded mt-auto" />
+                      <div className="h-4 w-1/3 bg-muted rounded" />
+                      <div className="flex gap-2">
+                        <div className="flex-1 h-10 bg-muted rounded" />
+                        <div className="flex-1 h-10 bg-muted rounded" />
                       </div>
                     </div>
                   </motion.article>
-                );
-              })}
-            </div>
+                ))}
+              </div>
+            ) : isError ? (
+              <div className="text-center py-12">
+                <AlertCircle className="h-12 w-12 text-destructive mx-auto mb-4" />
+                <h3 className="text-lg font-semibold text-foreground mb-2">Unable to load articles</h3>
+                <p className="text-muted-foreground mb-4">{error instanceof Error ? error.message : "Please try again later."}</p>
+                <Button variant="outline" onClick={() => window.location.reload()}>
+                  Retry
+                </Button>
+              </div>
+            ) : featuredArticles.length === 0 ? (
+              <div className="text-center py-12">
+                <FaFileAlt className="h-12 w-12 text-muted-foreground mx-auto mb-4" />
+                <h3 className="text-lg font-semibold text-foreground mb-2">No articles yet</h3>
+                <p className="text-muted-foreground">Check back soon for new insights.</p>
+              </div>
+            ) : (
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 max-w-md md:max-w-none mx-auto">
+                {featuredArticles.map((article, index) => {
+                  const Icon = getIconForCategory(article.category);
+                  const gradient = getGradientForCategory(article.category);
+                  const readTime = calculateReadTime(article.content);
+                  const excerpt = getArticleExcerpt(article.content);
+                  const formattedDate = formatArticleDate(article.published_at);
+
+                  return (
+                    <motion.article
+                      key={article.slug}
+                      initial={{ opacity: 0, y: 20 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: index * 0.1 }}
+                      className="bg-card rounded-2xl border border-border overflow-hidden hover:border-primary/50 transition-colors group cursor-pointer flex flex-col"
+                      onClick={() => navigate(`/blog/${article.slug}`)}
+                    >
+                      <div className={`relative aspect-[16/9] sm:aspect-[4/3] md:aspect-auto md:h-56 md:min-h-[280px] bg-gradient-to-br ${gradient} overflow-hidden`}>
+                        {article.featured_image && (
+                          <img
+                            src={article.featured_image}
+                            alt={article.title}
+                            width={1280}
+                            height={720}
+                            loading="lazy"
+                            className="absolute inset-0 h-full w-full object-cover object-center transition-transform duration-500 group-hover:scale-105"
+                          />
+                        )}
+                        <div className="absolute inset-0 bg-gradient-to-t from-background/60 via-background/5 to-transparent" />
+                        <Icon className="absolute bottom-4 left-4 w-8 h-8 text-primary-foreground/95 drop-shadow-lg" />
+                      </div>
+                      <div className="p-4 sm:p-5 flex flex-col flex-1">
+                        <Badge className="self-start mb-2 bg-primary/10 text-primary border-0">{article.category}</Badge>
+                        <h2 className="text-lg sm:text-xl font-bold text-foreground mb-2 leading-snug text-balance group-hover:text-primary transition-colors">
+                          {article.title}
+                        </h2>
+                        <p className="text-muted-foreground text-[0.9375rem] sm:text-sm mb-3 leading-relaxed flex-1 line-clamp-3">
+                          {excerpt}
+                        </p>
+                        <div className="flex flex-wrap items-center gap-x-4 gap-y-1 text-xs text-muted-foreground mb-4">
+                          <span className="inline-flex items-center gap-1.5"><Calendar className="h-4 w-4 shrink-0" /> {formattedDate}</span>
+                          <span className="inline-flex items-center gap-1.5"><User className="h-4 w-4 shrink-0" /> {article.author} · {readTime}</span>
+                        </div>
+                        <div className="flex flex-col sm:flex-row gap-2">
+                          <Button
+                            variant="outline"
+                            className="flex-1 h-11 border-primary/20 text-primary hover:bg-primary hover:text-primary-foreground"
+                            asChild
+                          >
+                            <Link to={`/blog/${article.slug}`}>Read article</Link>
+                          </Button>
+                          <Button
+                            variant="outline"
+                            className="flex-1 h-11 border-primary/20 text-primary hover:bg-primary hover:text-primary-foreground"
+                            onClick={(e) => { e.stopPropagation(); setOpen(true); }}
+                          >
+                            Book a Demo
+                          </Button>
+                        </div>
+                      </div>
+                    </motion.article>
+                  );
+                })}
+              </div>
+            )}
           </div>
         </section>
 

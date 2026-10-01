@@ -146,3 +146,38 @@ export interface Kpis {
   click_through: number;
 }
 
+export interface Article {
+  id: string;
+  auto_seo_id: string;
+  title: string;
+  slug: string;
+  excerpt: string;
+  content: string;
+  featured_image: string;
+  category: string;
+  tags: string[];
+  author: string;
+  published_at: string;
+  seo_title: string;
+  seo_description: string;
+  status: string;
+  created_at: string;
+  updated_at: string;
+}
+
+export interface ArticlesResponse {
+  articles: Article[];
+  total: number;
+  page: number;
+  limit: number;
+  totalPages: number;
+}
+
+export interface SingleArticleResponse {
+  article: Article;
+}
+
+export interface CategoriesResponse {
+  categories: string[];
+}
+

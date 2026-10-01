@@ -61,7 +61,7 @@ const HeroSection = () => {
         transition={{ duration: 0.8, delay: 0.2 }}
         className="relative"
       >
-        <div className="relative w-full overflow-hidden rounded-2xl shadow-2xl aspect-[16/10] group bg-muted">
+        <div className="relative w-full overflow-hidden rounded-2xl shadow-2xl aspect-[16/10] group">
           <VirtualTour />
 
           {/* Virtual tour HUD */}

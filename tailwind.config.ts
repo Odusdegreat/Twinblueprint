@@ -1,4 +1,6 @@
 import type { Config } from "tailwindcss";
+import tailwindcssAnimate from "tailwindcss-animate";
+import typography from "@tailwindcss/typography";
 
 export default {
   darkMode: ["class"],
@@ -93,7 +95,40 @@ export default {
         "accordion-up": "accordion-up 0.2s ease-out",
         "fade-up": "fade-up 0.6s ease-out forwards",
       },
+      typography: (theme: (path: string) => string) => ({
+        DEFAULT: {
+          css: {
+            color: theme("colors.foreground"),
+            maxWidth: "none",
+            h1: { color: theme("colors.foreground"), fontWeight: "700" },
+            h2: { color: theme("colors.foreground"), fontWeight: "700" },
+            h3: { color: theme("colors.foreground"), fontWeight: "700" },
+            h4: { color: theme("colors.foreground"), fontWeight: "600" },
+            strong: { color: theme("colors.foreground"), fontWeight: "600" },
+            p: { color: theme("colors.foreground") },
+            li: { color: theme("colors.foreground") },
+            span: { color: "inherit" },
+            div: { color: "inherit" },
+            a: { color: theme("colors.primary"), textDecoration: "underline", fontWeight: "500" },
+            "a:hover": { color: theme("colors.primary") },
+            code: { color: theme("colors.primary"), backgroundColor: theme("colors.muted.DEFAULT"), padding: "0.125rem 0.25rem", borderRadius: "0.25rem", fontWeight: "500" },
+            "code::before": { content: '""' },
+            "code::after": { content: '""' },
+            pre: { backgroundColor: theme("colors.muted.DEFAULT"), color: theme("colors.foreground"), borderRadius: "0.5rem" },
+            "pre code": { backgroundColor: "transparent", padding: 0, color: "inherit", fontSize: "inherit" },
+            blockquote: {
+              borderLeftColor: theme("colors.primary"),
+              color: theme("colors.muted.foreground"),
+              fontStyle: "italic",
+            },
+            hr: { borderColor: theme("colors.border") },
+            img: { borderRadius: "0.75rem" },
+            "ul > li::marker": { color: theme("colors.muted.foreground") },
+            "ol > li::marker": { color: theme("colors.muted.foreground") },
+          },
+        },
+      }),
     },
   },
-  plugins: [require("tailwindcss-animate")],
+  plugins: [tailwindcssAnimate, typography],
 } satisfies Config;
