@@ -11,9 +11,9 @@ const Footer = () => {
               <img
                 src={logoSrc}
                 alt="Meta-dology Twinblueprint - Licensed Meta-dology Associate"
-                width={640}
-                height={360}
-                className="h-auto w-56 md:w-64 rounded-md"
+                width={442}
+                height={244}
+                className="h-auto w-64 md:w-72 rounded-xl"
               />
             </Link>
             <p className="text-hero-muted text-sm mt-3 leading-relaxed">
