@@ -8,7 +8,6 @@ import IndustriesSection from "@/components/IndustriesSection";
 import CaseStudiesSection from "@/components/CaseStudiesSection";
 import HowItWorksSection from "@/components/HowItWorksSection";
 import CTASection from "@/components/CTASection";
-import Footer from "@/components/Footer";
 import PageNav from "@/components/PageNav";
 
 const Index = () => {
@@ -53,7 +52,6 @@ const Index = () => {
         <CTASection />
       </main>
       <PageNav />
-      <Footer />
     </>
   );
 };

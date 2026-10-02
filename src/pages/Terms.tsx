@@ -1,6 +1,5 @@
 import { motion } from "framer-motion";
 import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
 
 const sections = [
   {
@@ -126,7 +125,6 @@ const Terms = () => {
           </div>
         </section>
       </main>
-      <Footer />
     </>
   );
 };

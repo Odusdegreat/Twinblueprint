@@ -12,7 +12,6 @@ import {
 } from "@/components/ui/accordion";
 import { useDemoDialogStore } from "@/stores/demoDialogStore";
 import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
 import PageNav from "@/components/PageNav";
 
 const faqs = [
@@ -164,7 +163,6 @@ const FAQ = () => {
         </section>
       </main>
       <PageNav />
-      <Footer />
     </>
   );
 };

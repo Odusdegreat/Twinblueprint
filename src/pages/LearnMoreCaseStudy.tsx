@@ -6,7 +6,6 @@ import { Button } from "@/components/ui/button";
 
 import { useDemoDialogStore } from "@/stores/demoDialogStore";
 import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
 import BookDemoDialog from "@/components/BookDemoDialog";
 import caseStudy1 from "@/assets/case-study-1.jpg";
 import caseStudy2 from "@/assets/case-study-2.jpg";
@@ -292,7 +291,6 @@ const LearnMoreCaseStudy = () => {
           </div>
         </section>
       </main>
-      <Footer />
       <BookDemoDialog />
     </>
   );
