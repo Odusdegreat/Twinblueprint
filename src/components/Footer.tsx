@@ -7,23 +7,7 @@ const Footer = () => {
       <div className="container">
         <div className="grid md:grid-cols-4 gap-8">
           <div className="md:col-span-1">
-            <Link to="/" aria-label="Twinblueprint - Licensed Meta-dology Associate, home" className="inline-block w-full max-w-[320px] md:w-72">
-              <img
-                src={logoSrc}
-                alt="Meta-dology logo"
-                width={640}
-                height={346}
-                className="h-auto w-full"
-              />
-              <span className="mt-2 flex justify-center gap-1 text-hero-foreground text-sm font-medium tracking-wide">
-                <span>Twinblueprint -</span>
-                <span className="text-left">
-                  <span className="block">Licensed Meta-dology</span>
-                  <span className="block">Associate</span>
-                </span>
-              </span>
-            </Link>
-            <p className="text-hero-muted text-sm mt-3 leading-relaxed">
+            <p className="text-hero-muted text-sm leading-relaxed">
               Digital Twin specialists delivering architectural visualisation, infrastructure visualisation and interactive immersive property solutions for construction, planning and government clients.
             </p>
           </div>
@@ -59,6 +43,12 @@ const Footer = () => {
           </div>
         </div>
         <div className="mt-12 pt-8 border-t border-hero-muted/10">
+          <Link to="/" aria-label="Twinblueprint - Licensed Meta-dology Associate, home" className="mx-auto mb-8 flex w-56 md:w-64 flex-col items-center">
+            <img src={logoSrc} alt="Meta-dology logo" width={640} height={346} className="h-auto w-full" />
+            <span className="mt-2 text-center text-hero-foreground text-sm font-medium tracking-wide whitespace-nowrap">
+              Twinblueprint - Licensed Meta-dology Associate
+            </span>
+          </Link>
           <ul className="flex flex-wrap justify-center gap-3">
             {["ISO 27001 aligned", "RIBA ready workflow", "BREEAM aware visuals", "GDPR compliant"].map((item) => (
               <li
