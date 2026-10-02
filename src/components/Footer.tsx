@@ -13,7 +13,7 @@ const Footer = () => {
                 alt="Meta-dology Twinblueprint - Licensed Meta-dology Associate"
                 width={442}
                 height={244}
-                className="h-auto w-64 md:w-72"
+                className="h-auto w-full max-w-[320px] md:w-72"
               />
             </Link>
             <p className="text-hero-muted text-sm mt-3 leading-relaxed">
