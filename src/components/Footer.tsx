@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import logoSrc from "@/assets/meta-dology-logo-transparent.webp";
+import logoSrc from "@/assets/meta-dology-logo-new.webp";
 
 const Footer = () => {
   return (
