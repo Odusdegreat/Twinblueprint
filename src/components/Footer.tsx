@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import logoAsset from "@/assets/meta-dology-logo.png.asset.json";
+import logoSrc from "@/assets/meta-dology-logo.webp";
 
 const Footer = () => {
   return (
@@ -9,10 +9,10 @@ const Footer = () => {
           <div className="md:col-span-1">
             <Link to="/" aria-label="Twinblueprint - Licensed Meta-dology Associate, home" className="inline-block">
               <img
-                src={logoAsset.url}
+                src={logoSrc}
                 alt="Meta-dology Twinblueprint - Licensed Meta-dology Associate"
-                width={1672}
-                height={941}
+                width={640}
+                height={360}
                 loading="lazy"
                 className="h-auto w-48 md:w-56 rounded-md"
               />
