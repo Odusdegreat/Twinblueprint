@@ -15,8 +15,12 @@ const Footer = () => {
                 height={346}
                 className="h-auto w-full"
               />
-              <span className="block mt-2 text-center text-hero-foreground text-sm font-medium tracking-wide">
-                Twinblueprint - Licensed Meta-dology Associate
+              <span className="mt-2 flex justify-center gap-1 text-hero-foreground text-sm font-medium tracking-wide">
+                <span>Twinblueprint -</span>
+                <span className="text-left">
+                  <span className="block">Licensed Meta-dology</span>
+                  <span className="block">Associate</span>
+                </span>
               </span>
             </Link>
             <p className="text-hero-muted text-sm mt-3 leading-relaxed">
