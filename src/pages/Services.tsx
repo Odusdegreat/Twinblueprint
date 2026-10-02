@@ -6,7 +6,6 @@ import { FaCube, FaUsers, FaChartLine, FaPaintBrush, FaClock, FaShieldAlt } from
 import { Button } from "@/components/ui/button";
 import { useDemoDialogStore } from "@/stores/demoDialogStore";
 import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
 import PageNav from "@/components/PageNav";
 import ExploreLinks from "@/components/ExploreLinks";
 import svcArchVis from "@/assets/svc-arch-vis.jpg";
@@ -285,7 +284,6 @@ const Services = () => {
         </section>
       </main>
       <PageNav />
-      <Footer />
     </>
   );
 };

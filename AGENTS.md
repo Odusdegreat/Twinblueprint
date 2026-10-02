@@ -1,0 +1,1 @@
+- Public-site footer is rendered once in App via GlobalFooter (hidden on CRM); pages must not import Footer themselves — keeps one footer for every current and future route.

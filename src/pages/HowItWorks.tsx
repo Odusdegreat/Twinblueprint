@@ -6,7 +6,6 @@ import { CheckCircle2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useDemoDialogStore } from "@/stores/demoDialogStore";
 import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
 import PageNav from "@/components/PageNav";
 
 const steps = [
@@ -253,7 +252,6 @@ const HowItWorks = () => {
         </section>
       </main>
       <PageNav />
-      <Footer />
     </>
   );
 };

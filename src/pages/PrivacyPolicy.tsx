@@ -1,6 +1,5 @@
 import { motion } from "framer-motion";
 import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
 
 const sections = [
   {
@@ -111,7 +110,6 @@ const PrivacyPolicy = () => {
           </div>
         </section>
       </main>
-      <Footer />
     </>
   );
 };

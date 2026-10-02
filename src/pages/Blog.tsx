@@ -8,7 +8,6 @@ import { Badge } from "@/components/ui/badge";
 import { useDemoDialogStore } from "@/stores/demoDialogStore";
 import { useToast } from "@/hooks/use-toast";
 import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
 import PageNav from "@/components/PageNav";
 import BookDemoDialog from "@/components/BookDemoDialog";
 import { useQuery } from "@tanstack/react-query";
@@ -276,7 +275,6 @@ const Blog = () => {
         </section>
       </main>
       <PageNav />
-      <Footer />
       <BookDemoDialog />
     </>
   );

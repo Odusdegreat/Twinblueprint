@@ -6,7 +6,6 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { useDemoDialogStore } from "@/stores/demoDialogStore";
 import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
 import PageNav from "@/components/PageNav";
 import BookDemoDialog from "@/components/BookDemoDialog";
 import ExploreLinks from "@/components/ExploreLinks";
@@ -494,7 +493,6 @@ const CaseStudies = () => {
 
       </main>
       <PageNav />
-      <Footer />
       <BookDemoDialog />
     </>
   );

@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import logoAsset from "@/assets/meta-dology-logo.png.asset.json";
 
 const Footer = () => {
   return (
@@ -6,8 +7,15 @@ const Footer = () => {
       <div className="container">
         <div className="grid md:grid-cols-4 gap-8">
           <div className="md:col-span-1">
-            <Link to="/" className="text-hero-foreground font-heading font-extrabold text-xl">
-              Twin<span className="text-gradient">blueprint</span>
+            <Link to="/" aria-label="Twinblueprint - Licensed Meta-dology Associate, home" className="inline-block">
+              <img
+                src={logoAsset.url}
+                alt="Meta-dology Twinblueprint - Licensed Meta-dology Associate"
+                width={1672}
+                height={941}
+                loading="lazy"
+                className="h-auto w-48 md:w-56 rounded-md"
+              />
             </Link>
             <p className="text-hero-muted text-sm mt-3 leading-relaxed">
               Digital Twin specialists delivering architectural visualisation, infrastructure visualisation and interactive immersive property solutions for construction, planning and government clients.

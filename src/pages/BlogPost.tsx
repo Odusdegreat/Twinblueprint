@@ -5,7 +5,6 @@ import { ArrowLeft, ArrowRight, Calendar, User, Loader2, AlertCircle } from "luc
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
 import BookDemoDialog from "@/components/BookDemoDialog";
 import { useDemoDialogStore } from "@/stores/demoDialogStore";
 import { useQuery } from "@tanstack/react-query";
@@ -38,7 +37,6 @@ const BlogPost = () => {
             <p className="text-muted-foreground">Loading article...</p>
           </div>
         </main>
-        <Footer />
         <BookDemoDialog />
       </>
     );
@@ -63,7 +61,6 @@ const BlogPost = () => {
             </Link>
           </div>
         </main>
-        <Footer />
         <BookDemoDialog />
       </>
     );
@@ -229,7 +226,6 @@ const BlogPost = () => {
             </div>
           </section>
         </main>
-      <Footer />
       <BookDemoDialog />
     </>
   );

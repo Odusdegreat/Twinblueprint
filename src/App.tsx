@@ -16,6 +16,7 @@ import NotFound from "./pages/NotFound";
 import LearnMoreCaseStudy from "./pages/LearnMoreCaseStudy";
 import BlogPost from "./pages/BlogPost";
 import RouteTracker from "./components/RouteTracker";
+import GlobalFooter from "./components/GlobalFooter";
 import { Toaster } from "@/components/ui/toaster";
 import { AuthProvider } from "./hooks/useAuth";
 import { crmPath, isCrmHost, isCrmOnlyHost } from "./lib/crm-base";
@@ -52,7 +53,7 @@ const App = () => (
         </Route></Route>
         </>}
         <Route path="*" element={<NotFound />} />
-      </Routes><RouteTracker /><BookDemoDialog />
+      </Routes><GlobalFooter /><RouteTracker /><BookDemoDialog />
     </BrowserRouter></TooltipProvider></AuthProvider>
   </QueryClientProvider>
 );
