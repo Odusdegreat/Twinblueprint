@@ -7,14 +7,17 @@ const Footer = () => {
       <div className="container">
         <div className="grid md:grid-cols-4 gap-8">
           <div className="md:col-span-1">
-            <Link to="/" aria-label="Twinblueprint - Licensed Meta-dology Associate, home" className="inline-block">
+            <Link to="/" aria-label="Twinblueprint - Licensed Meta-dology Associate, home" className="inline-block w-full max-w-[320px] md:w-72">
               <img
                 src={logoSrc}
-                alt="Meta-dology Twinblueprint - Licensed Meta-dology Associate"
-                width={442}
-                height={244}
-                className="h-auto w-full max-w-[320px] md:w-72"
+                alt="Meta-dology logo"
+                width={640}
+                height={346}
+                className="h-auto w-full"
               />
+              <span className="block mt-2 text-center text-hero-foreground text-sm font-medium tracking-wide">
+                Twinblueprint - Licensed Meta-dology Associate
+              </span>
             </Link>
             <p className="text-hero-muted text-sm mt-3 leading-relaxed">
               Digital Twin specialists delivering architectural visualisation, infrastructure visualisation and interactive immersive property solutions for construction, planning and government clients.
