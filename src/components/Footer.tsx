@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import logoSrc from "@/assets/meta-dology-logo.webp";
+import logoSrc from "@/assets/meta-dology-logo-transparent.webp";
 
 const Footer = () => {
   return (
@@ -13,7 +13,7 @@ const Footer = () => {
                 alt="Meta-dology Twinblueprint - Licensed Meta-dology Associate"
                 width={442}
                 height={244}
-                className="h-auto w-64 md:w-72 rounded-xl"
+                className="h-auto w-64 md:w-72"
               />
             </Link>
             <p className="text-hero-muted text-sm mt-3 leading-relaxed">
