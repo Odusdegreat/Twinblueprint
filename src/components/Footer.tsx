@@ -14,7 +14,7 @@ const Footer = () => {
                 width={640}
                 height={360}
                 loading="lazy"
-                className="h-auto w-48 md:w-56 rounded-md"
+                className="h-auto w-48 md:w-56 mix-blend-lighten [mask-image:radial-gradient(ellipse_at_center,black_60%,transparent_100%)]"
               />
             </Link>
             <p className="text-hero-muted text-sm mt-3 leading-relaxed">
