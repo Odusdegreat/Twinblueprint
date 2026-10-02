@@ -7,7 +7,10 @@ const Footer = () => {
       <div className="container">
         <div className="grid md:grid-cols-4 gap-8">
           <div className="md:col-span-1">
-            <p className="text-hero-muted text-sm leading-relaxed">
+            <Link to="/" className="inline-block mb-4 text-hero-foreground font-heading font-extrabold text-2xl tracking-tight">
+              Twin<span className="text-gradient">blueprint</span>
+            </Link>
+            <p className="text-hero-muted text-base leading-relaxed">
               Digital Twin specialists delivering architectural visualisation, infrastructure visualisation and interactive immersive property solutions for construction, planning and government clients.
             </p>
           </div>
