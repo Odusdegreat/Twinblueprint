@@ -15,7 +15,7 @@ const Footer = () => {
                 height={244}
                 className="h-auto w-full max-w-[320px] md:w-72"
               />
-              <span className="text-hero-foreground text-sm sm:text-base font-semibold tracking-wide uppercase leading-snug">
+              <span className="text-hero-foreground text-sm sm:text-base md:text-xs lg:text-sm font-semibold tracking-wide uppercase leading-snug">
                 Licensed Meta-dology Associate
               </span>
             </Link>
