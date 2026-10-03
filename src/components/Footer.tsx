@@ -46,7 +46,7 @@ const Footer = () => {
           </div>
         </div>
         <div className="mt-2 pt-0 border-t border-hero-muted/10">
-          <Link to="/" aria-label="Twinblueprint - Licensed Meta-dology Associate, home" className="mx-auto -mt-2 mb-4 flex w-56 md:w-64 flex-col items-center">
+          <Link to="/" aria-label="Twinblueprint - Licensed Meta-dology Associate, home" className="mx-auto mt-2 mb-4 flex w-56 md:w-64 flex-col items-center">
             <img src={logoSrc} alt="Meta-dology logo" width={640} height={346} className="h-auto w-full" />
             <span className="mt-2 text-center text-hero-foreground text-sm font-medium tracking-wide whitespace-nowrap">
               Twinblueprint - Licensed Meta-dology Associate
