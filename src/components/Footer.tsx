@@ -62,7 +62,7 @@ const Footer = () => {
               </li>
             ))}
           </ul>
-          <p className="text-hero-muted text-sm text-center mt-8">© 2026 Twinblueprint. Digital Twin and architectural visualisation specialists. <br />All rights reserved.</p>
+          <p className="text-hero-muted text-sm text-center mt-3">© 2026 Twinblueprint. Digital Twin and architectural visualisation specialists. <br />All rights reserved.</p>
         </div>
 
       </div>
