@@ -20,7 +20,7 @@ const HeroSection = () => {
         className="max-w-xl"
       >
         <h1 className="text-4xl md:text-5xl lg:text-6xl leading-[1.1] tracking-tight text-hero-foreground text-balance">
-          Bringing Construction Projects to Life <span className="text-gradient">before they are Built</span>
+          Digital Twins and Architectural Visualisation for Construction Projects
         </h1>
         <p className="mt-5 text-hero-muted text-base md:text-lg leading-relaxed text-pretty">
           Accelerate planning approvals, improve stakeholder engagement and reduce project risk with industry leading Digital Twin technology, photorealistic architectural visualisation and immersive virtual project experiences.

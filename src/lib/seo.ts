@@ -15,7 +15,7 @@ export const ORGANIZATION_SCHEMA = {
   ],
   contactPoint: {
     "@type": "ContactPoint",
-    telephone: "+44-20-1234-5678",
+    // Add verified contact details when available; avoid publishing placeholders.
     contactType: "customer service",
     availableLanguage: "English",
     areaServed: "World",
@@ -133,6 +133,10 @@ export function getWebPageSchema(name: string, url: string, description?: string
     description,
     isPartOf: { "@type": "WebSite", name: "Twinblueprint", url: BASE_URL },
   };
+}
+
+export function getPublicPageSchemas(items: Array<{ name: string; url: string }>, name: string, url: string, description?: string) {
+  return [getWebPageSchema(name, url, description), getBreadcrumbSchema(items)];
 }
 
 export function getAboutPageSchema() {

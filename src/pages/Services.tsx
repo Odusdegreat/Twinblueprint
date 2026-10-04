@@ -102,7 +102,7 @@ const Services = () => {
         <title>Digital Twin & Visualisation Services | Twinblueprint</title>
         <meta
           name="description"
-          content="Digital Twin solutions, architectural visualisation, infrastructure visualisation and planning approval support that reduce delivery risk and accelerate approvals."
+          content="Explore Twinblueprint digital twin, architectural visualisation and infrastructure visualisation services for development teams worldwide, including Nigeria."
         />
         <link rel="canonical" href={`${BASE_URL}/services`} />
         <meta property="og:title" content="Digital Twin & Visualisation Services | Twinblueprint" />
@@ -149,7 +149,7 @@ const Services = () => {
               viewport={{ once: true }}
               className="max-w-3xl mx-auto mb-6 bg-card border border-border rounded-2xl p-8 text-center"
             >
-              <h3 className="text-2xl md:text-3xl text-foreground mb-4">What we Offer</h3>
+              <h2 className="text-2xl md:text-3xl text-foreground mb-4">What we Offer</h2>
               <p className="text-muted-foreground leading-relaxed">
                 End to end visualisation solutions for construction, infrastructure and urban planning projects, providing high fidelity digital models that support every critical stage from planning and design through stakeholder consultation, technical development and sales enablement.
               </p>
@@ -186,7 +186,7 @@ const Services = () => {
                     <div className="w-12 h-12 -mt-6 mb-4 bg-card border border-border rounded-lg flex items-center justify-center relative z-10 shadow-sm">
                       <Icon className="h-6 w-6 text-primary" />
                     </div>
-                    <h3 className="text-xl font-bold text-foreground mb-3">{service.title}</h3>
+                    <h2 className="text-xl font-bold text-foreground mb-3">{service.title}</h2>
 
                     <p className="text-muted-foreground text-sm mb-4 leading-relaxed">
                       {service.description}

@@ -1,5 +1,6 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Route, Routes, useLocation } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import BookDemoDialog from "@/components/BookDemoDialog";
@@ -35,6 +36,13 @@ import CrmAnalytics from "./crm/pages/Analytics";
 import CrmEmea from "./crm/pages/Emea";
 import CrmAmericas from "./crm/pages/Americas";
 
+const GlobalMetadata = () => {
+  const { pathname } = useLocation();
+  const isPrivate = isCrmHost() || /^\/(crm|admin|login|dashboard)(\/|$)/i.test(pathname);
+  const isUnknownArticle = pathname.startsWith("/blog/");
+  return isPrivate || isUnknownArticle ? <Helmet><meta name="robots" content="noindex, nofollow, noarchive" /></Helmet> : null;
+};
+
 const queryClient = new QueryClient();
 
 const App = () => (
@@ -53,7 +61,7 @@ const App = () => (
         </Route></Route>
         </>}
         <Route path="*" element={<NotFound />} />
-      </Routes><GlobalFooter /><RouteTracker /><BookDemoDialog />
+      </Routes><GlobalMetadata /><GlobalFooter /><RouteTracker /><BookDemoDialog />
     </BrowserRouter></TooltipProvider></AuthProvider>
   </QueryClientProvider>
 );

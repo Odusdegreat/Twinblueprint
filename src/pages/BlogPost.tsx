@@ -30,7 +30,8 @@ const BlogPost = () => {
     return (
       <>
         <Helmet>
-          <title>Loading... | Twinblueprint Blog</title>
+          <title>Loading article | Twinblueprint Blog</title>
+          <meta name="robots" content="noindex, nofollow" />
         </Helmet>
         <Navbar />
         <main className="min-h-screen flex items-center justify-center bg-background">
@@ -49,6 +50,7 @@ const BlogPost = () => {
       <>
         <Helmet>
           <title>Article Not Found | Twinblueprint Blog</title>
+          <meta name="robots" content="noindex, nofollow" />
         </Helmet>
         <Navbar />
         <main className="min-h-screen flex items-center justify-center bg-background">
@@ -70,10 +72,10 @@ const BlogPost = () => {
 
   const formattedDate = formatArticleDate(article.published_at);
   const readTime = calculateReadTime(article.content);
-  const articleUrl = article.canonical_url || `${window.location.origin}/blog/${article.slug}`;
-  const imageUrl = article.featured_image || `${window.location.origin}/og-image.jpg`;
-  const seoTitle = article.meta_title || article.title;
-  const seoDescription = article.meta_description || article.excerpt || "";
+  const articleUrl = `${BASE_URL}/blog/${article.slug}`;
+  const imageUrl = article.featured_image || `${BASE_URL}/og-image.jpg`;
+  const seoTitle = article.meta_title || `${article.title} | Twinblueprint`;
+  const seoDescription = article.meta_description || article.excerpt || article.title;
 
   const breadcrumbItems = [
     { name: "Home", url: BASE_URL },

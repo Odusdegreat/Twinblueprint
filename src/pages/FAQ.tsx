@@ -64,7 +64,7 @@ const FAQ = () => {
         <title>FAQ | Digital Twin & Visualisation Questions | Twinblueprint</title>
         <meta
           name="description"
-          content="Answers to common questions about Digital Twin, BIM visualisation, planning approval support, file formats, timelines and confidentiality."
+          content="Answers about Twinblueprint digital twin and visualisation services, project inputs, deliverables, timelines, approvals and confidentiality."
         />
         <link rel="canonical" href={`${BASE_URL}/faq`} />
         <meta property="og:title" content="FAQ | Twinblueprint" />

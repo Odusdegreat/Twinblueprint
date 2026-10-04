@@ -2,16 +2,15 @@ import fs from "fs";
 import path from "path";
 import axios from "axios";
 
-const API_BASE = process.env.VITE_API_BASE_URL || process.env.VITE_API_URL || "http://localhost:5000/api";
-const BASE_URL = process.env.SITE_URL || "https://twinblueprint.com";
+const API_BASE = process.env.VITE_API_BASE_URL || process.env.VITE_API_URL || "https://twinblueprint-server.onrender.com/api";
+const BASE_URL = "https://twinblueprint.com";
 const OUTPUT_PATH = path.resolve("public/sitemap.xml");
 
 interface Article {
   slug: string;
   updated_at: string;
+  status: string;
 }
-
-const CASE_STUDY_IDS = [1, 2, 3, 4, 5];
 
 const STATIC_URLS = [
   { url: "/", changefreq: "weekly", priority: 1.0 },
@@ -25,12 +24,6 @@ const STATIC_URLS = [
   { url: "/terms", changefreq: "yearly", priority: 0.3 },
 ];
 
-const CASE_STUDY_URLS = CASE_STUDY_IDS.map((id) => ({
-  url: `/case-studies/${id}`,
-  changefreq: "yearly" as const,
-  priority: 0.7,
-}));
-
 async function fetchArticles(): Promise<Article[]> {
   try {
     const response = await axios.get(`${API_BASE}/articles`, {
@@ -40,7 +33,7 @@ async function fetchArticles(): Promise<Article[]> {
 
     if (response.data.success && response.data.data?.articles) {
       return response.data.data.articles
-        .filter((a: Article) => a.status === "published")
+        .filter((a: Article) => a.status === "published" && typeof a.slug === "string" && !!a.slug)
         .map((a: Article) => ({
           slug: a.slug,
           updated_at: a.updated_at,
@@ -61,7 +54,7 @@ function generateSitemap(articles: Article[]): string {
     priority: 0.7,
   }));
 
-  const allUrls = [...STATIC_URLS, ...CASE_STUDY_URLS, ...articleUrls];
+  const allUrls = [...new Map([...STATIC_URLS, ...articleUrls].map((entry) => [entry.url, entry])).values()];
 
   const urlEntries = allUrls
     .map(({ url, lastmod, changefreq, priority }) => {

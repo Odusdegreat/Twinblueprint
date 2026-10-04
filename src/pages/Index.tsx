@@ -19,7 +19,7 @@ const Index = () => {
         <title>Digital Twin & Architectural Visualisation | Twinblueprint</title>
         <meta
           name="description"
-          content="Digital Twin technology and photorealistic architectural visualisation that accelerate planning approvals, align stakeholders and reduce construction project risk."
+          content="Twinblueprint creates digital twins and architectural visualisations for construction, property and infrastructure teams worldwide, including projects in Nigeria."
         />
         <link rel="canonical" href={`${BASE_URL}/`} />
         <meta property="og:title" content="Digital Twin & Architectural Visualisation | Twinblueprint" />

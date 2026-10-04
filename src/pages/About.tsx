@@ -64,7 +64,7 @@ const About = () => {
         <title>About Twinblueprint | Digital Twin & Visualisation Specialists</title>
         <meta
           name="description"
-          content="Meet the Twinblueprint team - Digital Twin, BIM visualisation and immersive property visualisation specialists serving construction, infrastructure and planning teams."
+          content="Meet Twinblueprint, a global team creating digital twins and immersive visualisation for construction, infrastructure and property projects."
         />
         <link rel="canonical" href={`${BASE_URL}/about`} />
         <meta property="og:title" content="About Twinblueprint" />

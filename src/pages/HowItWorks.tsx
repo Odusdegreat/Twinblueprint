@@ -79,7 +79,7 @@ const HowItWorks = () => {
         <title>How it Works | Our Digital Twin Delivery Process | Twinblueprint</title>
         <meta
           name="description"
-          content="Our four step Digital Twin delivery process - Discovery, Project Development, Review & Collaboration, Delivery & Support - built for construction, infrastructure and planning teams."
+          content="See how Twinblueprint turns project drawings, BIM and site data into digital twins through discovery, development, review and delivery."
         />
         <link rel="canonical" href={`${BASE_URL}/how-it-works`} />
         <meta property="og:title" content="How it Works | Twinblueprint" />

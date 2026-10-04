@@ -1,4 +1,5 @@
-export const BASE_URL = import.meta.env.VITE_SITE_URL || "https://twinblueprint.com";
+// SEO URLs must always use the production domain, even on previews or localhost.
+export const BASE_URL = "https://twinblueprint.com";
 
 export const CRM_PATHS = [
   "/crm",

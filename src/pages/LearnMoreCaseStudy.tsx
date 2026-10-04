@@ -162,7 +162,7 @@ const LearnMoreCaseStudy = () => {
   const { setOpen } = useDemoDialogStore();
 
   const studyUrl = `${BASE_URL}/case-studies/${study.id}`;
-  const imageUrl = `${BASE_URL}${study.image.src || study.image}`;
+  const imageUrl = new URL(study.image, BASE_URL).toString();
   const breadcrumbItems = [
     { name: "Home", url: BASE_URL },
     { name: "Case Studies", url: `${BASE_URL}/case-studies` },

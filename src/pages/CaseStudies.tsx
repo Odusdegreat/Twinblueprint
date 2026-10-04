@@ -442,7 +442,7 @@ const CaseStudies = () => {
                         {post.title}
                       </Link>
                     </h3>
-                    <p className="text-sm text-muted-foreground leading-relaxed mb-4">{post.seo_description || post.excerpt}</p>
+                    <p className="text-sm text-muted-foreground leading-relaxed mb-4">{post.meta_description || post.excerpt}</p>
                     <p className="text-xs text-muted-foreground mb-5">{formatArticleDate(post.published_at)} · {calculateReadTime(post.content)}</p>
                     <Link
                       to={`/blog/${post.slug}`}

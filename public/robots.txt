@@ -1,7 +1,5 @@
 User-agent: *
 Allow: /
-
-User-agent: *
 Disallow: /crm/
 Disallow: /dashboard/
 Disallow: /admin/
