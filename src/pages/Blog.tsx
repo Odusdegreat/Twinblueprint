@@ -40,7 +40,8 @@ const GRADIENT_MAP: Record<string, string> = {
   "interactive": "from-purple-600 to-pink-00",
 };
 
-function getIconForCategory(category: string) {
+function getIconForCategory(category?: string | null) {
+  if (!category) return FaFileAlt;
   const lower = category.toLowerCase();
   for (const [key, icon] of Object.entries(ICON_MAP)) {
     if (lower.includes(key)) return icon;
@@ -48,7 +49,8 @@ function getIconForCategory(category: string) {
   return FaFileAlt;
 }
 
-function getGradientForCategory(category: string) {
+function getGradientForCategory(category?: string | null) {
+  if (!category) return "from-gray-600 to-gray-500";
   const lower = category.toLowerCase();
   for (const [key, gradient] of Object.entries(GRADIENT_MAP)) {
     if (lower.includes(key)) return gradient;
