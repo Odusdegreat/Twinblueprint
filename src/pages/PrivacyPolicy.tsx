@@ -1,5 +1,8 @@
 import { motion } from "framer-motion";
+import { Helmet } from "react-helmet-async";
 import Navbar from "@/components/Navbar";
+import { BASE_URL } from "@/lib/constants";
+import { getWebPageSchema, ORGANIZATION_SCHEMA, WEBSITE_SCHEMA } from "@/lib/seo";
 
 const sections = [
   {
@@ -57,6 +60,23 @@ const sections = [
 const PrivacyPolicy = () => {
   return (
     <>
+      <Helmet>
+        <title>Privacy Policy | Twinblueprint</title>
+        <meta name="description" content="Twinblueprint Privacy Policy - How we collect, use, and protect your personal information when you use our Digital Twin and architectural visualisation services." />
+        <link rel="canonical" href={`${BASE_URL}/privacy-policy`} />
+        <meta property="og:title" content="Privacy Policy | Twinblueprint" />
+        <meta property="og:description" content="How we collect, use, and protect your personal information when you use our Digital Twin and architectural visualisation services." />
+        <meta property="og:url" content={`${BASE_URL}/privacy-policy`} />
+        <meta property="og:type" content="website" />
+        <meta property="og:image" content={`${BASE_URL}/og-image.jpg`} />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Privacy Policy | Twinblueprint" />
+        <meta name="twitter:description" content="How we collect, use, and protect your personal information when you use our Digital Twin and architectural visualisation services." />
+        <meta name="twitter:image" content={`${BASE_URL}/og-image.jpg`} />
+        <script type="application/ld+json">{JSON.stringify(WEBSITE_SCHEMA)}</script>
+        <script type="application/ld+json">{JSON.stringify(ORGANIZATION_SCHEMA)}</script>
+        <script type="application/ld+json">{JSON.stringify(getWebPageSchema("Privacy Policy", `${BASE_URL}/privacy-policy`, "Twinblueprint Privacy Policy - How we collect, use, and protect your personal information."))}</script>
+      </Helmet>
       <Navbar />
       <main>
         <section className="bg-hero pt-32 pb-20 md:pt-40 md:pb-28">

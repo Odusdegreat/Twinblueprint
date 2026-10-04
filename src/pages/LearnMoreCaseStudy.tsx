@@ -3,12 +3,13 @@ import { useParams, Link } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import { ArrowLeft, ArrowRight, CheckCircle2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
-
 import { useDemoDialogStore } from "@/stores/demoDialogStore";
 import Navbar from "@/components/Navbar";
 import BookDemoDialog from "@/components/BookDemoDialog";
 import caseStudy1 from "@/assets/case-study-1.jpg";
 import caseStudy2 from "@/assets/case-study-2.jpg";
+import { BASE_URL } from "@/lib/constants";
+import { ORGANIZATION_SCHEMA, WEBSITE_SCHEMA, getCaseStudySchema, getBreadcrumbSchema } from "@/lib/seo";
 
 const caseStudiesData = {
   1: {
@@ -160,26 +161,38 @@ const LearnMoreCaseStudy = () => {
   const study = caseStudiesData[studyId as keyof typeof caseStudiesData] || caseStudiesData[1];
   const { setOpen } = useDemoDialogStore();
 
+  const studyUrl = `${BASE_URL}/case-studies/${study.id}`;
+  const imageUrl = `${BASE_URL}${study.image.src || study.image}`;
+  const breadcrumbItems = [
+    { name: "Home", url: BASE_URL },
+    { name: "Case Studies", url: `${BASE_URL}/case-studies` },
+    { name: study.title, url: studyUrl },
+  ];
+
   return (
     <>
       <Helmet>
         <title>{study.metaTitle}</title>
         <meta name="description" content={study.metaDescription} />
-        <link rel="canonical" href={`/case-studies/${study.id}`} />
+        <link rel="canonical" href={studyUrl} />
         <meta property="og:title" content={study.metaTitle} />
         <meta property="og:description" content={study.metaDescription} />
-        <meta property="og:url" content={`/case-studies/${study.id}`} />
-        <meta property="og:image" content="/og-image.jpg" />
-        <meta name="twitter:image" content="/og-image.jpg" />
+        <meta property="og:url" content={studyUrl} />
+        <meta property="og:type" content="article" />
+        <meta property="og:image" content={imageUrl} />
+        <meta name="twitter:image" content={imageUrl} />
         <meta name="twitter:card" content="summary_large_image" />
-        <script type="application/ld+json">{JSON.stringify({
-          "@context": "https://schema.org",
-          "@type": "Article",
-          headline: study.title,
+        <meta name="twitter:title" content={study.metaTitle} />
+        <meta name="twitter:description" content={study.metaDescription} />
+        <script type="application/ld+json">{JSON.stringify(WEBSITE_SCHEMA)}</script>
+        <script type="application/ld+json">{JSON.stringify(ORGANIZATION_SCHEMA)}</script>
+        <script type="application/ld+json">{JSON.stringify(getCaseStudySchema({
+          title: study.title,
           description: study.metaDescription,
-          author: { "@type": "Organization", name: "Twinblueprint" },
-          publisher: { "@type": "Organization", name: "Twinblueprint" },
-        })}</script>
+          image: imageUrl,
+          url: studyUrl,
+        }))}</script>
+        <script type="application/ld+json">{JSON.stringify(getBreadcrumbSchema(breadcrumbItems))}</script>
       </Helmet>
       <Navbar />
       <main>

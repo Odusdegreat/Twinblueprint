@@ -14,6 +14,8 @@ import svcPlanningApproval from "@/assets/svc-planning-approval.jpg";
 import svcInfrastructure from "@/assets/svc-infrastructure.jpg";
 import svcUrbanPlanning from "@/assets/svc-urban-planning.jpg";
 import svcWalkthrough from "@/assets/svc-walkthrough.jpg";
+import { BASE_URL } from "@/lib/constants";
+import { ORGANIZATION_SCHEMA, WEBSITE_SCHEMA, getWebPageSchema } from "@/lib/seo";
 
 
 const services = [
@@ -102,20 +104,19 @@ const Services = () => {
           name="description"
           content="Digital Twin solutions, architectural visualisation, infrastructure visualisation and planning approval support that reduce delivery risk and accelerate approvals."
         />
-        <link rel="canonical" href="/services" />
+        <link rel="canonical" href={`${BASE_URL}/services`} />
         <meta property="og:title" content="Digital Twin & Visualisation Services | Twinblueprint" />
-        <meta property="og:url" content="/services" />
-        <meta property="og:image" content="/og-image.jpg" />
-        <meta name="twitter:image" content="/og-image.jpg" />
+        <meta property="og:description" content="Digital Twin solutions, architectural visualisation, infrastructure visualisation and planning approval support that reduce delivery risk and accelerate approvals." />
+        <meta property="og:url" content={`${BASE_URL}/services`} />
+        <meta property="og:type" content="website" />
+        <meta property="og:image" content={`${BASE_URL}/og-image.jpg`} />
+        <meta name="twitter:image" content={`${BASE_URL}/og-image.jpg`} />
         <meta name="twitter:card" content="summary_large_image" />
-        <script type="application/ld+json">{JSON.stringify({
-          "@context": "https://schema.org",
-          "@type": "WebPage",
-          name: "Digital Twin & Visualisation Services",
-          url: "/services",
-          isPartOf: { "@type": "WebSite", name: "Twinblueprint", url: "/" },
-          about: ["Digital Twin", "Architectural Visualisation", "Planning Approval Support", "BIM Visualisation"],
-        })}</script>
+        <meta name="twitter:title" content="Digital Twin & Visualisation Services | Twinblueprint" />
+        <meta name="twitter:description" content="Digital Twin solutions, architectural visualisation, infrastructure visualisation and planning approval support that reduce delivery risk and accelerate approvals." />
+        <script type="application/ld+json">{JSON.stringify(WEBSITE_SCHEMA)}</script>
+        <script type="application/ld+json">{JSON.stringify(ORGANIZATION_SCHEMA)}</script>
+        <script type="application/ld+json">{JSON.stringify(getWebPageSchema("Digital Twin & Visualisation Services", `${BASE_URL}/services`, "Digital Twin solutions, architectural visualisation, infrastructure visualisation and planning approval support that reduce delivery risk and accelerate approvals."))}</script>
       </Helmet>
       <Navbar />
       <main>

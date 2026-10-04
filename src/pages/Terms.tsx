@@ -1,5 +1,8 @@
 import { motion } from "framer-motion";
+import { Helmet } from "react-helmet-async";
 import Navbar from "@/components/Navbar";
+import { BASE_URL } from "@/lib/constants";
+import { getWebPageSchema, ORGANIZATION_SCHEMA, WEBSITE_SCHEMA } from "@/lib/seo";
 
 const sections = [
   {
@@ -72,6 +75,23 @@ const sections = [
 const Terms = () => {
   return (
     <>
+      <Helmet>
+        <title>Terms of Service | Twinblueprint</title>
+        <meta name="description" content="Twinblueprint Terms of Service - Rules and guidelines for using our Digital Twin and architectural visualisation services." />
+        <link rel="canonical" href={`${BASE_URL}/terms`} />
+        <meta property="og:title" content="Terms of Service | Twinblueprint" />
+        <meta property="og:description" content="Rules and guidelines for using our Digital Twin and architectural visualisation services." />
+        <meta property="og:url" content={`${BASE_URL}/terms`} />
+        <meta property="og:type" content="website" />
+        <meta property="og:image" content={`${BASE_URL}/og-image.jpg`} />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Terms of Service | Twinblueprint" />
+        <meta name="twitter:description" content="Rules and guidelines for using our Digital Twin and architectural visualisation services." />
+        <meta name="twitter:image" content={`${BASE_URL}/og-image.jpg`} />
+        <script type="application/ld+json">{JSON.stringify(WEBSITE_SCHEMA)}</script>
+        <script type="application/ld+json">{JSON.stringify(ORGANIZATION_SCHEMA)}</script>
+        <script type="application/ld+json">{JSON.stringify(getWebPageSchema("Terms of Service", `${BASE_URL}/terms`, "Twinblueprint Terms of Service - Rules and guidelines for using our Digital Twin and architectural visualisation services."))}</script>
+      </Helmet>
       <Navbar />
       <main>
         <section className="bg-hero pt-32 pb-20 md:pt-40 md:pb-28">

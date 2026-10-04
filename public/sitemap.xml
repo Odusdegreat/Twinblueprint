@@ -1,58 +1,73 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://twinblueprint.co.uk/</loc>
+    <loc>https://twinblueprint.com/</loc>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://twinblueprint.co.uk/services</loc>
+    <loc>https://twinblueprint.com/services</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://twinblueprint.co.uk/case-studies</loc>
+    <loc>https://twinblueprint.com/case-studies</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://twinblueprint.co.uk/case-studies/1</loc>
-    <changefreq>yearly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://twinblueprint.co.uk/case-studies/2</loc>
-    <changefreq>yearly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://twinblueprint.co.uk/how-it-works</loc>
+    <loc>https://twinblueprint.com/how-it-works</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://twinblueprint.co.uk/about</loc>
+    <loc>https://twinblueprint.com/about</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://twinblueprint.co.uk/blog</loc>
+    <loc>https://twinblueprint.com/blog</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://twinblueprint.co.uk/faq</loc>
+    <loc>https://twinblueprint.com/faq</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://twinblueprint.co.uk/privacy-policy</loc>
+    <loc>https://twinblueprint.com/privacy-policy</loc>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
   <url>
-    <loc>https://twinblueprint.co.uk/terms</loc>
+    <loc>https://twinblueprint.com/terms</loc>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
+  </url>
+  <url>
+    <loc>https://twinblueprint.com/case-studies/1</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://twinblueprint.com/case-studies/2</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://twinblueprint.com/case-studies/3</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://twinblueprint.com/case-studies/4</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://twinblueprint.com/case-studies/5</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.7</priority>
   </url>
 </urlset>

@@ -3,13 +3,33 @@ import path from "path";
 import axios from "axios";
 
 const API_BASE = process.env.VITE_API_BASE_URL || process.env.VITE_API_URL || "http://localhost:5000/api";
-const BASE_URL = process.env.SITE_URL || "https://twinblueprint.co.uk";
+const BASE_URL = process.env.SITE_URL || "https://twinblueprint.com";
 const OUTPUT_PATH = path.resolve("public/sitemap.xml");
 
 interface Article {
   slug: string;
   updated_at: string;
 }
+
+const CASE_STUDY_IDS = [1, 2, 3, 4, 5];
+
+const STATIC_URLS = [
+  { url: "/", changefreq: "weekly", priority: 1.0 },
+  { url: "/services", changefreq: "monthly", priority: 0.9 },
+  { url: "/case-studies", changefreq: "monthly", priority: 0.9 },
+  { url: "/how-it-works", changefreq: "monthly", priority: 0.8 },
+  { url: "/about", changefreq: "monthly", priority: 0.7 },
+  { url: "/blog", changefreq: "weekly", priority: 0.8 },
+  { url: "/faq", changefreq: "monthly", priority: 0.6 },
+  { url: "/privacy-policy", changefreq: "yearly", priority: 0.3 },
+  { url: "/terms", changefreq: "yearly", priority: 0.3 },
+];
+
+const CASE_STUDY_URLS = CASE_STUDY_IDS.map((id) => ({
+  url: `/case-studies/${id}`,
+  changefreq: "yearly" as const,
+  priority: 0.7,
+}));
 
 async function fetchArticles(): Promise<Article[]> {
   try {
@@ -34,28 +54,14 @@ async function fetchArticles(): Promise<Article[]> {
 }
 
 function generateSitemap(articles: Article[]): string {
-  const staticUrls = [
-    { url: "/", changefreq: "weekly", priority: 1.0 },
-    { url: "/services", changefreq: "monthly", priority: 0.9 },
-    { url: "/case-studies", changefreq: "monthly", priority: 0.9 },
-    { url: "/case-studies/1", changefreq: "yearly", priority: 0.7 },
-    { url: "/case-studies/2", changefreq: "yearly", priority: 0.7 },
-    { url: "/how-it-works", changefreq: "monthly", priority: 0.8 },
-    { url: "/about", changefreq: "monthly", priority: 0.7 },
-    { url: "/blog", changefreq: "weekly", priority: 0.8 },
-    { url: "/faq", changefreq: "monthly", priority: 0.6 },
-    { url: "/privacy-policy", changefreq: "yearly", priority: 0.3 },
-    { url: "/terms", changefreq: "yearly", priority: 0.3 },
-  ];
-
   const articleUrls = articles.map((article) => ({
     url: `/blog/${article.slug}`,
     lastmod: article.updated_at.split("T")[0],
-    changefreq: "monthly",
+    changefreq: "monthly" as const,
     priority: 0.7,
   }));
 
-  const allUrls = [...staticUrls, ...articleUrls];
+  const allUrls = [...STATIC_URLS, ...CASE_STUDY_URLS, ...articleUrls];
 
   const urlEntries = allUrls
     .map(({ url, lastmod, changefreq, priority }) => {

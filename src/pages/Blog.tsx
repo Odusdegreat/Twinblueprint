@@ -13,6 +13,8 @@ import BookDemoDialog from "@/components/BookDemoDialog";
 import { useQuery } from "@tanstack/react-query";
 import { articlesApi, formatArticleDate, calculateReadTime, getArticleExcerpt } from "@/lib/articlesApi";
 import { FaBuilding, FaChartLine, FaVrCardboard, FaFileAlt } from "react-icons/fa";
+import { BASE_URL } from "@/lib/constants";
+import { ORGANIZATION_SCHEMA, WEBSITE_SCHEMA, getCollectionPageSchema } from "@/lib/seo";
 
 const ICON_MAP: Record<string, typeof FaChartLine> = {
   "planning": FaChartLine,
@@ -86,12 +88,19 @@ const Blog = () => {
           name="description"
           content="Expert insights on Digital Twin visualisation, BIM, planning approval support and immersive property visualisation for construction, property and planning teams."
         />
-        <link rel="canonical" href="/blog" />
+        <link rel="canonical" href={`${BASE_URL}/blog`} />
         <meta property="og:title" content="Digital Twin & Visualisation Insights | Twinblueprint Blog" />
-        <meta property="og:url" content="/blog" />
-        <meta property="og:image" content="/og-image.jpg" />
-        <meta name="twitter:image" content="/og-image.jpg" />
+        <meta property="og:description" content="Expert insights on Digital Twin visualisation, BIM, planning approval support and immersive property visualisation for construction, property and planning teams." />
+        <meta property="og:url" content={`${BASE_URL}/blog`} />
+        <meta property="og:type" content="website" />
+        <meta property="og:image" content={`${BASE_URL}/og-image.jpg`} />
         <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Digital Twin & Visualisation Insights | Twinblueprint Blog" />
+        <meta name="twitter:description" content="Expert insights on Digital Twin visualisation, BIM, planning approval support and immersive property visualisation for construction, property and planning teams." />
+        <meta name="twitter:image" content={`${BASE_URL}/og-image.jpg`} />
+        <script type="application/ld+json">{JSON.stringify(WEBSITE_SCHEMA)}</script>
+        <script type="application/ld+json">{JSON.stringify(ORGANIZATION_SCHEMA)}</script>
+        <script type="application/ld+json">{JSON.stringify(getCollectionPageSchema("Digital Twin & Visualisation Insights", `${BASE_URL}/blog`, "Expert insights on Digital Twin visualisation, BIM, planning approval support and immersive property visualisation."))}</script>
       </Helmet>
       <Navbar />
       <main>

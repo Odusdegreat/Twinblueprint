@@ -13,6 +13,8 @@ import {
 import { useDemoDialogStore } from "@/stores/demoDialogStore";
 import Navbar from "@/components/Navbar";
 import PageNav from "@/components/PageNav";
+import { BASE_URL } from "@/lib/constants";
+import { ORGANIZATION_SCHEMA, WEBSITE_SCHEMA, getFAQSchema, getWebPageSchema } from "@/lib/seo";
 
 const faqs = [
   {
@@ -64,16 +66,20 @@ const FAQ = () => {
           name="description"
           content="Answers to common questions about Digital Twin, BIM visualisation, planning approval support, file formats, timelines and confidentiality."
         />
-        <link rel="canonical" href="/faq" />
-        <script type="application/ld+json">{JSON.stringify({
-          "@context": "https://schema.org",
-          "@type": "FAQPage",
-          mainEntity: faqs.map((f) => ({
-            "@type": "Question",
-            name: f.question,
-            acceptedAnswer: { "@type": "Answer", text: f.answer },
-          })),
-        })}</script>
+        <link rel="canonical" href={`${BASE_URL}/faq`} />
+        <meta property="og:title" content="FAQ | Twinblueprint" />
+        <meta property="og:description" content="Answers to common questions about Digital Twin, BIM visualisation, planning approval support, file formats, timelines and confidentiality." />
+        <meta property="og:url" content={`${BASE_URL}/faq`} />
+        <meta property="og:type" content="website" />
+        <meta property="og:image" content={`${BASE_URL}/og-image.jpg`} />
+        <meta name="twitter:image" content={`${BASE_URL}/og-image.jpg`} />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="FAQ | Twinblueprint" />
+        <meta name="twitter:description" content="Answers to common questions about Digital Twin, BIM visualisation, planning approval support, file formats, timelines and confidentiality." />
+        <script type="application/ld+json">{JSON.stringify(WEBSITE_SCHEMA)}</script>
+        <script type="application/ld+json">{JSON.stringify(ORGANIZATION_SCHEMA)}</script>
+        <script type="application/ld+json">{JSON.stringify(getWebPageSchema("FAQ", `${BASE_URL}/faq`, "Answers to common questions about Digital Twin, BIM visualisation, planning approval support, file formats, timelines and confidentiality."))}</script>
+        <script type="application/ld+json">{JSON.stringify(getFAQSchema(faqs))}</script>
       </Helmet>
       <Navbar />
       <main>

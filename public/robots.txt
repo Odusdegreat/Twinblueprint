@@ -1,17 +1,14 @@
-User-agent: Googlebot
-Allow: /
-
-User-agent: Bingbot
-Allow: /
-
-User-agent: Twitterbot
-Allow: /
-
-User-agent: facebookexternalhit
-Allow: /
-
 User-agent: *
 Allow: /
 
 User-agent: *
+Disallow: /crm/
+Disallow: /dashboard/
+Disallow: /admin/
+Disallow: /login/
 Disallow: /crm
+Disallow: /dashboard
+Disallow: /admin
+Disallow: /login
+
+Sitemap: https://twinblueprint.com/sitemap.xml

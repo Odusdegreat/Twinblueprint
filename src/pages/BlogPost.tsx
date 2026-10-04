@@ -10,6 +10,8 @@ import { useDemoDialogStore } from "@/stores/demoDialogStore";
 import { useQuery } from "@tanstack/react-query";
 import { articlesApi, formatArticleDate, calculateReadTime } from "@/lib/articlesApi";
 import { parseISO } from "date-fns";
+import { BASE_URL } from "@/lib/constants";
+import { ORGANIZATION_SCHEMA, WEBSITE_SCHEMA, getArticleSchema, getBreadcrumbSchema } from "@/lib/seo";
 
 const BlogPost = () => {
   const { slug } = useParams();
@@ -68,56 +70,25 @@ const BlogPost = () => {
 
   const formattedDate = formatArticleDate(article.published_at);
   const readTime = calculateReadTime(article.content);
-  const articleUrl = `${window.location.origin}/blog/${article.slug}`;
+  const articleUrl = article.canonical_url || `${window.location.origin}/blog/${article.slug}`;
   const imageUrl = article.featured_image || `${window.location.origin}/og-image.jpg`;
+  const seoTitle = article.meta_title || article.title;
+  const seoDescription = article.meta_description || article.excerpt || "";
 
-  const structuredData = {
-    "@context": "https://schema.org",
-    "@type": "BlogPosting",
-    headline: article.seo_title || article.title,
-    description: article.seo_description || article.excerpt,
-    image: imageUrl,
-    author: {
-      "@type": "Organization",
-      name: article.author,
-    },
-    publisher: {
-      "@type": "Organization",
-      name: "Twinblueprint",
-      logo: {
-        "@type": "ImageObject",
-        url: `${window.location.origin}/logo.png`,
-      },
-    },
-    datePublished: article.published_at,
-    dateModified: article.updated_at,
-    mainEntityOfPage: {
-      "@type": "WebPage",
-      "@id": articleUrl,
-    },
-    articleSection: article.category,
-    keywords: article.tags.join(", "),
-    inLanguage: "en",
-  };
-
-  const breadcrumbData = {
-    "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    itemListElement: [
-      { "@type": "ListItem", position: 1, name: "Home", item: `${window.location.origin}/` },
-      { "@type": "ListItem", position: 2, name: "Blog", item: `${window.location.origin}/blog` },
-      { "@type": "ListItem", position: 3, name: article.title, item: articleUrl },
-    ],
-  };
+  const breadcrumbItems = [
+    { name: "Home", url: BASE_URL },
+    { name: "Blog", url: `${BASE_URL}/blog` },
+    { name: article.title, url: articleUrl },
+  ];
 
   return (
     <>
       <Helmet>
-        <title>{article.seo_title || article.title}</title>
-        <meta name="description" content={article.seo_description || article.excerpt} />
+        <title>{seoTitle}</title>
+        <meta name="description" content={seoDescription} />
         <link rel="canonical" href={articleUrl} />
-        <meta property="og:title" content={article.seo_title || article.title} />
-        <meta property="og:description" content={article.seo_description || article.excerpt} />
+        <meta property="og:title" content={seoTitle} />
+        <meta property="og:description" content={seoDescription} />
         <meta property="og:url" content={articleUrl} />
         <meta property="og:image" content={imageUrl} />
         <meta property="og:type" content="article" />
@@ -129,11 +100,23 @@ const BlogPost = () => {
           <meta key={tag} property="article:tag" content={tag} />
         ))}
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content={article.seo_title || article.title} />
-        <meta name="twitter:description" content={article.seo_description || article.excerpt} />
+        <meta name="twitter:title" content={seoTitle} />
+        <meta name="twitter:description" content={seoDescription} />
         <meta name="twitter:image" content={imageUrl} />
-        <script type="application/ld+json">{JSON.stringify(structuredData)}</script>
-        <script type="application/ld+json">{JSON.stringify(breadcrumbData)}</script>
+        <script type="application/ld+json">{JSON.stringify(WEBSITE_SCHEMA)}</script>
+        <script type="application/ld+json">{JSON.stringify(ORGANIZATION_SCHEMA)}</script>
+        <script type="application/ld+json">{JSON.stringify(getArticleSchema({
+          title: seoTitle,
+          description: seoDescription,
+          image: imageUrl,
+          author: article.author,
+          publishedAt: article.published_at,
+          updatedAt: article.updated_at,
+          url: articleUrl,
+          category: article.category,
+          tags: article.tags,
+        }))}</script>
+        <script type="application/ld+json">{JSON.stringify(getBreadcrumbSchema(breadcrumbItems))}</script>
       </Helmet>
       <Navbar />
       <main>

@@ -6,6 +6,8 @@ import { Button } from "@/components/ui/button";
 import { useDemoDialogStore } from "@/stores/demoDialogStore";
 import Navbar from "@/components/Navbar";
 import PageNav from "@/components/PageNav";
+import { BASE_URL } from "@/lib/constants";
+import { ORGANIZATION_SCHEMA, WEBSITE_SCHEMA, getAboutPageSchema } from "@/lib/seo";
 
 const teamMembers = [
   {
@@ -64,19 +66,19 @@ const About = () => {
           name="description"
           content="Meet the Twinblueprint team - Digital Twin, BIM visualisation and immersive property visualisation specialists serving construction, infrastructure and planning teams."
         />
-        <link rel="canonical" href="/about" />
+        <link rel="canonical" href={`${BASE_URL}/about`} />
         <meta property="og:title" content="About Twinblueprint" />
-        <meta property="og:url" content="/about" />
-        <meta property="og:image" content="/og-image.jpg" />
-        <meta name="twitter:image" content="/og-image.jpg" />
+        <meta property="og:description" content="Meet the Twinblueprint team - Digital Twin, BIM visualisation and immersive property visualisation specialists serving construction, infrastructure and planning teams." />
+        <meta property="og:url" content={`${BASE_URL}/about`} />
+        <meta property="og:type" content="website" />
+        <meta property="og:image" content={`${BASE_URL}/og-image.jpg`} />
+        <meta name="twitter:image" content={`${BASE_URL}/og-image.jpg`} />
         <meta name="twitter:card" content="summary_large_image" />
-        <script type="application/ld+json">{JSON.stringify({
-          "@context": "https://schema.org",
-          "@type": "AboutPage",
-          name: "About Twinblueprint",
-          url: "/about",
-          isPartOf: { "@type": "WebSite", name: "Twinblueprint", url: "/" },
-        })}</script>
+        <meta name="twitter:title" content="About Twinblueprint" />
+        <meta name="twitter:description" content="Meet the Twinblueprint team - Digital Twin, BIM visualisation and immersive property visualisation specialists serving construction, infrastructure and planning teams." />
+        <script type="application/ld+json">{JSON.stringify(WEBSITE_SCHEMA)}</script>
+        <script type="application/ld+json">{JSON.stringify(ORGANIZATION_SCHEMA)}</script>
+        <script type="application/ld+json">{JSON.stringify(getAboutPageSchema())}</script>
       </Helmet>
       <Navbar />
       <main>

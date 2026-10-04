@@ -11,6 +11,8 @@ import BookDemoDialog from "@/components/BookDemoDialog";
 import ExploreLinks from "@/components/ExploreLinks";
 import { useQuery } from "@tanstack/react-query";
 import { articlesApi, formatArticleDate, calculateReadTime } from "@/lib/articlesApi";
+import { BASE_URL } from "@/lib/constants";
+import { ORGANIZATION_SCHEMA, WEBSITE_SCHEMA, getCollectionPageSchema } from "@/lib/seo";
 
 import heroImage from "@/assets/case-studies-hero.jpg";
 import csMegaProjects from "@/assets/cs-mega-projects.jpg";
@@ -197,19 +199,19 @@ const CaseStudies = () => {
           name="description"
           content="Real Digital Twin and immersive visualisation projects with measurable outcomes - faster planning approvals, aligned stakeholders and reduced delivery risk."
         />
-        <link rel="canonical" href="/case-studies" />
+        <link rel="canonical" href={`${BASE_URL}/case-studies`} />
         <meta property="og:title" content="Case Studies | Twinblueprint" />
-        <meta property="og:url" content="/case-studies" />
-        <meta property="og:image" content="/og-image.jpg" />
-        <meta name="twitter:image" content="/og-image.jpg" />
+        <meta property="og:description" content="Real Digital Twin and immersive visualisation projects with measurable outcomes - faster planning approvals, aligned stakeholders and reduced delivery risk." />
+        <meta property="og:url" content={`${BASE_URL}/case-studies`} />
+        <meta property="og:type" content="website" />
+        <meta property="og:image" content={`${BASE_URL}/og-image.jpg`} />
+        <meta name="twitter:image" content={`${BASE_URL}/og-image.jpg`} />
         <meta name="twitter:card" content="summary_large_image" />
-        <script type="application/ld+json">{JSON.stringify({
-          "@context": "https://schema.org",
-          "@type": "CollectionPage",
-          name: "Digital Twin & Visualisation Case Studies",
-          url: "/case-studies",
-          isPartOf: { "@type": "WebSite", name: "Twinblueprint", url: "/" },
-        })}</script>
+        <meta name="twitter:title" content="Case Studies | Twinblueprint" />
+        <meta name="twitter:description" content="Real Digital Twin and immersive visualisation projects with measurable outcomes - faster planning approvals, aligned stakeholders and reduced delivery risk." />
+        <script type="application/ld+json">{JSON.stringify(WEBSITE_SCHEMA)}</script>
+        <script type="application/ld+json">{JSON.stringify(ORGANIZATION_SCHEMA)}</script>
+        <script type="application/ld+json">{JSON.stringify(getCollectionPageSchema("Digital Twin & Visualisation Case Studies", `${BASE_URL}/case-studies`, "Real Digital Twin and immersive visualisation projects with measurable outcomes."))}</script>
       </Helmet>
       <Navbar />
       <main>

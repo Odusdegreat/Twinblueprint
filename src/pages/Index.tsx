@@ -9,6 +9,8 @@ import CaseStudiesSection from "@/components/CaseStudiesSection";
 import HowItWorksSection from "@/components/HowItWorksSection";
 import CTASection from "@/components/CTASection";
 import PageNav from "@/components/PageNav";
+import { BASE_URL } from "@/lib/constants";
+import { ORGANIZATION_SCHEMA, WEBSITE_SCHEMA, getWebPageSchema } from "@/lib/seo";
 
 const Index = () => {
   return (
@@ -19,26 +21,22 @@ const Index = () => {
           name="description"
           content="Digital Twin technology and photorealistic architectural visualisation that accelerate planning approvals, align stakeholders and reduce construction project risk."
         />
-        <link rel="canonical" href="/" />
+        <link rel="canonical" href={`${BASE_URL}/`} />
         <meta property="og:title" content="Digital Twin & Architectural Visualisation | Twinblueprint" />
         <meta
           property="og:description"
           content="Accelerate planning approvals and de risk delivery with Digital Twin solutions for construction, infrastructure and urban planning teams."
         />
-        <meta property="og:url" content="/" />
-        <meta property="og:image" content="/og-image.jpg" />
-        <meta name="twitter:image" content="/og-image.jpg" />
+        <meta property="og:url" content={`${BASE_URL}/`} />
+        <meta property="og:type" content="website" />
+        <meta property="og:image" content={`${BASE_URL}/og-image.jpg`} />
+        <meta name="twitter:image" content={`${BASE_URL}/og-image.jpg`} />
         <meta name="twitter:card" content="summary_large_image" />
-        <script type="application/ld+json">{JSON.stringify({
-          "@context": "https://schema.org",
-          "@type": "Organization",
-          name: "Twinblueprint",
-          url: "/",
-          description:
-            "Digital Twin, architectural visualisation and immersive property visualisation specialists for construction, infrastructure and urban planning.",
-          areaServed: "Worldwide",
-          sameAs: [],
-        })}</script>
+        <meta name="twitter:title" content="Digital Twin & Architectural Visualisation | Twinblueprint" />
+        <meta name="twitter:description" content="Accelerate planning approvals and de risk delivery with Digital Twin solutions for construction, infrastructure and urban planning teams." />
+        <script type="application/ld+json">{JSON.stringify(WEBSITE_SCHEMA)}</script>
+        <script type="application/ld+json">{JSON.stringify(ORGANIZATION_SCHEMA)}</script>
+        <script type="application/ld+json">{JSON.stringify(getWebPageSchema("Digital Twin & Architectural Visualisation", BASE_URL, "Digital Twin technology and photorealistic architectural visualisation that accelerate planning approvals, align stakeholders and reduce construction project risk."))}</script>
       </Helmet>
       <Navbar />
       <main>

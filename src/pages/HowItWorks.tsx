@@ -7,6 +7,8 @@ import { Button } from "@/components/ui/button";
 import { useDemoDialogStore } from "@/stores/demoDialogStore";
 import Navbar from "@/components/Navbar";
 import PageNav from "@/components/PageNav";
+import { BASE_URL } from "@/lib/constants";
+import { ORGANIZATION_SCHEMA, WEBSITE_SCHEMA, getWebPageSchema } from "@/lib/seo";
 
 const steps = [
   {
@@ -79,19 +81,19 @@ const HowItWorks = () => {
           name="description"
           content="Our four step Digital Twin delivery process - Discovery, Project Development, Review & Collaboration, Delivery & Support - built for construction, infrastructure and planning teams."
         />
-        <link rel="canonical" href="/how-it-works" />
+        <link rel="canonical" href={`${BASE_URL}/how-it-works`} />
         <meta property="og:title" content="How it Works | Twinblueprint" />
-        <meta property="og:url" content="/how-it-works" />
-        <meta property="og:image" content="/og-image.jpg" />
-        <meta name="twitter:image" content="/og-image.jpg" />
+        <meta property="og:description" content="Our four step Digital Twin delivery process - Discovery, Project Development, Review & Collaboration, Delivery & Support - built for construction, infrastructure and planning teams." />
+        <meta property="og:url" content={`${BASE_URL}/how-it-works`} />
+        <meta property="og:type" content="website" />
+        <meta property="og:image" content={`${BASE_URL}/og-image.jpg`} />
+        <meta name="twitter:image" content={`${BASE_URL}/og-image.jpg`} />
         <meta name="twitter:card" content="summary_large_image" />
-        <script type="application/ld+json">{JSON.stringify({
-          "@context": "https://schema.org",
-          "@type": "WebPage",
-          name: "Our Digital Twin Delivery Process",
-          url: "/how-it-works",
-          isPartOf: { "@type": "WebSite", name: "Twinblueprint", url: "/" },
-        })}</script>
+        <meta name="twitter:title" content="How it Works | Twinblueprint" />
+        <meta name="twitter:description" content="Our four step Digital Twin delivery process - Discovery, Project Development, Review & Collaboration, Delivery & Support - built for construction, infrastructure and planning teams." />
+        <script type="application/ld+json">{JSON.stringify(WEBSITE_SCHEMA)}</script>
+        <script type="application/ld+json">{JSON.stringify(ORGANIZATION_SCHEMA)}</script>
+        <script type="application/ld+json">{JSON.stringify(getWebPageSchema("Our Digital Twin Delivery Process", `${BASE_URL}/how-it-works`, "Our four step Digital Twin delivery process - Discovery, Project Development, Review & Collaboration, Delivery & Support - built for construction, infrastructure and planning teams."))}</script>
       </Helmet>
       <Navbar />
       <main>
