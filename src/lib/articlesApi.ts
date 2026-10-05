@@ -1,12 +1,28 @@
 import { api } from "./api";
 import type { Article, ArticlesResponse, SingleArticleResponse, CategoriesResponse } from "./types";
 
-export const articlesApi = {
-  list: (params?: { page?: number; limit?: number; category?: string; search?: string }) =>
-    api.get<ArticlesResponse>("/articles", params),
+function normalizeArticle(article: Article): Article {
+  return {
+    ...article,
+    tags: Array.isArray(article.tags) ? article.tags : [],
+  };
+}
 
-  getBySlug: (slug: string) =>
-    api.get<SingleArticleResponse>(`/articles/${slug}`),
+function normalizeArticlesResponse(response: ArticlesResponse): ArticlesResponse {
+  return {
+    ...response,
+    articles: Array.isArray(response?.articles) ? response.articles.map(normalizeArticle) : [],
+  };
+}
+
+export const articlesApi = {
+  list: async (params?: { page?: number; limit?: number; category?: string; search?: string }) =>
+    normalizeArticlesResponse(await api.get<ArticlesResponse>("/articles", params)),
+
+  getBySlug: async (slug: string): Promise<SingleArticleResponse> => {
+    const response = await api.get<SingleArticleResponse>(`/articles/${slug}`);
+    return { ...response, article: normalizeArticle(response.article) };
+  },
 
   getCategories: () =>
     api.get<CategoriesResponse>("/articles/categories"),

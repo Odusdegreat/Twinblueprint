@@ -98,7 +98,7 @@ const BlogPost = () => {
         <meta property="article:modified_time" content={article.updated_at} />
         <meta property="article:author" content={article.author} />
         <meta property="article:section" content={article.category} />
-        {article.tags.map((tag) => (
+        {(Array.isArray(article.tags) ? article.tags : []).map((tag) => (
           <meta key={tag} property="article:tag" content={tag} />
         ))}
         <meta name="twitter:card" content="summary_large_image" />

@@ -34,7 +34,9 @@ const Dashboard = () => {
   const funnelQuery = useFunnel();
   const dashboardQuery = useDashboardAnalytics();
   const regionalCoverage = dashboardQuery.data?.regional_coverage ?? [];
-  const largestRegionalValue = Math.max(0, ...regionalCoverage.map(region => Number(region.won_deal_value) || 0));
+  const largestRegionalValue = regionalCoverage.length
+    ? Math.max(0, ...regionalCoverage.map(region => Number(region.won_deal_value) || 0))
+    : 0;
 
   const leads = leadsQuery.data?.leads ?? emptyLeads;
   const bids = bidsQuery.data?.bids ?? emptyBids;

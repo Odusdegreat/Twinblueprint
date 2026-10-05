@@ -71,7 +71,9 @@ const Blog = () => {
     staleTime: 5 * 60 * 1000,
   });
 
-  const featuredArticles = data?.articles.slice(0, 3) ?? [];
+  // Treat malformed or older API responses as an empty list instead of crashing
+  // the whole page while attempting to slice an undefined articles field.
+  const featuredArticles = Array.isArray(data?.articles) ? data.articles.slice(0, 3) : [];
 
   const handleSubscribe = (e: React.FormEvent) => {
     e.preventDefault();
