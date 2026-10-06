@@ -20,52 +20,52 @@ import { ORGANIZATION_SCHEMA, WEBSITE_SCHEMA, getWebPageSchema } from "@/lib/seo
 
 const services = [
   {
-    icon: FaCube,
-    title: "Architectural Visualisation",
+    icon: FaChartLine,
+    title: "Technology Consulting",
     image: svcArchVis,
-    imageAlt: "Photorealistic architectural visualisation of a mixed use building exterior at dusk",
-    description: "Photorealistic architectural visualisation that communicates design intent, materiality and context with engineering accuracy.",
-    features: ["High fidelity exterior and interior renders", "Contextual site and massing studies", "BIM aligned visual output"],
+    imageAlt: "Technology consulting strategy session with stakeholders reviewing digital priorities and business systems",
+    description: "Strategic technology consulting that helps organizations align digital investments, operational priorities and transformation goals with measurable business outcomes.",
+    features: ["Technology roadmap planning", "Process and systems assessment", "Executive advisory support"],
   },
   {
     icon: FaUsers,
-    title: "Digital Twin Solutions",
+    title: "Digital Transformation",
     image: svcDigitalTwin,
-    imageAlt: "Digital Twin of a city district with data overlays connecting buildings and infrastructure",
-    description: "Interactive Digital Twins that mirror real world geometry, data and context for planning, design review and operations.",
-    features: ["BIM and GIS data integration", "Live model updates", "Web based stakeholder access"],
-  },
-  {
-    icon: FaChartLine,
-    title: "Planning Approval Support",
-    image: svcPlanningApproval,
-    imageAlt: "Planning committee reviewing a development proposal on screen during an approval meeting",
-    description: "Visual evidence that helps planning officers, committees and consultees evaluate development proposals with confidence.",
-    features: ["Compliance ready visuals", "Townscape and impact studies", "Public consultation assets"],
+    imageAlt: "Digital transformation initiatives unifying operations, workflows and stakeholder data across departments",
+    description: "Modern digital transformation services that improve how organizations deliver value through smarter workflows, better data and connected systems.",
+    features: ["Workflow modernization", "System integration", "Operational efficiency gains"],
   },
   {
     icon: FaCube,
-    title: "Infrastructure Visualisation",
-    image: svcInfrastructure,
-    imageAlt: "Aerial infrastructure visualisation of a bridge and highway corridor under construction",
-    description: "Immersive visualisation for transport, utilities and major infrastructure projects, from corridor studies to delivery.",
-    features: ["Linear and corridor modelling", "Construction staging visuals", "Operational context overlays"],
+    title: "Software Development",
+    image: svcPlanningApproval,
+    imageAlt: "Custom software interface for business operations, dashboards and stakeholder workflows",
+    description: "Custom software development solutions designed to streamline operations, support decision-making and power digital growth across the enterprise.",
+    features: ["Custom platform development", "Business applications", "Scalable solution delivery"],
   },
   {
     icon: FaPaintBrush,
-    title: "Urban Planning & Master Planning",
-    image: svcUrbanPlanning,
-    imageAlt: "Aerial master planning visualisation of a mixed use urban district with public realm",
-    description: "Digital experiences that support master planning, mixed use developments and smart city strategies.",
-    features: ["Master plan visualisations", "Phasing and density studies", "Public realm modelling"],
+    title: "AI Solutions",
+    image: svcInfrastructure,
+    imageAlt: "AI powered business workflow dashboard and intelligent automation interface",
+    description: "AI solutions that help organizations automate processes, unlock insights and build faster, more intelligent business operations.",
+    features: ["AI strategy and implementation", "Automation workflows", "Decision support systems"],
   },
   {
     icon: FaShieldAlt,
-    title: "Interactive Virtual Walkthroughs",
+    title: "Business Automation",
+    image: svcUrbanPlanning,
+    imageAlt: "Business automation dashboard optimizing repetitive operational and reporting tasks",
+    description: "Business automation services designed to reduce manual effort, improve consistency and free teams to focus on higher-value work.",
+    features: ["Workflow automation", "Reporting and alerting", "Operational scale and consistency"],
+  },
+  {
+    icon: FaUsers,
+    title: "Enterprise Technology Solutions",
     image: svcWalkthrough,
-    imageAlt: "Stakeholder exploring an interactive virtual walkthrough of an apartment on a tablet",
-    description: "Self-guided virtual walkthroughs that let stakeholders explore developments on any device, at any time.",
-    features: ["Browser based delivery", "VR and tablet support", "Guided narrative tours"],
+    imageAlt: "Enterprise technology solution overview connecting business systems, data and teams across the organization",
+    description: "Enterprise technology solutions that unify platforms, improve visibility and support sustainable growth for organizations operating at scale.",
+    features: ["Enterprise architecture support", "Data and systems alignment", "Long-term technology enablement"],
   },
 ];
 
@@ -99,24 +99,24 @@ const Services = () => {
   return (
     <>
       <Helmet>
-        <title>Digital Twin & Visualisation Services | Twinblueprint</title>
+        <title>Technology Consulting & Digital Transformation Services | Twinblueprint</title>
         <meta
           name="description"
-          content="Explore Twinblueprint digital twin, architectural visualisation and infrastructure visualisation services for development teams worldwide, including Nigeria."
+          content="Twinblueprint delivers technology consulting, digital transformation, software development, AI solutions and business automation services for organizations worldwide."
         />
         <link rel="canonical" href={`${BASE_URL}/services`} />
-        <meta property="og:title" content="Digital Twin & Visualisation Services | Twinblueprint" />
-        <meta property="og:description" content="Digital Twin solutions, architectural visualisation, infrastructure visualisation and planning approval support that reduce delivery risk and accelerate approvals." />
+        <meta property="og:title" content="Technology Consulting & Digital Transformation Services | Twinblueprint" />
+        <meta property="og:description" content="Technology consulting, digital transformation, software development and AI solutions that help organizations modernize operations and improve business performance." />
         <meta property="og:url" content={`${BASE_URL}/services`} />
         <meta property="og:type" content="website" />
         <meta property="og:image" content={`${BASE_URL}/og-image.jpg`} />
         <meta name="twitter:image" content={`${BASE_URL}/og-image.jpg`} />
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Digital Twin & Visualisation Services | Twinblueprint" />
-        <meta name="twitter:description" content="Digital Twin solutions, architectural visualisation, infrastructure visualisation and planning approval support that reduce delivery risk and accelerate approvals." />
+        <meta name="twitter:title" content="Technology Consulting & Digital Transformation Services | Twinblueprint" />
+        <meta name="twitter:description" content="Technology consulting, digital transformation, software development and AI solutions that help organizations modernize operations and improve business performance." />
         <script type="application/ld+json">{JSON.stringify(WEBSITE_SCHEMA)}</script>
         <script type="application/ld+json">{JSON.stringify(ORGANIZATION_SCHEMA)}</script>
-        <script type="application/ld+json">{JSON.stringify(getWebPageSchema("Digital Twin & Visualisation Services", `${BASE_URL}/services`, "Digital Twin solutions, architectural visualisation, infrastructure visualisation and planning approval support that reduce delivery risk and accelerate approvals."))}</script>
+        <script type="application/ld+json">{JSON.stringify(getWebPageSchema("Technology Consulting & Digital Transformation Services", `${BASE_URL}/services`, "Technology consulting, digital transformation, software development and AI solutions for global businesses."))}</script>
       </Helmet>
       <Navbar />
       <main>
@@ -130,10 +130,10 @@ const Services = () => {
               className="max-w-3xl mx-auto text-center"
             >
               <h1 className="text-4xl md:text-5xl lg:text-6xl leading-tight text-hero-foreground mb-6">
-                Digital Twin & <span className="text-gradient">Visualisation Services</span>
+                Technology consulting and <span className="text-gradient">digital transformation services</span>
               </h1>
               <p className="text-hero-muted text-lg md:text-xl leading-relaxed">
-                Architectural visualisation, infrastructure visualisation and Digital Twin solutions that accelerate planning approvals, improve stakeholder engagement and reduce delivery risk.
+                Twinblueprint helps organizations modernize operations, improve systems and deliver measurable business value through technology consulting, software delivery, AI solutions and automation.
               </p>
             </motion.div>
           </div>

@@ -20,17 +20,17 @@ const HeroSection = () => {
         className="max-w-xl"
       >
         <h1 className="text-4xl md:text-5xl lg:text-6xl leading-[1.1] tracking-tight text-hero-foreground text-balance">
-          Digital Twins and Architectural Visualisation for Construction Projects
+          Technology solutions for organizations worldwide
         </h1>
         <p className="mt-5 text-hero-muted text-base md:text-lg leading-relaxed text-pretty">
-          Accelerate planning approvals, improve stakeholder engagement and reduce project risk with industry leading Digital Twin technology, photorealistic architectural visualisation and immersive virtual project experiences.
+          Twinblueprint helps businesses modernize operations with technology consulting, digital transformation, software development, AI solutions and business automation designed for measurable growth.
         </p>
 
         <ul className="mt-6 space-y-2.5">
           {[
-            "Digital Twin models and photorealistic architectural visualisation",
-            "Faster planning approvals through clear visual communication",
-            "Aligned stakeholders across design, planning and delivery",
+            "Strategic technology consulting and digital roadmap planning",
+            "Digital transformation services that improve efficiency and agility",
+            "AI, automation and software delivery built for lasting business impact",
           ].map((item) => (
             <li key={item} className="flex items-start gap-3 text-hero-muted text-sm md:text-base">
               <span className="mt-2 h-2 w-2 rounded-full bg-primary shrink-0" />

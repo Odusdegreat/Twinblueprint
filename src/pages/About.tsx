@@ -61,21 +61,21 @@ const About = () => {
   return (
     <>
       <Helmet>
-        <title>About Twinblueprint | Digital Twin & Visualisation Specialists</title>
+        <title>About Twinblueprint | Global Technology & Business Solutions</title>
         <meta
           name="description"
-          content="Meet Twinblueprint, a global team creating digital twins and immersive visualisation for construction, infrastructure and property projects."
+          content="Twinblueprint is a global technology and business solutions company helping organizations modernize operations, deliver digital transformation and build smarter business systems worldwide."
         />
         <link rel="canonical" href={`${BASE_URL}/about`} />
-        <meta property="og:title" content="About Twinblueprint" />
-        <meta property="og:description" content="Meet the Twinblueprint team - Digital Twin, BIM visualisation and immersive property visualisation specialists serving construction, infrastructure and planning teams." />
+        <meta property="og:title" content="About Twinblueprint | Global Technology & Business Solutions" />
+        <meta property="og:description" content="Twinblueprint partners with organizations worldwide to improve technology strategy, modernize workflows and drive measurable business growth." />
         <meta property="og:url" content={`${BASE_URL}/about`} />
         <meta property="og:type" content="website" />
         <meta property="og:image" content={`${BASE_URL}/og-image.jpg`} />
         <meta name="twitter:image" content={`${BASE_URL}/og-image.jpg`} />
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="About Twinblueprint" />
-        <meta name="twitter:description" content="Meet the Twinblueprint team - Digital Twin, BIM visualisation and immersive property visualisation specialists serving construction, infrastructure and planning teams." />
+        <meta name="twitter:title" content="About Twinblueprint | Global Technology & Business Solutions" />
+        <meta name="twitter:description" content="Twinblueprint partners with organizations worldwide to improve technology strategy, modernize workflows and drive measurable business growth." />
         <script type="application/ld+json">{JSON.stringify(WEBSITE_SCHEMA)}</script>
         <script type="application/ld+json">{JSON.stringify(ORGANIZATION_SCHEMA)}</script>
         <script type="application/ld+json">{JSON.stringify(getAboutPageSchema())}</script>
@@ -95,7 +95,7 @@ const About = () => {
                 About <span className="text-gradient">Twinblueprint</span>
               </h1>
               <p className="text-hero-muted text-lg md:text-xl leading-relaxed">
-                We help construction companies, property developers, architects, infrastructure organisations and urban planning teams communicate complex projects clearly through Digital Twin and immersive visualisation.
+                We partner with organizations worldwide to strengthen technology strategy, streamline operations and deliver practical digital transformation outcomes across business and technology functions.
               </p>
               <p className="text-hero-muted mt-4 text-sm">
                 <Link to="/services" className="text-primary hover:underline">Explore our services</Link>
@@ -120,10 +120,10 @@ const About = () => {
               >
                 <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">Our Mission</h2>
                 <p className="text-muted-foreground text-lg leading-relaxed mb-4">
-                  To make Digital Twin and photorealistic visualisation a standard part of how the built environment plans, approves and delivers projects.
+                  To help organizations use technology more effectively, modernize operations and turn strategic priorities into measurable business outcomes.
                 </p>
                 <p className="text-muted-foreground text-lg leading-relaxed">
-                  Better visualisation leads to better decisions, faster approvals and lower risk delivery for developers, councils and communities alike.
+                  Better systems, better data and more agile delivery create stronger performance for teams operating in competitive global markets.
                 </p>
               </motion.div>
 
@@ -137,10 +137,10 @@ const About = () => {
                   Our Vision
                 </h2>
                 <p className="text-muted-foreground text-lg leading-relaxed mb-4">
-                  To be the global leader in architectural visualization, setting new standards for quality, innovation, and client service.
+                  To be a trusted global technology and business solutions company known for practical innovation, clear execution and measurable impact.
                 </p>
                 <p className="text-muted-foreground text-lg leading-relaxed">
-                  A world where every architectural project can be visualized with stunning clarity before a single brick is laid, enabling confident decision making and faster approvals.
+                  A future where every organization can use technology strategically to move faster, work smarter and compete with confidence.
                 </p>
               </motion.div>
             </div>

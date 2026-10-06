@@ -3,7 +3,7 @@ import path from "path";
 import axios from "axios";
 
 const API_BASE = process.env.VITE_API_BASE_URL || process.env.VITE_API_URL || "https://twinblueprint-server.onrender.com/api";
-const BASE_URL = "https://twinblueprint.com";
+const BASE_URL = "https://www.twinblueprint.com";
 const OUTPUT_PATH = path.resolve("public/sitemap.xml");
 
 interface Article {

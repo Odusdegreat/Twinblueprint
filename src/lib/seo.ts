@@ -7,7 +7,7 @@ export const ORGANIZATION_SCHEMA = {
   url: BASE_URL,
   logo: `${BASE_URL}/logo.png`,
   description:
-    "Digital Twin, architectural visualisation and immersive property visualisation specialists for construction, infrastructure and urban planning.",
+    "Global technology consultancy and business solutions company helping organizations modernize operations through digital transformation, software development, AI solutions and business automation.",
   areaServed: "Worldwide",
   sameAs: [
     "https://www.linkedin.com/company/twinblueprint",

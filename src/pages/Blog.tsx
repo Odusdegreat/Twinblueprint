@@ -87,24 +87,24 @@ const Blog = () => {
   return (
     <>
       <Helmet>
-        <title>Digital Twin & Visualisation Insights | Twinblueprint Blog</title>
+        <title>Technology & Business Insights | Twinblueprint Blog</title>
         <meta
           name="description"
-          content="Expert insights on Digital Twin visualisation, BIM, planning approval support and immersive property visualisation for construction, property and planning teams."
+          content="Explore insights on technology consulting, digital transformation, AI solutions, software development and business automation for organizations worldwide."
         />
         <link rel="canonical" href={`${BASE_URL}/blog`} />
-        <meta property="og:title" content="Digital Twin & Visualisation Insights | Twinblueprint Blog" />
-        <meta property="og:description" content="Expert insights on Digital Twin visualisation, BIM, planning approval support and immersive property visualisation for construction, property and planning teams." />
+        <meta property="og:title" content="Technology & Business Insights | Twinblueprint Blog" />
+        <meta property="og:description" content="Practical guidance on technology consulting, digital transformation, AI solutions and business automation for leaders building resilient organizations." />
         <meta property="og:url" content={`${BASE_URL}/blog`} />
         <meta property="og:type" content="website" />
         <meta property="og:image" content={`${BASE_URL}/og-image.jpg`} />
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Digital Twin & Visualisation Insights | Twinblueprint Blog" />
-        <meta name="twitter:description" content="Expert insights on Digital Twin visualisation, BIM, planning approval support and immersive property visualisation for construction, property and planning teams." />
+        <meta name="twitter:title" content="Technology & Business Insights | Twinblueprint Blog" />
+        <meta name="twitter:description" content="Practical guidance on technology consulting, digital transformation, AI solutions and business automation for leaders building resilient organizations." />
         <meta name="twitter:image" content={`${BASE_URL}/og-image.jpg`} />
         <script type="application/ld+json">{JSON.stringify(WEBSITE_SCHEMA)}</script>
         <script type="application/ld+json">{JSON.stringify(ORGANIZATION_SCHEMA)}</script>
-        <script type="application/ld+json">{JSON.stringify(getCollectionPageSchema("Digital Twin & Visualisation Insights", `${BASE_URL}/blog`, "Expert insights on Digital Twin visualisation, BIM, planning approval support and immersive property visualisation."))}</script>
+        <script type="application/ld+json">{JSON.stringify(getCollectionPageSchema("Technology & Business Insights", `${BASE_URL}/blog`, "Insights on technology consulting, digital transformation, AI solutions and business automation for organizations worldwide."))}</script>
       </Helmet>
       <Navbar />
       <main>
@@ -117,10 +117,10 @@ const Blog = () => {
               className="max-w-3xl mx-auto text-center"
             >
               <h1 className="text-4xl md:text-5xl lg:text-6xl leading-tight text-hero-foreground mb-6">
-                Digital Twin <span className="text-gradient">Insights</span>
+                Technology and <span className="text-gradient">business insights</span>
               </h1>
               <p className="text-hero-muted text-lg md:text-xl leading-relaxed">
-                Practical perspectives on Digital Twin technology, BIM visualisation, planning approval support and immersive property visualisation for the built environment.
+                Practical perspectives on digital transformation, technology strategy, AI solutions, software development and business automation for organizations building for the future.
               </p>
             </motion.div>
           </div>

@@ -1,5 +1,5 @@
 // SEO URLs must always use the production domain, even on previews or localhost.
-export const BASE_URL = "https://twinblueprint.com";
+export const BASE_URL = "https://www.twinblueprint.com";
 
 export const CRM_PATHS = [
   "/crm",
