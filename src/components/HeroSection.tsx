@@ -11,7 +11,7 @@ const HeroSection = () => {
     setOpen(true);
   };
   return (
-    <section className="bg-hero pt-20 pb-8 md:pt-24 md:pb-12 overflow-hidden">
+    <header className="bg-hero pt-20 pb-8 md:pt-24 md:pb-12 overflow-hidden">
     <div className="container grid md:grid-cols-2 gap-8 md:gap-12 items-center">
       <motion.div
         initial={{ opacity: 0, y: 30 }}
@@ -20,7 +20,7 @@ const HeroSection = () => {
         className="max-w-xl"
       >
         <h1 className="text-4xl md:text-5xl lg:text-6xl leading-[1.1] tracking-tight text-hero-foreground text-balance">
-          Technology solutions for organizations worldwide
+          Technology Consulting and Digital Transformation for Global Organizations
         </h1>
         <p className="mt-5 text-hero-muted text-base md:text-lg leading-relaxed text-pretty">
           Twinblueprint helps businesses modernize operations with technology consulting, digital transformation, software development, AI solutions and business automation designed for measurable growth.
@@ -77,7 +77,7 @@ const HeroSection = () => {
         </div>
       </motion.div>
     </div>
-    </section>
+    </header>
   );
 };
 

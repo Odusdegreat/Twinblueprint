@@ -216,7 +216,7 @@ const CaseStudies = () => {
       <Navbar />
       <main>
         {/* Hero Section */}
-        <section className="bg-hero pt-24 pb-8 md:pt-28 md:pb-10 relative overflow-hidden">
+        <header className="bg-hero pt-24 pb-8 md:pt-28 md:pb-10 relative overflow-hidden">
           <div
             className="absolute inset-0 opacity-30 bg-cover bg-center"
             style={{ backgroundImage: `url(${heroImage})` }}
@@ -231,14 +231,14 @@ const CaseStudies = () => {
               className="max-w-3xl mx-auto text-center"
             >
               <h1 className="text-4xl md:text-5xl lg:text-6xl leading-tight text-hero-foreground mb-4">
-                Case <span className="text-gradient">Studies</span>
+                Digital Twin <span className="text-gradient">Case Studies</span>
               </h1>
               <p className="text-hero-muted text-lg md:text-xl leading-relaxed">
                 Real projects, real results. See how our digital twins have transformed approval timelines and stakeholder communication across the world.
               </p>
             </motion.div>
           </div>
-        </section>
+        </header>
 
         {/* Use Cases / Specialties */}
         <section className="py-8 md:py-10 bg-background">

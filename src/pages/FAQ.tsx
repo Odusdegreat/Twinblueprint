@@ -83,7 +83,7 @@ const FAQ = () => {
       </Helmet>
       <Navbar />
       <main>
-        <section className="bg-hero pt-32 pb-20 md:pt-40 md:pb-28">
+        <header className="bg-hero pt-32 pb-20 md:pt-40 md:pb-28">
           <div className="container">
             <motion.div
               initial={{ opacity: 0, y: 30 }}
@@ -99,11 +99,12 @@ const FAQ = () => {
               </p>
             </motion.div>
           </div>
-        </section>
+        </header>
 
         <section className="section-padding bg-background">
           <div className="container">
             <div className="max-w-3xl mx-auto">
+              <h2 className="mb-6 text-2xl font-bold text-foreground">Common Questions</h2>
               <Accordion
                 type="single"
                 collapsible

@@ -83,7 +83,7 @@ const About = () => {
       <Navbar />
       <main>
         {/* Hero Section */}
-        <section className="bg-hero pt-20 pb-8 md:pt-24 md:pb-10">
+        <header className="bg-hero pt-20 pb-8 md:pt-24 md:pb-10">
           <div className="container">
             <motion.div
               initial={{ opacity: 0, y: 30 }}
@@ -106,7 +106,7 @@ const About = () => {
               </p>
             </motion.div>
           </div>
-        </section>
+        </header>
 
         {/* Mission & Vision */}
         <section className="py-8 md:py-10 bg-background">

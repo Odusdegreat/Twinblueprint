@@ -23,6 +23,7 @@ import { useDemoDialogStore } from "@/stores/demoDialogStore";
 import { useSubmitDemo } from "@/hooks/use-demo";
 import { useIndustries } from "@/hooks/use-industries";
 import { resolveServerErrors } from "@/lib/server-errors";
+import { track } from "@/lib/analytics";
 import { cn } from "@/lib/utils";
 import { ServerErrorBanner } from "@/crm/components/ServerErrorBanner";
 
@@ -72,6 +73,8 @@ const BookDemoDialog = () => {
   const [openedAt] = useState(() => Date.now());
   const errorSummaryRef = useRef<HTMLDivElement>(null);
   const successRef = useRef<HTMLDivElement>(null);
+  const formStarted = useRef(false);
+  const leadReported = useRef(false);
 
   const demoSchema = useMemo(
     () =>
@@ -100,6 +103,10 @@ const BookDemoDialog = () => {
   }, [open]);
 
   const handleChange = (field: keyof FormState, value: string) => {
+    if (value && !formStarted.current) {
+      formStarted.current = true;
+      track("form_start", { form_name: "demo_request" });
+    }
     setForm((prev) => ({ ...prev, [field]: value }));
     setErrors((prev) => ({ ...prev, [field]: undefined }));
     setServerBanner(null);
@@ -164,7 +171,13 @@ const BookDemoDialog = () => {
         confirmationEmail: true,
       },
       {
-        onSuccess: () => setSubmitted(true),
+        onSuccess: () => {
+          if (!leadReported.current) {
+            leadReported.current = true;
+            track("generate_lead", { form_name: "demo_request" });
+          }
+          setSubmitted(true);
+        },
         onError: (error: unknown) => {
           const resolved = resolveServerErrors(error, demoFields);
           setErrors((prev) => ({ ...prev, ...resolved.fieldErrors }) as typeof prev);
@@ -192,6 +205,8 @@ const BookDemoDialog = () => {
         setErrors({});
         setServerBanner(null);
         setCaptchaAnswer("");
+        formStarted.current = false;
+        leadReported.current = false;
         submitDemo.reset();
       }, 200);
     }

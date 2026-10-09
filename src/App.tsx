@@ -4,6 +4,7 @@ import { Helmet } from "react-helmet-async";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import BookDemoDialog from "@/components/BookDemoDialog";
+import AnalyticsConsent from "@/components/AnalyticsConsent";
 import Index from "./pages/Index";
 import Services from "./pages/Services";
 import CaseStudies from "./pages/CaseStudies";
@@ -61,7 +62,7 @@ const App = () => (
         </Route></Route>
         </>}
         <Route path="*" element={<NotFound />} />
-      </Routes><GlobalMetadata /><GlobalFooter /><RouteTracker /><BookDemoDialog />
+      </Routes><GlobalMetadata /><GlobalFooter /><RouteTracker /><BookDemoDialog /><AnalyticsConsent />
     </BrowserRouter></TooltipProvider></AuthProvider>
   </QueryClientProvider>
 );

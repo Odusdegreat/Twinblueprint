@@ -196,7 +196,7 @@ const LearnMoreCaseStudy = () => {
       </Helmet>
       <Navbar />
       <main>
-        <section className="bg-hero pt-32 pb-12">
+        <header className="bg-hero pt-32 pb-12">
           <div className="container">
             <Link to="/case-studies">
               <Button variant="ghost" className="mb-6 text-hero-muted hover:text-hero-foreground pl-0">
@@ -215,7 +215,7 @@ const LearnMoreCaseStudy = () => {
               </p>
             </motion.div>
           </div>
-        </section>
+        </header>
 
         <section className="section-padding bg-background">
           <div className="container">

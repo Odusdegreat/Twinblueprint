@@ -3,6 +3,7 @@ import { Link, useLocation } from "react-router-dom";
 import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useDemoDialogStore } from "@/stores/demoDialogStore";
+import { track } from "@/lib/analytics";
 
 const navLinks = [
   { label: "Home", href: "/" },
@@ -17,9 +18,14 @@ const Navbar = () => {
   const [open, setOpen] = useState(false);
   const { setOpen: openDemo } = useDemoDialogStore();
   const location = useLocation();
+  const openDemoDialog = () => {
+    track("cta_click", { cta: "book_demo", location: "navigation" });
+    openDemo(true);
+  };
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 bg-hero/95 backdrop-blur-md border-b border-hero-muted/10">
+    <header>
+    <nav aria-label="Primary navigation" className="fixed top-0 left-0 right-0 z-50 bg-hero/95 backdrop-blur-md border-b border-hero-muted/10">
       <div className="container flex items-center justify-between h-16 md:h-20">
         <Link to="/" className="text-hero-foreground font-heading font-extrabold text-xl md:text-2xl tracking-tight">
           Twin<span className="text-gradient">blueprint</span>
@@ -41,7 +47,7 @@ const Navbar = () => {
             </Link>
           ))}
 
-          <Button size="sm" className="bg-primary text-primary-foreground hover:bg-primary/90 rounded-full px-6" onClick={() => openDemo(true)}>
+          <Button size="sm" className="bg-primary text-primary-foreground hover:bg-primary/90 rounded-full px-6" onClick={openDemoDialog}>
             Book a Demo
           </Button>
         </div>
@@ -73,13 +79,14 @@ const Navbar = () => {
                 {link.label}
               </Link>
             ))}
-            <Button size="sm" className="bg-primary text-primary-foreground hover:bg-primary/90 rounded-full w-fit px-6" onClick={() => openDemo(true)}>
+            <Button size="sm" className="bg-primary text-primary-foreground hover:bg-primary/90 rounded-full w-fit px-6" onClick={openDemoDialog}>
               Book a Demo
             </Button>
           </div>
         </div>
       )}
     </nav>
+    </header>
   );
 };
 

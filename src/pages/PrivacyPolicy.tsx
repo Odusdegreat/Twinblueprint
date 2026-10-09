@@ -3,6 +3,7 @@ import { Helmet } from "react-helmet-async";
 import Navbar from "@/components/Navbar";
 import { BASE_URL } from "@/lib/constants";
 import { getWebPageSchema, ORGANIZATION_SCHEMA, WEBSITE_SCHEMA } from "@/lib/seo";
+import { openAnalyticsConsent } from "@/lib/analytics";
 
 const sections = [
   {
@@ -28,7 +29,7 @@ const sections = [
   {
     title: "Cookies and Tracking Technologies",
     content:
-      "We use cookies and similar tracking technologies to collect usage information and improve your browsing experience. You can control cookies through your browser settings, though some features may not function properly without them. We also record anonymous page views and button clicks (page address, button text and referring website) in our own hosting provider, Lovable Cloud, to understand how the site is used. This does not use cookies or identify you personally.",
+      "We record anonymous page views and button clicks using our hosting provider to understand how the site is used; this first-party tracking does not use cookies or identify you personally. Google Analytics 4 is enabled only if you allow analytics. We do not send form contents, names, email addresses, phone numbers, or company contact details to Google Analytics. You can change your choice at any time using the analytics preferences below.",
   },
   {
     title: "Your Rights",
@@ -79,7 +80,7 @@ const PrivacyPolicy = () => {
       </Helmet>
       <Navbar />
       <main>
-        <section className="bg-hero pt-32 pb-20 md:pt-40 md:pb-28">
+        <header className="bg-hero pt-32 pb-20 md:pt-40 md:pb-28">
           <div className="container">
             <motion.div
               initial={{ opacity: 0, y: 30 }}
@@ -95,7 +96,7 @@ const PrivacyPolicy = () => {
               </p>
             </motion.div>
           </div>
-        </section>
+        </header>
 
         <section className="section-padding bg-background">
           <div className="container">
@@ -126,6 +127,13 @@ const PrivacyPolicy = () => {
                   </p>
                 </motion.div>
               ))}
+              <button
+                type="button"
+                onClick={openAnalyticsConsent}
+                className="min-h-11 rounded-md border border-border px-4 text-sm font-medium text-foreground hover:bg-muted"
+              >
+                Manage analytics preferences
+              </button>
             </div>
           </div>
         </section>

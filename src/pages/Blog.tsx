@@ -108,7 +108,7 @@ const Blog = () => {
       </Helmet>
       <Navbar />
       <main>
-        <section className="bg-hero pt-20 pb-8 md:pt-24 md:pb-10">
+        <header className="bg-hero pt-20 pb-8 md:pt-24 md:pb-10">
           <div className="container">
             <motion.div
               initial={{ opacity: 0, y: 30 }}
@@ -124,7 +124,7 @@ const Blog = () => {
               </p>
             </motion.div>
           </div>
-        </section>
+        </header>
 
         <section className="py-5 md:py-6 bg-background">
           <div className="container">

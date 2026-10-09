@@ -121,7 +121,7 @@ const Services = () => {
       <Navbar />
       <main>
         {/* Hero Section */}
-        <section className="bg-hero pt-20 pb-8 md:pt-24 md:pb-10">
+        <header className="bg-hero pt-20 pb-8 md:pt-24 md:pb-10">
           <div className="container">
             <motion.div
               initial={{ opacity: 0, y: 30 }}
@@ -137,7 +137,7 @@ const Services = () => {
               </p>
             </motion.div>
           </div>
-        </section>
+        </header>
 
         {/* Services Grid */}
         <section className="py-8 md:py-10 bg-background">
@@ -186,7 +186,7 @@ const Services = () => {
                     <div className="w-12 h-12 -mt-6 mb-4 bg-card border border-border rounded-lg flex items-center justify-center relative z-10 shadow-sm">
                       <Icon className="h-6 w-6 text-primary" />
                     </div>
-                    <h2 className="text-xl font-bold text-foreground mb-3">{service.title}</h2>
+                    <h3 className="text-xl font-bold text-foreground mb-3">{service.title}</h3>
 
                     <p className="text-muted-foreground text-sm mb-4 leading-relaxed">
                       {service.description}

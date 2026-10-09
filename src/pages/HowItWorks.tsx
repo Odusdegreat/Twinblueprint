@@ -97,7 +97,7 @@ const HowItWorks = () => {
       </Helmet>
       <Navbar />
       <main>
-        <section className="bg-hero pt-20 pb-8 md:pt-24 md:pb-10">
+        <header className="bg-hero pt-20 pb-8 md:pt-24 md:pb-10">
           <div className="container">
             <motion.div
               initial={{ opacity: 0, y: 30 }}
@@ -106,14 +106,14 @@ const HowItWorks = () => {
               className="max-w-3xl mx-auto text-center"
             >
               <h1 className="text-4xl md:text-5xl lg:text-6xl leading-tight text-hero-foreground mb-6">
-                How It <span className="text-gradient">Works</span>
+                How Our <span className="text-gradient">Digital Twin Process</span> Works
               </h1>
               <p className="text-hero-muted text-lg md:text-xl leading-relaxed">
                 A four step process built for construction, infrastructure and planning teams. We translate complex projects into Digital Twins that accelerate approvals and align every stakeholder.
               </p>
             </motion.div>
           </div>
-        </section>
+        </header>
 
         <section className="py-8 md:py-10 bg-background">
           <div className="container">

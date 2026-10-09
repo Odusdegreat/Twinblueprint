@@ -122,8 +122,9 @@ const BlogPost = () => {
       </Helmet>
       <Navbar />
       <main>
+        <article>
         {article.featured_image && (
-          <section className="relative h-[60vh] min-h-[500px] max-h-[700px] w-full overflow-hidden pb-20 md:pb-28">
+          <header className="relative h-[60vh] min-h-[500px] max-h-[700px] w-full overflow-hidden pb-20 md:pb-28">
             <img
               src={article.featured_image}
               alt={article.title}
@@ -141,11 +142,11 @@ const BlogPost = () => {
                 </div>
               </div>
             </div>
-          </section>
+          </header>
         )}
 
         {!article.featured_image && (
-          <section className="bg-hero pt-32 pb-20 md:pb-28">
+          <header className="bg-hero pt-32 pb-20 md:pb-28">
             <div className="container">
               <div className="pt-8">
                 <motion.div
@@ -162,7 +163,7 @@ const BlogPost = () => {
                 </motion.div>
               </div>
             </div>
-          </section>
+          </header>
         )}
 
         <section className="section-padding bg-background">
@@ -177,7 +178,7 @@ const BlogPost = () => {
                 <Badge className="bg-primary/10 text-primary border-0">{article.category}</Badge>
               </div>
             </div>
-            <article className="max-w-3xl mx-auto">
+            <div className="max-w-3xl mx-auto">
               <div className="prose prose-lg max-w-none" dangerouslySetInnerHTML={{ __html: article.content }} />
 
               <div className="mt-12 p-6 bg-muted rounded-2xl border border-border">
@@ -207,9 +208,10 @@ const BlogPost = () => {
                 </Button>
                 <p className="text-xs text-muted-foreground mt-3">30-minute call · NDA on request · No sales pressure</p>
               </div>
-            </article>
+            </div>
             </div>
           </section>
+        </article>
         </main>
       <BookDemoDialog />
     </>
