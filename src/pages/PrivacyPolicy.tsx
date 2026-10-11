@@ -54,7 +54,7 @@ const sections = [
   {
     title: "Contact Us",
     content:
-      "If you have any questions about this Privacy Policy or our privacy practices, please contact us at hello@meta-dology.com. We will endeavor to respond to your inquiry as soon as possible.",
+      "If you have any questions about this Privacy Policy or our privacy practices, please contact us at Info@twinblueprint.com. We will endeavor to respond to your inquiry as soon as possible.",
   },
 ];
 

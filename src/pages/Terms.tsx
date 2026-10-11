@@ -68,7 +68,7 @@ const sections = [
   {
     title: "Contact Information",
     content:
-      "If you have any questions about these Terms of Service, please contact us at hello@meta-dology.com. We will endeavor to respond to your inquiry as soon as possible.",
+      "If you have any questions about these Terms of Service, please contact us at Info@twinblueprint.com. We will endeavor to respond to your inquiry as soon as possible.",
   },
 ];
 
