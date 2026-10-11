@@ -1,7 +1,7 @@
 import { supabase } from "@/integrations/supabase/client";
 
 // Anonymous visitor tracking: no cookies, no stored IDs, no personal data.
-const GA_MEASUREMENT_ID = "G-5WR1QWH3G7";
+const GA_MEASUREMENT_ID = "G-V691JJ2QX5";
 const CONSENT_KEY = "twinblueprint.analytics-consent";
 const CONSENT_EVENT = "twinblueprint:manage-analytics-consent";
 let visitStarted = false;
@@ -23,7 +23,7 @@ declare global {
   interface Window {
     dataLayer?: unknown[][];
     gtag?: Gtag;
-    "ga-disable-G-5WR1QWH3G7"?: boolean;
+    "ga-disable-G-V691JJ2QX5"?: boolean;
   }
 }
 
@@ -74,7 +74,7 @@ export function setAnalyticsConsent(granted: boolean, sendCurrentPageView = fals
   if (granted) {
     const wasLoaded = gaLoaded;
     gaConsentGranted = true;
-    window["ga-disable-G-5WR1QWH3G7"] = false;
+    window["ga-disable-G-V691JJ2QX5"] = false;
     loadGoogleTag();
     if (wasLoaded) window.gtag?.("consent", "update", { analytics_storage: "granted" });
     if (sendCurrentPageView) track("page_view", { path: window.location.pathname });
@@ -82,7 +82,7 @@ export function setAnalyticsConsent(granted: boolean, sendCurrentPageView = fals
   }
 
   gaConsentGranted = false;
-  window["ga-disable-G-5WR1QWH3G7"] = true;
+  window["ga-disable-G-V691JJ2QX5"] = true;
   window.gtag?.("consent", "update", { analytics_storage: "denied" });
 }
 
