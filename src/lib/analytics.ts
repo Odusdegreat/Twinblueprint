@@ -21,7 +21,7 @@ type Gtag = (...args: unknown[]) => void;
 
 declare global {
   interface Window {
-    dataLayer?: unknown[][];
+    dataLayer?: unknown[];
     gtag?: Gtag;
     "ga-disable-G-V691JJ2QX5"?: boolean;
   }
@@ -48,7 +48,11 @@ function loadGoogleTag() {
   gaLoaded = true;
   gaConsentGranted = true;
   window.dataLayer = window.dataLayer || [];
-  window.gtag = (...args: unknown[]) => window.dataLayer?.push(args);
+  window.gtag = function () {
+    // Google Tag expects the Arguments object in its data layer queue.
+    // eslint-disable-next-line prefer-rest-params
+    window.dataLayer?.push(arguments);
+  };
   window.gtag("js", new Date());
   window.gtag("config", GA_MEASUREMENT_ID, {
     send_page_view: false,
