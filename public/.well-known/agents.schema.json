@@ -1,0 +1,64 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://www.twinblueprint.com/.well-known/agents.schema.json",
+  "title": "Twinblueprint AI discovery manifest",
+  "description": "Versioned public discovery metadata for Twinblueprint. This project-defined schema does not describe an executable agent or expose private APIs.",
+  "type": "object",
+  "required": ["$schema", "schema_version", "site", "capabilities", "pages", "contact"],
+  "additionalProperties": false,
+  "properties": {
+    "$schema": {
+      "type": "string",
+      "format": "uri"
+    },
+    "schema_version": {
+      "const": "1.0"
+    },
+    "site": {
+      "type": "object",
+      "required": ["name", "url", "description", "language"],
+      "additionalProperties": false,
+      "properties": {
+        "name": { "type": "string", "minLength": 1 },
+        "url": { "type": "string", "format": "uri" },
+        "description": { "type": "string", "minLength": 1 },
+        "language": { "type": "string", "minLength": 2 }
+      }
+    },
+    "capabilities": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["name", "description", "url"],
+        "additionalProperties": false,
+        "properties": {
+          "name": { "type": "string", "minLength": 1 },
+          "description": { "type": "string", "minLength": 1 },
+          "url": { "type": "string", "format": "uri" }
+        }
+      }
+    },
+    "pages": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["name", "url", "type"],
+        "additionalProperties": false,
+        "properties": {
+          "name": { "type": "string", "minLength": 1 },
+          "url": { "type": "string", "format": "uri" },
+          "type": { "type": "string", "minLength": 1 }
+        }
+      }
+    },
+    "contact": {
+      "type": "object",
+      "required": ["email", "url"],
+      "additionalProperties": false,
+      "properties": {
+        "email": { "type": "string", "format": "email" },
+        "url": { "type": "string", "format": "uri" }
+      }
+    }
+  }
+}

@@ -1,0 +1,18 @@
+# Twinblueprint
+
+> Twinblueprint helps organizations modernize operations through technology consulting, digital transformation, software development, AI solutions, and business automation. The company also provides Digital Twin, architectural visualisation, and immersive project visualisation for property, construction, infrastructure, and planning teams.
+
+## Public pages
+
+- [Home](https://www.twinblueprint.com/): Company overview and technology solutions.
+- [Services](https://www.twinblueprint.com/services): Technology consulting, digital transformation, Digital Twin, and visualisation services.
+- [About](https://www.twinblueprint.com/about): Company background, mission, and team.
+- [Case Studies](https://www.twinblueprint.com/case-studies): Project examples and outcomes.
+- [How It Works](https://www.twinblueprint.com/how-it-works): The Digital Twin delivery process.
+- [FAQ](https://www.twinblueprint.com/faq): Answers about services, deliverables, and project process.
+- [Blog](https://www.twinblueprint.com/blog): Public articles and insights.
+
+## Contact
+
+- Email: info@twinblueprint.com
+- [Privacy Policy](https://www.twinblueprint.com/privacy-policy)

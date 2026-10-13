@@ -1,0 +1,63 @@
+{
+  "$schema": "https://www.twinblueprint.com/.well-known/agents.schema.json",
+  "schema_version": "1.0",
+  "site": {
+    "name": "Twinblueprint",
+    "url": "https://www.twinblueprint.com/",
+    "description": "Twinblueprint helps organizations modernize operations through technology consulting, digital transformation, software development, AI solutions, and business automation. It also provides Digital Twin, architectural visualisation, and immersive project visualisation for property, construction, infrastructure, and planning teams.",
+    "language": "en-GB"
+  },
+  "capabilities": [
+    {
+      "name": "Technology consulting and digital transformation",
+      "description": "Technology consulting, digital roadmaps, software development, AI solutions, and business automation.",
+      "url": "https://www.twinblueprint.com/services"
+    },
+    {
+      "name": "Digital Twin and architectural visualisation",
+      "description": "Digital Twin modelling, architectural visualisation, and immersive project walkthroughs for property, construction, infrastructure, and planning teams.",
+      "url": "https://www.twinblueprint.com/services"
+    }
+  ],
+  "pages": [
+    {
+      "name": "Home",
+      "url": "https://www.twinblueprint.com/",
+      "type": "home"
+    },
+    {
+      "name": "Services",
+      "url": "https://www.twinblueprint.com/services",
+      "type": "services"
+    },
+    {
+      "name": "About",
+      "url": "https://www.twinblueprint.com/about",
+      "type": "about"
+    },
+    {
+      "name": "Case Studies",
+      "url": "https://www.twinblueprint.com/case-studies",
+      "type": "case-studies"
+    },
+    {
+      "name": "How It Works",
+      "url": "https://www.twinblueprint.com/how-it-works",
+      "type": "process"
+    },
+    {
+      "name": "FAQ",
+      "url": "https://www.twinblueprint.com/faq",
+      "type": "faq"
+    },
+    {
+      "name": "Blog",
+      "url": "https://www.twinblueprint.com/blog",
+      "type": "blog"
+    }
+  ],
+  "contact": {
+    "email": "info@twinblueprint.com",
+    "url": "https://www.twinblueprint.com/privacy-policy"
+  }
+}
