@@ -4,6 +4,7 @@ import type { Article, ArticlesResponse, SingleArticleResponse, CategoriesRespon
 function normalizeArticle(article: Article): Article {
   return {
     ...article,
+    category: article.category ?? null,
     tags: Array.isArray(article.tags) ? article.tags : [],
   };
 }
@@ -27,9 +28,36 @@ export const articlesApi = {
   getCategories: () =>
     api.get<CategoriesResponse>("/articles/categories"),
 
-  getFeatured: (limit = 3) =>
-    api.get<ArticlesResponse>("/articles", { page: 1, limit, category: undefined, search: undefined }),
+  getFeatured: async (limit = 3, category?: string) =>
+    normalizeArticlesResponse(await api.get<ArticlesResponse>("/articles", { page: 1, limit, category, search: undefined })),
 };
+
+export function isPublicArticle(article: Pick<Article, "published_at" | "status">, now = Date.now()) {
+  const publishedAt = Date.parse(article.published_at);
+  return (!article.status || article.status === "published")
+    && Number.isFinite(publishedAt)
+    && publishedAt <= now;
+}
+
+export function getArticleModifiedDate(publishedAt: string, updatedAt?: string | null) {
+  if (!updatedAt) return undefined;
+  const publishedTime = Date.parse(publishedAt);
+  const updatedTime = Date.parse(updatedAt);
+  if (!Number.isFinite(publishedTime) || !Number.isFinite(updatedTime) || updatedTime < publishedTime) return undefined;
+  return new Date(updatedTime).toISOString();
+}
+
+export function getPublicArticles(articles: Article[], now = Date.now()) {
+  return articles
+    .filter((article) => isPublicArticle(article, now))
+    .sort((first, second) => Date.parse(second.published_at) - Date.parse(first.published_at));
+}
+
+export function getFeaturedArticles(articles: Article[], limit = 3, now = Date.now()) {
+  const publicArticles = getPublicArticles(articles, now);
+  const explicitlyFeatured = publicArticles.filter((article) => article.featured === true);
+  return (explicitlyFeatured.length > 0 ? explicitlyFeatured : publicArticles).slice(0, limit);
+}
 
 export function formatArticleDate(dateString: string): string {
   const date = new Date(dateString);

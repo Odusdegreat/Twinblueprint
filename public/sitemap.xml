@@ -45,4 +45,16 @@
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
+  <url>
+    <loc>https://www.twinblueprint.com/blog/cost-of-architectural-visualisation-in-the-uk-2026-pricing-guide-1500</loc>
+    <lastmod>2026-10-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.twinblueprint.com/blog/how-to-create-digital-twins-for-architecture-full-2026-guide-1499</loc>
+    <lastmod>2026-10-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
 </urlset>

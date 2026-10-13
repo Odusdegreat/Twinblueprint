@@ -1,8 +1,8 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Helmet } from "react-helmet-async";
 import { useNavigate, Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import { Calendar, User, Check, Loader2, AlertCircle } from "lucide-react";
+import { Calendar, User, Check, Loader2, AlertCircle, ChevronLeft, ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { useDemoDialogStore } from "@/stores/demoDialogStore";
@@ -11,10 +11,12 @@ import Navbar from "@/components/Navbar";
 import PageNav from "@/components/PageNav";
 import BookDemoDialog from "@/components/BookDemoDialog";
 import { useQuery } from "@tanstack/react-query";
-import { articlesApi, formatArticleDate, calculateReadTime, getArticleExcerpt } from "@/lib/articlesApi";
+import { articlesApi, formatArticleDate, calculateReadTime, getArticleExcerpt, getFeaturedArticles, getPublicArticles } from "@/lib/articlesApi";
 import { FaBuilding, FaChartLine, FaVrCardboard, FaFileAlt } from "react-icons/fa";
 import { BASE_URL } from "@/lib/constants";
 import { ORGANIZATION_SCHEMA, WEBSITE_SCHEMA, getCollectionPageSchema } from "@/lib/seo";
+import { Pagination, PaginationContent, PaginationItem } from "@/components/ui/pagination";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 
 const ICON_MAP: Record<string, typeof FaChartLine> = {
   "planning": FaChartLine,
@@ -64,16 +66,37 @@ const Blog = () => {
   const navigate = useNavigate();
   const [subscribeEmail, setSubscribeEmail] = useState("");
   const [subscribed, setSubscribed] = useState(false);
+  const [page, setPage] = useState(1);
+  const [category, setCategory] = useState("all");
+  const selectedCategory = category === "all" ? undefined : category;
+  const pageSize = 10;
 
-  const { data, isLoading, isError, error } = useQuery({
-    queryKey: ["articles", { page: 1, limit: 10 }],
-    queryFn: () => articlesApi.list({ page: 1, limit: 10 }),
+  const categoriesQuery = useQuery({
+    queryKey: ["article-categories"],
+    queryFn: () => articlesApi.getCategories(),
     staleTime: 5 * 60 * 1000,
+    refetchInterval: 15 * 60 * 1000,
   });
 
-  // Treat malformed or older API responses as an empty list instead of crashing
-  // the whole page while attempting to slice an undefined articles field.
-  const featuredArticles = Array.isArray(data?.articles) ? data.articles.slice(0, 3) : [];
+  const { data, isLoading, isError, error, refetch } = useQuery({
+    queryKey: ["articles", { page, limit: pageSize, category: selectedCategory }],
+    queryFn: () => articlesApi.list({ page, limit: pageSize, category: selectedCategory }),
+    staleTime: 60 * 1000,
+    refetchInterval: 5 * 60 * 1000,
+  });
+
+  const featuredQuery = useQuery({
+    queryKey: ["articles", "featured", 3, selectedCategory],
+    queryFn: () => articlesApi.getFeatured(3, selectedCategory),
+    staleTime: 60 * 1000,
+    refetchInterval: 5 * 60 * 1000,
+  });
+
+  const featuredArticles = getFeaturedArticles(featuredQuery.data?.articles ?? []);
+  const publicArticles = getPublicArticles(data?.articles ?? []);
+  const featuredSlugs = new Set(featuredArticles.map((article) => article.slug));
+  const articlesToDisplay = publicArticles.filter((article) => page !== 1 || !featuredSlugs.has(article.slug));
+  const totalPages = Math.max(1, data?.totalPages ?? 1);
 
   const handleSubscribe = (e: React.FormEvent) => {
     e.preventDefault();
@@ -128,6 +151,19 @@ const Blog = () => {
 
         <section className="py-5 md:py-6 bg-background">
           <div className="container">
+            <div className="mb-5 flex justify-end">
+              <Select value={category} onValueChange={(value) => { setCategory(value); setPage(1); }}>
+                <SelectTrigger aria-label="Filter articles by category" className="w-full sm:w-64">
+                  <SelectValue placeholder="All categories" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="all">All categories</SelectItem>
+                  {(categoriesQuery.data?.categories ?? []).map((item) => (
+                    <SelectItem key={item} value={item}>{item}</SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            </div>
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -137,7 +173,7 @@ const Blog = () => {
               <Badge variant="default" className="px-4 py-2 text-sm">Featured Articles</Badge>
             </motion.div>
 
-            {isLoading ? (
+            {featuredQuery.isLoading ? (
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 max-w-md md:max-w-none mx-auto">
                 {[1, 2, 3].map((i) => (
                   <motion.article
@@ -162,12 +198,12 @@ const Blog = () => {
                   </motion.article>
                 ))}
               </div>
-            ) : isError ? (
+            ) : featuredQuery.isError ? (
               <div className="text-center py-12">
                 <AlertCircle className="h-12 w-12 text-destructive mx-auto mb-4" />
                 <h3 className="text-lg font-semibold text-foreground mb-2">Unable to load articles</h3>
-                <p className="text-muted-foreground mb-4">{error instanceof Error ? error.message : "Please try again later."}</p>
-                <Button variant="outline" onClick={() => window.location.reload()}>
+                <p className="text-muted-foreground mb-4">{featuredQuery.error instanceof Error ? featuredQuery.error.message : "Please try again later."}</p>
+                <Button variant="outline" onClick={() => void featuredQuery.refetch()}>
                   Retry
                 </Button>
               </div>
@@ -211,7 +247,7 @@ const Blog = () => {
                         <Icon className="absolute bottom-4 left-4 w-8 h-8 text-primary-foreground/95 drop-shadow-lg" />
                       </div>
                       <div className="p-4 sm:p-5 flex flex-col flex-1">
-                        <Badge className="self-start mb-2 bg-primary/10 text-primary border-0">{article.category}</Badge>
+                        <Badge className="self-start mb-2 bg-primary/10 text-primary border-0">{article.category || "Insights"}</Badge>
                         <h2 className="text-lg sm:text-xl font-bold text-foreground mb-2 leading-snug text-balance group-hover:text-primary transition-colors">
                           {article.title}
                         </h2>
@@ -246,6 +282,76 @@ const Blog = () => {
             )}
           </div>
         </section>
+
+        {(isLoading || isError || articlesToDisplay.length > 0 || page > 1) && (
+          <section className="bg-background py-10 md:py-14">
+            <div className="container max-w-5xl">
+              <div className="mb-6">
+                <h2 className="text-2xl md:text-3xl font-bold text-foreground">More articles</h2>
+              </div>
+              {isLoading ? (
+                <div role="status" aria-label="Loading articles" className="divide-y divide-border border-y border-border">
+                  {[1, 2, 3].map((item) => <div key={item} className="h-28 animate-pulse bg-muted/50" />)}
+                </div>
+              ) : isError ? (
+                <div className="py-10 text-center">
+                  <AlertCircle className="h-10 w-10 text-destructive mx-auto mb-3" />
+                  <p className="text-muted-foreground mb-4">{error instanceof Error ? error.message : "Unable to load articles."}</p>
+                  <Button variant="outline" onClick={() => void refetch()}>Retry</Button>
+                </div>
+              ) : articlesToDisplay.length === 0 ? (
+                <p className="border-y border-border py-8 text-center text-muted-foreground">No more articles on this page.</p>
+              ) : (
+                <div className="divide-y divide-border border-y border-border">
+                  {articlesToDisplay.map((article) => (
+                    <article key={article.slug} className="flex gap-4 py-5 sm:gap-6">
+                      {article.featured_image && (
+                        <img
+                          src={article.featured_image}
+                          alt=""
+                          width={112}
+                          height={84}
+                          loading="lazy"
+                          className="h-20 w-28 shrink-0 rounded-md object-cover sm:h-24 sm:w-36"
+                        />
+                      )}
+                      <div className="min-w-0 flex-1">
+                        <div className="mb-2 flex flex-wrap items-center gap-x-3 gap-y-1 text-xs text-muted-foreground">
+                          <span>{article.category || "Insights"}</span>
+                          <span className="inline-flex items-center gap-1"><Calendar className="h-3.5 w-3.5" />{formatArticleDate(article.published_at)}</span>
+                        </div>
+                        <h3 className="text-lg font-semibold leading-snug text-foreground hover:text-primary">
+                          <Link to={`/blog/${article.slug}`}>{article.title}</Link>
+                        </h3>
+                        <p className="mt-1 line-clamp-2 text-sm text-muted-foreground">
+                          {article.excerpt || getArticleExcerpt(article.content)}
+                        </p>
+                        <p className="mt-2 text-xs text-muted-foreground">{article.author} · {calculateReadTime(article.content)}</p>
+                      </div>
+                    </article>
+                  ))}
+                </div>
+              )}
+              {totalPages > 1 && (
+                <Pagination className="mt-6">
+                  <PaginationContent>
+                    <PaginationItem>
+                      <Button type="button" variant="outline" size="sm" disabled={isLoading || page <= 1} onClick={() => setPage((current) => current - 1)}>
+                        <ChevronLeft className="mr-1 h-4 w-4" />Previous
+                      </Button>
+                    </PaginationItem>
+                    <PaginationItem><span aria-live="polite" className="px-3 text-sm text-muted-foreground">Page {page} of {totalPages}</span></PaginationItem>
+                    <PaginationItem>
+                      <Button type="button" variant="outline" size="sm" disabled={isLoading || page >= totalPages} onClick={() => setPage((current) => current + 1)}>
+                        Next<ChevronRight className="ml-1 h-4 w-4" />
+                      </Button>
+                    </PaginationItem>
+                  </PaginationContent>
+                </Pagination>
+              )}
+            </div>
+          </section>
+        )}
 
         <section className="bg-hero py-10 md:py-12">
           <div className="container">

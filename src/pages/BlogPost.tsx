@@ -8,7 +8,7 @@ import Navbar from "@/components/Navbar";
 import BookDemoDialog from "@/components/BookDemoDialog";
 import { useDemoDialogStore } from "@/stores/demoDialogStore";
 import { useQuery } from "@tanstack/react-query";
-import { articlesApi, formatArticleDate, calculateReadTime } from "@/lib/articlesApi";
+import { articlesApi, formatArticleDate, calculateReadTime, getArticleModifiedDate, isPublicArticle } from "@/lib/articlesApi";
 import { parseISO } from "date-fns";
 import { BASE_URL } from "@/lib/constants";
 import { ORGANIZATION_SCHEMA, WEBSITE_SCHEMA, getArticleSchema, getBreadcrumbSchema } from "@/lib/seo";
@@ -22,6 +22,7 @@ const BlogPost = () => {
     queryFn: () => articlesApi.getBySlug(slug!),
     enabled: !!slug,
     staleTime: 5 * 60 * 1000,
+    refetchInterval: 5 * 60 * 1000,
   });
 
   const article = data?.article;
@@ -45,7 +46,7 @@ const BlogPost = () => {
     );
   }
 
-  if (isError || !article) {
+  if (isError || !article || !isPublicArticle(article)) {
     return (
       <>
         <Helmet>
@@ -76,6 +77,7 @@ const BlogPost = () => {
   const imageUrl = article.featured_image || `${BASE_URL}/og-image.jpg`;
   const seoTitle = article.meta_title || `${article.title} | Twinblueprint`;
   const seoDescription = article.meta_description || article.excerpt || article.title;
+  const modifiedAt = getArticleModifiedDate(article.published_at, article.updated_at);
 
   const breadcrumbItems = [
     { name: "Home", url: BASE_URL },
@@ -95,9 +97,9 @@ const BlogPost = () => {
         <meta property="og:image" content={imageUrl} />
         <meta property="og:type" content="article" />
         <meta property="article:published_time" content={article.published_at} />
-        <meta property="article:modified_time" content={article.updated_at} />
+        {modifiedAt && <meta property="article:modified_time" content={modifiedAt} />}
         <meta property="article:author" content={article.author} />
-        <meta property="article:section" content={article.category} />
+        <meta property="article:section" content={article.category || "Insights"} />
         {(Array.isArray(article.tags) ? article.tags : []).map((tag) => (
           <meta key={tag} property="article:tag" content={tag} />
         ))}
@@ -113,9 +115,9 @@ const BlogPost = () => {
           image: imageUrl,
           author: article.author,
           publishedAt: article.published_at,
-          updatedAt: article.updated_at,
+          updatedAt: modifiedAt,
           url: articleUrl,
-          category: article.category,
+          category: article.category || "Insights",
           tags: article.tags,
         }))}</script>
         <script type="application/ld+json">{JSON.stringify(getBreadcrumbSchema(breadcrumbItems))}</script>
@@ -175,7 +177,7 @@ const BlogPost = () => {
                     <ArrowLeft className="mr-2 h-4 w-4" /> Back to Blog
                   </Button>
                 </Link>
-                <Badge className="bg-primary/10 text-primary border-0">{article.category}</Badge>
+                <Badge className="bg-primary/10 text-primary border-0">{article.category || "Insights"}</Badge>
               </div>
             </div>
             <div className="max-w-3xl mx-auto">

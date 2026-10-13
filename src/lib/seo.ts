@@ -57,7 +57,7 @@ export function getArticleSchema(article: {
   image: string;
   author: string;
   publishedAt: string;
-  updatedAt: string;
+  updatedAt?: string;
   url: string;
   category: string;
   tags: string[];
@@ -81,7 +81,7 @@ export function getArticleSchema(article: {
       },
     },
     datePublished: article.publishedAt,
-    dateModified: article.updatedAt,
+    ...(article.updatedAt ? { dateModified: article.updatedAt } : {}),
     mainEntityOfPage: {
       "@type": "WebPage",
       "@id": article.url,

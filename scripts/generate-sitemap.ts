@@ -8,8 +8,18 @@ const OUTPUT_PATH = path.resolve("public/sitemap.xml");
 
 interface Article {
   slug: string;
-  updated_at: string;
-  status: string;
+  updated_at?: string | null;
+}
+
+interface SitemapResponse {
+  success: boolean;
+  data?: { articles?: Article[] };
+  message?: string;
+}
+
+interface PublishedArticlePage {
+  articles: Array<{ slug: string; published_at: string }>;
+  totalPages?: number;
 }
 
 const STATIC_URLS = [
@@ -24,35 +34,62 @@ const STATIC_URLS = [
   { url: "/terms", changefreq: "yearly", priority: 0.3 },
 ];
 
-async function fetchArticles(): Promise<Article[]> {
+async function fetchArticles(): Promise<Article[] | null> {
   try {
-    const response = await axios.get(`${API_BASE}/articles`, {
-      params: { page: 1, limit: 1000 },
-      timeout: 10000,
-    });
-
-    if (response.data.success && response.data.data?.articles) {
-      return response.data.data.articles
-        .filter((a: Article) => a.status === "published" && typeof a.slug === "string" && !!a.slug)
-        .map((a: Article) => ({
-          slug: a.slug,
-          updated_at: a.updated_at,
-        }));
+    const response = await axios.get<SitemapResponse>(`${API_BASE}/articles/sitemap`, { timeout: 30000 });
+    if (!response.data.success || !Array.isArray(response.data.data?.articles)) {
+      throw new Error(response.data.message || "Invalid article sitemap response");
     }
-    return [];
+    const articles = new Map<string, Article>();
+    for (const article of response.data.data.articles) {
+      if (typeof article.slug === "string" && article.slug) articles.set(article.slug, article);
+    }
+
+    const publicationDates = new Map<string, number>();
+    const pageSize = 10;
+    let page = 1;
+    let totalPages = 1;
+    do {
+      const listResponse = await axios.get<{ success: boolean; data?: PublishedArticlePage; message?: string }>(`${API_BASE}/articles`, {
+        params: { page, limit: pageSize },
+        timeout: 30000,
+      });
+      if (!listResponse.data.success || !Array.isArray(listResponse.data.data?.articles)) {
+        throw new Error(listResponse.data.message || `Invalid articles response on page ${page}`);
+      }
+      for (const article of listResponse.data.data.articles) {
+        if (articles.has(article.slug)) publicationDates.set(article.slug, Date.parse(article.published_at));
+      }
+      totalPages = Number.isInteger(listResponse.data.data.totalPages)
+        ? Math.max(page, listResponse.data.data.totalPages!)
+        : listResponse.data.data.articles.length === pageSize ? page + 1 : page;
+      page += 1;
+    } while (page <= totalPages);
+
+    return [...articles.values()].filter((article) => {
+      const publishedAt = publicationDates.get(article.slug);
+      return Number.isFinite(publishedAt) && publishedAt! <= Date.now();
+    });
   } catch (error) {
-    console.error("Failed to fetch articles for sitemap:", error instanceof Error ? error.message : "Unknown error");
-    return [];
+    console.warn("Sitemap refresh skipped; keeping the existing sitemap:", error instanceof Error ? error.message : "Unknown error");
+    return null;
   }
 }
 
 function generateSitemap(articles: Article[]): string {
-  const articleUrls = articles.map((article) => ({
-    url: `/blog/${article.slug}`,
-    lastmod: article.updated_at.split("T")[0],
-    changefreq: "monthly" as const,
-    priority: 0.7,
-  }));
+  const articleUrls = articles.map((article) => {
+    const updatedAt = article.updated_at ? Date.parse(article.updated_at) : NaN;
+    const lastmod = Number.isFinite(updatedAt) && updatedAt <= Date.now()
+      ? new Date(updatedAt).toISOString().slice(0, 10)
+      : undefined;
+
+    return {
+      url: `/blog/${article.slug}`,
+      lastmod,
+      changefreq: "monthly" as const,
+      priority: 0.7,
+    };
+  });
 
   const allUrls = [...new Map([...STATIC_URLS, ...articleUrls].map((entry) => [entry.url, entry])).values()];
 
@@ -78,6 +115,7 @@ async function main() {
   console.log(`Site URL: ${BASE_URL}`);
 
   const articles = await fetchArticles();
+  if (articles === null) return;
   console.log(`Found ${articles.length} published articles`);
 
   const sitemap = generateSitemap(articles);
