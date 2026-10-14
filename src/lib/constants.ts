@@ -1,5 +1,6 @@
 // SEO URLs must always use the production domain, even on previews or localhost.
 export const BASE_URL = "https://www.twinblueprint.com";
+export const BUSINESS_TELEPHONE = "+4479040539301";
 
 export const CRM_PATHS = [
   "/crm",
@@ -14,6 +15,7 @@ export const CRM_PATHS = [
 
 export const PUBLIC_ROUTES = [
   { path: "/", changefreq: "weekly", priority: 1.0 },
+  { path: "/contact", changefreq: "yearly", priority: 0.7 },
   { path: "/services", changefreq: "monthly", priority: 0.9 },
   { path: "/case-studies", changefreq: "monthly", priority: 0.9 },
   { path: "/case-studies/1", changefreq: "yearly", priority: 0.7 },

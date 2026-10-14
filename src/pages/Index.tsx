@@ -15,7 +15,7 @@ import { ORGANIZATION_SCHEMA, WEBSITE_SCHEMA, getWebPageSchema } from "@/lib/seo
 const Index = () => {
   return (
     <>
-      <Helmet>
+      <Helmet defer={false}>
         <title>Technology Solutions & Digital Transformation | Twinblueprint</title>
         <meta
           name="description"
@@ -36,7 +36,7 @@ const Index = () => {
         <meta name="twitter:description" content="Technology consulting and digital transformation services that help organizations modernize operations, improve efficiency and drive sustainable growth." />
         <script type="application/ld+json">{JSON.stringify(WEBSITE_SCHEMA)}</script>
         <script type="application/ld+json">{JSON.stringify(ORGANIZATION_SCHEMA)}</script>
-        <script type="application/ld+json">{JSON.stringify(getWebPageSchema("Technology Solutions & Digital Transformation", BASE_URL, "Technology consulting, software development, AI solutions and business automation services for organizations worldwide."))}</script>
+        <script type="application/ld+json">{JSON.stringify(getWebPageSchema("Technology Consulting and Digital Transformation for Global Organizations", `${BASE_URL}/`, "Twinblueprint provides technology consulting, digital transformation, software development, AI solutions and business automation services for organizations worldwide."))}</script>
       </Helmet>
       <Navbar />
       <main>

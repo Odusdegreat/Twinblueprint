@@ -75,7 +75,7 @@ const sections = [
 const Terms = () => {
   return (
     <>
-      <Helmet>
+      <Helmet defer={false}>
         <title>Terms of Service | Twinblueprint</title>
         <meta name="description" content="Twinblueprint Terms of Service - Rules and guidelines for using our Digital Twin and architectural visualisation services." />
         <link rel="canonical" href={`${BASE_URL}/terms`} />

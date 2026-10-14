@@ -61,7 +61,7 @@ const sections = [
 const PrivacyPolicy = () => {
   return (
     <>
-      <Helmet>
+      <Helmet defer={false}>
         <title>Privacy Policy | Twinblueprint</title>
         <meta name="description" content="Twinblueprint Privacy Policy - How we collect, use, and protect your personal information when you use our Digital Twin and architectural visualisation services." />
         <link rel="canonical" href={`${BASE_URL}/privacy-policy`} />

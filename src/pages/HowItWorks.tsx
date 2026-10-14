@@ -75,7 +75,7 @@ const HowItWorks = () => {
 
   return (
     <>
-      <Helmet>
+      <Helmet defer={false}>
         <title>How it Works | Our Digital Twin Delivery Process | Twinblueprint</title>
         <meta
           name="description"
@@ -150,6 +150,7 @@ const HowItWorks = () => {
         <section id="process" className="py-8 md:py-10 bg-background scroll-mt-24">
 
           <div className="container">
+            <h2 className="sr-only">Our four-step process</h2>
             <div className="grid lg:grid-cols-2 gap-6">
               {steps.map((step, i) => (
                 <motion.div

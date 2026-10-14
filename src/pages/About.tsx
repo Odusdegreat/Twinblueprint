@@ -60,7 +60,7 @@ const About = () => {
 
   return (
     <>
-      <Helmet>
+      <Helmet defer={false}>
         <title>About Twinblueprint | Global Technology & Business Solutions</title>
         <meta
           name="description"

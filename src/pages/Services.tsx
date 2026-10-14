@@ -98,7 +98,7 @@ const Services = () => {
 
   return (
     <>
-      <Helmet>
+      <Helmet defer={false}>
         <title>Technology Consulting & Digital Transformation Services | Twinblueprint</title>
         <meta
           name="description"

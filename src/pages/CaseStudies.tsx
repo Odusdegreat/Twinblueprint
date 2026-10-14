@@ -193,7 +193,7 @@ const CaseStudies = () => {
 
   return (
     <>
-      <Helmet>
+      <Helmet defer={false}>
         <title>Case Studies | Digital Twin & Visualisation Projects | Twinblueprint</title>
         <meta
           name="description"

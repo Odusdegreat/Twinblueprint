@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import logoSrc from "@/assets/meta-dology-logo-new.webp";
+import { BUSINESS_TELEPHONE } from "@/lib/constants";
 
 const Footer = () => {
   return (
@@ -15,7 +16,7 @@ const Footer = () => {
             </p>
           </div>
           <div>
-            <h4 className="text-hero-foreground font-semibold text-sm mb-4">Capabilities</h4>
+            <h2 className="text-hero-foreground font-semibold text-sm mb-4">Capabilities</h2>
             <ul className="space-y-2 text-hero-muted text-sm">
               <li><Link to="/services#digital-twin-solutions" className="hover:text-hero-foreground transition-colors">Digital Twin Solutions</Link></li>
               <li><Link to="/services#architectural-visualisation" className="hover:text-hero-foreground transition-colors">Architectural Visualisation</Link></li>
@@ -26,7 +27,7 @@ const Footer = () => {
             </ul>
           </div>
           <div>
-            <h4 className="text-hero-foreground font-semibold text-sm mb-4">Explore</h4>
+            <h2 className="text-hero-foreground font-semibold text-sm mb-4">Explore</h2>
             <ul className="space-y-2 text-hero-muted text-sm">
               <li><Link to="/case-studies" className="hover:text-hero-foreground transition-colors">Case Studies</Link></li>
               <li><Link to="/how-it-works" className="hover:text-hero-foreground transition-colors">How it Works</Link></li>
@@ -36,9 +37,10 @@ const Footer = () => {
             </ul>
           </div>
           <div>
-            <h4 className="text-hero-foreground font-semibold text-sm mb-4">Resources</h4>
+            <h2 className="text-hero-foreground font-semibold text-sm mb-4">Resources</h2>
             <ul className="space-y-2 text-hero-muted text-sm">
-              <li><Link to="/#contact" className="hover:text-hero-foreground transition-colors">Contact / Book a Consultation</Link></li>
+              <li><Link to="/contact" className="hover:text-hero-foreground transition-colors">Contact / Book a Consultation</Link></li>
+              <li><a href={`tel:${BUSINESS_TELEPHONE}`} className="hover:text-hero-foreground transition-colors">{BUSINESS_TELEPHONE}</a></li>
               <li><Link to="/faq" className="hover:text-hero-foreground transition-colors">FAQ</Link></li>
               <li><Link to="/privacy-policy" className="hover:text-hero-foreground transition-colors">Privacy Policy</Link></li>
               <li><Link to="/terms" className="hover:text-hero-foreground transition-colors">Terms</Link></li>

@@ -16,7 +16,7 @@ const SEO = ({ title, description, path = "/", image, type = "website", jsonLd }
   const ogImage = image ?? `${SITE_URL}/og-image.jpg`;
 
   return (
-    <Helmet>
+    <Helmet defer={false}>
       <title>{title}</title>
       <meta name="description" content={description} />
       <link rel="canonical" href={url} />

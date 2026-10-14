@@ -1,10 +1,11 @@
-import { BASE_URL } from "./constants";
+import { BASE_URL, BUSINESS_TELEPHONE } from "./constants";
 
 export const ORGANIZATION_SCHEMA = {
   "@context": "https://schema.org",
   "@type": "Organization",
+  "@id": `${BASE_URL}/#organization`,
   name: "Twinblueprint",
-  url: BASE_URL,
+  url: `${BASE_URL}/`,
   logo: `${BASE_URL}/logo.png`,
   description:
     "Global technology consultancy and business solutions company helping organizations modernize operations through digital transformation, software development, AI solutions and business automation.",
@@ -15,8 +16,9 @@ export const ORGANIZATION_SCHEMA = {
   ],
   contactPoint: {
     "@type": "ContactPoint",
-    // Add verified contact details when available; avoid publishing placeholders.
-    contactType: "customer service",
+    telephone: BUSINESS_TELEPHONE,
+    email: "info@twinblueprint.com",
+    contactType: "For more information",
     availableLanguage: "English",
     areaServed: "World",
   },
@@ -25,17 +27,10 @@ export const ORGANIZATION_SCHEMA = {
 export const WEBSITE_SCHEMA = {
   "@context": "https://schema.org",
   "@type": "WebSite",
+  "@id": `${BASE_URL}/#website`,
   name: "Twinblueprint",
-  url: BASE_URL,
-  potentialAction: {
-    "@type": "SearchAction",
-    target: {
-      "@type": "EntryPoint",
-      urlTemplate: `${BASE_URL}/blog?search={search_term_string}`,
-    },
-    "query-input": "required name=search_term_string",
-  },
-  publisher: ORGANIZATION_SCHEMA,
+  url: `${BASE_URL}/`,
+  publisher: { "@id": `${BASE_URL}/#organization` },
 };
 
 export function getBreadcrumbSchema(items: Array<{ name: string; url: string }>) {
@@ -73,12 +68,7 @@ export function getArticleSchema(article: {
       name: article.author,
     },
     publisher: {
-      "@type": "Organization",
-      name: "Twinblueprint",
-      logo: {
-        "@type": "ImageObject",
-        url: `${BASE_URL}/logo.png`,
-      },
+      "@id": `${BASE_URL}/#organization`,
     },
     datePublished: article.publishedAt,
     ...(article.updatedAt ? { dateModified: article.updatedAt } : {}),
@@ -104,8 +94,8 @@ export function getCaseStudySchema(study: {
     headline: study.title,
     description: study.description,
     image: study.image,
-    author: { "@type": "Organization", name: "Twinblueprint" },
-    publisher: { "@type": "Organization", name: "Twinblueprint" },
+    author: { "@id": `${BASE_URL}/#organization` },
+    publisher: { "@id": `${BASE_URL}/#organization` },
     mainEntityOfPage: {
       "@type": "WebPage",
       "@id": study.url,
@@ -120,7 +110,7 @@ export function getCollectionPageSchema(name: string, url: string, description?:
     name,
     url,
     description,
-    isPartOf: { "@type": "WebSite", name: "Twinblueprint", url: BASE_URL },
+    isPartOf: { "@id": `${BASE_URL}/#website` },
   };
 }
 
@@ -131,7 +121,7 @@ export function getWebPageSchema(name: string, url: string, description?: string
     name,
     url,
     description,
-    isPartOf: { "@type": "WebSite", name: "Twinblueprint", url: BASE_URL },
+    isPartOf: { "@id": `${BASE_URL}/#website` },
   };
 }
 
@@ -145,15 +135,16 @@ export function getAboutPageSchema() {
     "@type": "AboutPage",
     name: "About Twinblueprint",
     url: `${BASE_URL}/about`,
-    isPartOf: { "@type": "WebSite", name: "Twinblueprint", url: BASE_URL },
-    mainEntity: ORGANIZATION_SCHEMA,
+    isPartOf: { "@id": `${BASE_URL}/#website` },
+    mainEntity: { "@id": `${BASE_URL}/#organization` },
   };
 }
 
-export function getFAQSchema(faqs: Array<{ question: string; answer: string }>) {
+export function getFAQSchema(faqs: Array<{ question: string; answer: string }>, url: string) {
   return {
     "@context": "https://schema.org",
     "@type": "FAQPage",
+    url,
     mainEntity: faqs.map((f) => ({
       "@type": "Question",
       name: f.question,

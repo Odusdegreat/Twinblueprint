@@ -171,7 +171,7 @@ const LearnMoreCaseStudy = () => {
 
   return (
     <>
-      <Helmet>
+      <Helmet defer={false}>
         <title>{study.metaTitle}</title>
         <meta name="description" content={study.metaDescription} />
         <link rel="canonical" href={studyUrl} />

@@ -30,7 +30,7 @@ const BlogPost = () => {
   if (isLoading) {
     return (
       <>
-        <Helmet>
+        <Helmet defer={false}>
           <title>Loading article | Twinblueprint Blog</title>
         </Helmet>
         <Navbar />
@@ -48,7 +48,7 @@ const BlogPost = () => {
   if (isError || !article || !isPublicArticle(article)) {
     return (
       <>
-        <Helmet>
+        <Helmet defer={false}>
           <title>Article Not Found | Twinblueprint Blog</title>
         </Helmet>
         <Navbar />
@@ -85,11 +85,11 @@ const BlogPost = () => {
 
   return (
     <>
-      <Helmet>
+      <Helmet defer={false}>
         <title>{seoTitle}</title>
         <meta name="description" content={seoDescription} />
         <link rel="canonical" href={articleUrl} />
-        <link rel="preload" as="image" href={imageUrl} imagesrcset={`${imageUrl} 1x`} />
+        <link rel="preload" as="image" href={imageUrl} imageSrcSet={`${imageUrl} 1x`} />
         <meta property="og:title" content={seoTitle} />
         <meta property="og:description" content={seoDescription} />
         <meta property="og:url" content={articleUrl} />
@@ -109,7 +109,7 @@ const BlogPost = () => {
         <script type="application/ld+json">{JSON.stringify(WEBSITE_SCHEMA)}</script>
         <script type="application/ld+json">{JSON.stringify(ORGANIZATION_SCHEMA)}</script>
         <script type="application/ld+json">{JSON.stringify(getArticleSchema({
-          title: seoTitle,
+          title: article.title,
           description: seoDescription,
           image: imageUrl,
           author: article.author,
@@ -189,7 +189,7 @@ const BlogPost = () => {
               <div className="prose prose-lg max-w-none" dangerouslySetInnerHTML={{ __html: article.content }} />
 
               <div className="mt-12 p-6 bg-muted rounded-2xl border border-border">
-                <h3 className="text-lg font-bold text-foreground mb-3">Continue reading</h3>
+                <h2 className="text-lg font-bold text-foreground mb-3">Continue reading</h2>
                 <ul className="space-y-2">
                   <li>
                     <Link to="/services" className="text-primary hover:underline">Explore our Digital Twin services →</Link>

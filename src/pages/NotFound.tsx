@@ -13,7 +13,7 @@ const NotFound = () => {
 
   return (
     <>
-      <Helmet>
+      <Helmet defer={false}>
         <title>Page Not Found | Twinblueprint</title>
         <meta name="robots" content="noindex,nofollow" />
         <meta name="description" content="The page you're looking for doesn't exist. Explore Twinblueprint's Digital Twin services, case studies, and insights." />

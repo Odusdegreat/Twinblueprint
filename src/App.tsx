@@ -17,6 +17,7 @@ const Services = lazy(() => import("./pages/Services"));
 const CaseStudies = lazy(() => import("./pages/CaseStudies"));
 const Blog = lazy(() => import("./pages/Blog"));
 const About = lazy(() => import("./pages/About"));
+const Contact = lazy(() => import("./pages/Contact"));
 const HowItWorks = lazy(() => import("./pages/HowItWorks"));
 const FAQ = lazy(() => import("./pages/FAQ"));
 const PrivacyPolicy = lazy(() => import("./pages/PrivacyPolicy"));
@@ -47,7 +48,7 @@ export function shouldIndexRoute(pathname: string) {
 
 const GlobalMetadata = () => {
   const { pathname } = useLocation();
-  return shouldIndexRoute(pathname) ? null : <Helmet><meta name="robots" content="noindex, nofollow, noarchive" /></Helmet>;
+  return shouldIndexRoute(pathname) ? null : <Helmet defer={false}><meta name="robots" content="noindex, nofollow, noarchive" /></Helmet>;
 };
 
 const queryClient = new QueryClient();
@@ -66,6 +67,7 @@ const App = () => (
           <Route path="/" element={<Index />} /><Route path="/services" element={<Services />} /><Route path="/case-studies" element={<CaseStudies />} />
           <Route path="/case-studies/:id" element={<LearnMoreCaseStudy />} /><Route path="/blog" element={<Blog />} /><Route path="/blog/:slug" element={<BlogPost />} /><Route path="/about" element={<About />} />
           <Route path="/how-it-works" element={<HowItWorks />} /><Route path="/faq" element={<FAQ />} /><Route path="/privacy-policy" element={<PrivacyPolicy />} /><Route path="/terms" element={<Terms />} />
+          <Route path="/contact" element={<Contact />} />
           {!isCrmHost() && <Route path="/crm/*" element={<CrmHostRedirect />} />}
           </>}
           {isCrmHost() && <>

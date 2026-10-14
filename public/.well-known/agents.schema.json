@@ -53,10 +53,11 @@
     },
     "contact": {
       "type": "object",
-      "required": ["email", "url"],
+      "required": ["email", "telephone", "url"],
       "additionalProperties": false,
       "properties": {
         "email": { "type": "string", "format": "email" },
+        "telephone": { "type": "string", "minLength": 7 },
         "url": { "type": "string", "format": "uri" }
       }
     }

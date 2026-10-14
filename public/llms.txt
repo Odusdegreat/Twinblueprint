@@ -5,6 +5,7 @@
 ## Public pages
 
 - [Home](https://www.twinblueprint.com/): Company overview and technology solutions.
+- [Contact](https://www.twinblueprint.com/contact): Contact details and consultation enquiries.
 - [Services](https://www.twinblueprint.com/services): Technology consulting, digital transformation, Digital Twin, and visualisation services.
 - [About](https://www.twinblueprint.com/about): Company background, mission, and team.
 - [Case Studies](https://www.twinblueprint.com/case-studies): Project examples and outcomes.
@@ -15,4 +16,5 @@
 ## Contact
 
 - Email: info@twinblueprint.com
+- Phone: +4479040539301
 - [Privacy Policy](https://www.twinblueprint.com/privacy-policy)

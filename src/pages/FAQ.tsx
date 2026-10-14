@@ -60,7 +60,7 @@ const FAQ = () => {
 
   return (
     <>
-      <Helmet>
+      <Helmet defer={false}>
         <title>FAQ | Digital Twin & Visualisation Questions | Twinblueprint</title>
         <meta
           name="description"
@@ -79,7 +79,7 @@ const FAQ = () => {
         <script type="application/ld+json">{JSON.stringify(WEBSITE_SCHEMA)}</script>
         <script type="application/ld+json">{JSON.stringify(ORGANIZATION_SCHEMA)}</script>
         <script type="application/ld+json">{JSON.stringify(getWebPageSchema("FAQ", `${BASE_URL}/faq`, "Answers to common questions about Digital Twin, BIM visualisation, planning approval support, file formats, timelines and confidentiality."))}</script>
-        <script type="application/ld+json">{JSON.stringify(getFAQSchema(faqs))}</script>
+        <script type="application/ld+json">{JSON.stringify(getFAQSchema(faqs, `${BASE_URL}/faq`))}</script>
       </Helmet>
       <Navbar />
       <main>

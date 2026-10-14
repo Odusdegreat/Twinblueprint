@@ -26,6 +26,11 @@
       "type": "home"
     },
     {
+      "name": "Contact",
+      "url": "https://www.twinblueprint.com/contact",
+      "type": "contact"
+    },
+    {
       "name": "Services",
       "url": "https://www.twinblueprint.com/services",
       "type": "services"
@@ -58,6 +63,7 @@
   ],
   "contact": {
     "email": "info@twinblueprint.com",
-    "url": "https://www.twinblueprint.com/privacy-policy"
+    "telephone": "+4479040539301",
+    "url": "https://www.twinblueprint.com/contact"
   }
 }

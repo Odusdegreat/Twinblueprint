@@ -24,6 +24,7 @@ interface PublishedArticlePage {
 
 const STATIC_URLS = [
   { url: "/", changefreq: "weekly", priority: 1.0 },
+  { url: "/contact", changefreq: "yearly", priority: 0.7 },
   { url: "/services", changefreq: "monthly", priority: 0.9 },
   { url: "/case-studies", changefreq: "monthly", priority: 0.9 },
   { url: "/how-it-works", changefreq: "monthly", priority: 0.8 },

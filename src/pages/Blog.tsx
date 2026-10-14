@@ -109,7 +109,7 @@ const Blog = () => {
 
   return (
     <>
-      <Helmet>
+      <Helmet defer={false}>
         <title>Technology & Business Insights | Twinblueprint Blog</title>
         <meta
           name="description"
@@ -170,7 +170,7 @@ const Blog = () => {
               viewport={{ once: true }}
               className="flex flex-wrap gap-2 justify-center mb-4"
             >
-              <Badge variant="default" className="px-4 py-2 text-sm">Featured Articles</Badge>
+              <h2><Badge variant="default" className="px-4 py-2 text-sm">Featured Articles</Badge></h2>
             </motion.div>
 
             {featuredQuery.isLoading ? (
@@ -248,9 +248,9 @@ const Blog = () => {
                       </div>
                       <div className="p-4 sm:p-5 flex flex-col flex-1">
                         <Badge className="self-start mb-2 bg-primary/10 text-primary border-0">{article.category || "Insights"}</Badge>
-                        <h2 className="text-lg sm:text-xl font-bold text-foreground mb-2 leading-snug text-balance group-hover:text-primary transition-colors">
+                        <h3 className="text-lg sm:text-xl font-bold text-foreground mb-2 leading-snug text-balance group-hover:text-primary transition-colors">
                           {article.title}
-                        </h2>
+                        </h3>
                         <p className="text-muted-foreground text-[0.9375rem] sm:text-sm mb-3 leading-relaxed flex-1 line-clamp-3">
                           {excerpt}
                         </p>
