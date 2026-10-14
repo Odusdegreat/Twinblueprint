@@ -32,7 +32,6 @@ const BlogPost = () => {
       <>
         <Helmet>
           <title>Loading article | Twinblueprint Blog</title>
-          <meta name="robots" content="noindex, nofollow" />
         </Helmet>
         <Navbar />
         <main className="min-h-screen flex items-center justify-center bg-background">
@@ -51,7 +50,6 @@ const BlogPost = () => {
       <>
         <Helmet>
           <title>Article Not Found | Twinblueprint Blog</title>
-          <meta name="robots" content="noindex, nofollow" />
         </Helmet>
         <Navbar />
         <main className="min-h-screen flex items-center justify-center bg-background">
@@ -91,6 +89,7 @@ const BlogPost = () => {
         <title>{seoTitle}</title>
         <meta name="description" content={seoDescription} />
         <link rel="canonical" href={articleUrl} />
+        <link rel="preload" as="image" href={imageUrl} imagesrcset={`${imageUrl} 1x`} />
         <meta property="og:title" content={seoTitle} />
         <meta property="og:description" content={seoDescription} />
         <meta property="og:url" content={articleUrl} />
@@ -130,6 +129,12 @@ const BlogPost = () => {
             <img
               src={article.featured_image}
               alt={article.title}
+              width={1600}
+              height={900}
+              fetchPriority="high"
+              decoding="async"
+              loading="eager"
+              sizes="(max-width: 768px) 100vw, 1200px"
               className="absolute inset-0 h-full w-full object-cover object-center"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-background/70 via-background/5 to-transparent" />
