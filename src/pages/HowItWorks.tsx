@@ -10,6 +10,7 @@ import PageNav from "@/components/PageNav";
 import { BASE_URL } from "@/lib/constants";
 import { ORGANIZATION_SCHEMA, WEBSITE_SCHEMA, getWebPageSchema } from "@/lib/seo";
 import marketingVideo from "@/assets/marketing-video-2026.mp4.asset.json";
+import cityPlanningVideo from "@/assets/city-planning-2026.mp4.asset.json";
 
 const steps = [
   {
@@ -171,6 +172,34 @@ const HowItWorks = () => {
                 preload="metadata"
                 className="w-full h-auto block"
                 aria-label="Twinblueprint marketing video 2026"
+              />
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="text-center max-w-2xl mx-auto mt-12 mb-5"
+            >
+              <p className="text-primary font-semibold text-sm uppercase tracking-wider mb-3">See It In Action</p>
+              <h2 className="text-3xl md:text-4xl text-foreground mb-4">The Future of Property Tours</h2>
+              <p className="text-muted-foreground text-lg">
+                Watch how our Digital Twin technology brings off plan developments to life with hyperreal 3D experiences III.
+              </p>
+            </motion.div>
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="max-w-4xl mx-auto rounded-2xl overflow-hidden border border-border shadow-lg bg-card"
+            >
+              <video
+                src={cityPlanningVideo.url}
+                controls
+                playsInline
+                preload="metadata"
+                className="w-full h-auto block"
+                aria-label="Twinblueprint city planning video 2026"
               />
             </motion.div>
           </div>
