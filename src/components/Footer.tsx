@@ -1,8 +1,11 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import logoSrc from "@/assets/meta-dology-logo-new.webp";
-import { BUSINESS_TELEPHONE } from "@/lib/constants";
+import { BUSINESS_TELEPHONE, BUSINESS_TELEPHONE_DISPLAY } from "@/lib/constants";
 
 const Footer = () => {
+  const location = useLocation();
+  const isAboutPage = location.pathname === "/about";
+
   return (
     <footer className="bg-hero border-t border-hero-muted/10 py-12">
       <div className="container">
@@ -39,8 +42,13 @@ const Footer = () => {
           <div>
             <h2 className="text-hero-foreground font-semibold text-sm mb-4">Resources</h2>
             <ul className="space-y-2 text-hero-muted text-sm">
-              <li><Link to="/contact" className="hover:text-hero-foreground transition-colors">Contact / Book a Consultation</Link></li>
-              <li><a href={`tel:${BUSINESS_TELEPHONE}`} className="hover:text-hero-foreground transition-colors">{BUSINESS_TELEPHONE}</a></li>
+              <li><Link to="/contact" className="hover:text-hero-foreground transition-colors">Contact</Link></li>
+              {isAboutPage && (
+                <>
+                  <li><a href="mailto:info@twinblueprint.com" className="hover:text-hero-foreground transition-colors">info@twinblueprint.com</a></li>
+                  <li><a href={`tel:${BUSINESS_TELEPHONE}`} className="hover:text-hero-foreground transition-colors">{BUSINESS_TELEPHONE_DISPLAY}</a></li>
+                </>
+              )}
               <li><Link to="/faq" className="hover:text-hero-foreground transition-colors">FAQ</Link></li>
               <li><Link to="/privacy-policy" className="hover:text-hero-foreground transition-colors">Privacy Policy</Link></li>
               <li><Link to="/terms" className="hover:text-hero-foreground transition-colors">Terms</Link></li>

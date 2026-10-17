@@ -1,17 +1,14 @@
 import { Helmet } from "react-helmet-async";
-import { ArrowRight, Mail, Phone } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { Mail } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import PageNav from "@/components/PageNav";
-import { useDemoDialogStore } from "@/stores/demoDialogStore";
-import { BASE_URL, BUSINESS_TELEPHONE } from "@/lib/constants";
+import { BASE_URL, BUSINESS_TELEPHONE, BUSINESS_TELEPHONE_DISPLAY } from "@/lib/constants";
 import { ORGANIZATION_SCHEMA, WEBSITE_SCHEMA, getWebPageSchema } from "@/lib/seo";
 
 const pageTitle = "Contact Twinblueprint | Speak with Our Team";
 const pageDescription = "Contact Twinblueprint about technology consulting, digital transformation, Digital Twin and visualisation projects.";
 
 const Contact = () => {
-  const { setOpen } = useDemoDialogStore();
   const contactUrl = `${BASE_URL}/contact`;
 
   return (
@@ -47,20 +44,16 @@ const Contact = () => {
           <div className="container max-w-4xl">
             <h2 className="text-2xl font-bold text-foreground">Get in touch</h2>
             <p className="mt-3 max-w-2xl text-muted-foreground">
-              Call or email us directly, or book a discovery consultation.
+              Email or call us directly.
             </p>
             <div className="mt-8 flex flex-col items-start gap-5">
-              <a className="inline-flex items-center gap-3 text-lg font-semibold text-primary hover:underline" href={`tel:${BUSINESS_TELEPHONE}`}>
-                <Phone className="h-5 w-5" aria-hidden="true" />
-                {BUSINESS_TELEPHONE}
-              </a>
               <a className="inline-flex items-center gap-3 text-lg font-semibold text-primary hover:underline" href="mailto:info@twinblueprint.com">
                 <Mail className="h-5 w-5" aria-hidden="true" />
                 info@twinblueprint.com
               </a>
-              <Button className="mt-3" onClick={() => setOpen(true)}>
-                Book a discovery consultation <ArrowRight className="ml-2 h-4 w-4" />
-              </Button>
+              <a className="inline-flex items-center gap-3 text-lg font-semibold text-primary hover:underline" href={`tel:${BUSINESS_TELEPHONE}`}>
+                {BUSINESS_TELEPHONE_DISPLAY}
+              </a>
             </div>
           </div>
         </section>

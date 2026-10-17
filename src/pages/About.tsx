@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 import { useDemoDialogStore } from "@/stores/demoDialogStore";
 import Navbar from "@/components/Navbar";
 import PageNav from "@/components/PageNav";
-import { BASE_URL } from "@/lib/constants";
+import { BASE_URL, BUSINESS_TELEPHONE, BUSINESS_TELEPHONE_DISPLAY } from "@/lib/constants";
 import { ORGANIZATION_SCHEMA, WEBSITE_SCHEMA, getAboutPageSchema } from "@/lib/seo";
 
 const teamMembers = [
@@ -216,6 +216,37 @@ const About = () => {
                 </motion.div>
               ))}
             </div>
+          </div>
+        </section>
+
+        {/* Contact Section */}
+        <section className="py-8 md:py-10 bg-background">
+          <div className="container">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="text-center max-w-2xl mx-auto"
+            >
+              <h2 className="text-3xl md:text-4xl text-foreground mb-6">Contact</h2>
+              <p className="text-muted-foreground text-lg mb-6 leading-relaxed">
+                Get in touch with us directly.
+              </p>
+              <div className="flex flex-col items-center gap-4">
+                <a
+                  href="mailto:info@twinblueprint.com"
+                  className="text-xl font-semibold text-primary hover:underline"
+                >
+                  info@twinblueprint.com
+                </a>
+                <a
+                  href={`tel:${BUSINESS_TELEPHONE}`}
+                  className="text-xl font-semibold text-primary hover:underline"
+                >
+                  {BUSINESS_TELEPHONE_DISPLAY}
+                </a>
+              </div>
+            </motion.div>
           </div>
         </section>
 
