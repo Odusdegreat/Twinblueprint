@@ -9,7 +9,7 @@ import Navbar from "@/components/Navbar";
 import PageNav from "@/components/PageNav";
 import { BASE_URL } from "@/lib/constants";
 import { ORGANIZATION_SCHEMA, WEBSITE_SCHEMA, getWebPageSchema } from "@/lib/seo";
-import marketingVideo from "@/assets/marketing-video-2026.mp4.asset.json";
+import marketingVideo from "@/assets/marketing-video-ii-clean-2026.mp4.asset.json";
 import cityPlanningVideo from "@/assets/city-planning-clean-2026.mp4.asset.json";
 
 const steps = [
