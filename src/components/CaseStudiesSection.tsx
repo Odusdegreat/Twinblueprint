@@ -40,11 +40,9 @@ const CaseStudiesSection = () => (
       </motion.div>
 
 
-
-
       <div className="text-center mt-8">
         <Link to="/case-studies" className="text-primary font-semibold hover:underline">
-          View all case studies →
+          View all case studies ��'
         </Link>
       </div>
     </div>

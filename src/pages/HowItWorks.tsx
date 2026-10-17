@@ -8,7 +8,7 @@ import { useDemoDialogStore } from "@/stores/demoDialogStore";
 import Navbar from "@/components/Navbar";
 import PageNav from "@/components/PageNav";
 import { BASE_URL } from "@/lib/constants";
-import { ORGANIZATION_SCHEMA, WEBSITE_SCHEMA, getWebPageSchema } from "@/lib/seo";
+import { ORGANIZATION_SCHEMA, WEBSITE_SCHEMA, getWebPageSchema, getVideoObjectSchema } from "@/lib/seo";
 
 const steps = [
   {
@@ -94,6 +94,13 @@ const HowItWorks = () => {
         <script type="application/ld+json">{JSON.stringify(WEBSITE_SCHEMA)}</script>
         <script type="application/ld+json">{JSON.stringify(ORGANIZATION_SCHEMA)}</script>
         <script type="application/ld+json">{JSON.stringify(getWebPageSchema("Our Digital Twin Delivery Process", `${BASE_URL}/how-it-works`, "Our four step Digital Twin delivery process - Discovery, Project Development, Review & Collaboration, Delivery & Support - built for construction, infrastructure and planning teams."))}</script>
+        <script type="application/ld+json">{JSON.stringify(getVideoObjectSchema({
+          name: "How Twinblueprint works",
+          description: "Watch how Twinblueprint's Digital Twin technology brings projects to life with hyperreal 3D experiences.",
+          thumbnailUrl: `${BASE_URL}/og-image.jpg`,
+          contentUrl: `${BASE_URL}/assets/videos/twinblueprintmeta.mp4`,
+          uploadDate: "2026-01-01",
+        }))}</script>
       </Helmet>
       <Navbar />
       <main>

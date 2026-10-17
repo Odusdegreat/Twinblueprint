@@ -10,7 +10,7 @@ import HowItWorksSection from "@/components/HowItWorksSection";
 import CTASection from "@/components/CTASection";
 import PageNav from "@/components/PageNav";
 import { BASE_URL } from "@/lib/constants";
-import { ORGANIZATION_SCHEMA, WEBSITE_SCHEMA, getWebPageSchema } from "@/lib/seo";
+import { ORGANIZATION_SCHEMA, WEBSITE_SCHEMA, getWebPageSchema, getVideoObjectSchema } from "@/lib/seo";
 
 const Index = () => {
   return (
@@ -37,6 +37,13 @@ const Index = () => {
         <script type="application/ld+json">{JSON.stringify(WEBSITE_SCHEMA)}</script>
         <script type="application/ld+json">{JSON.stringify(ORGANIZATION_SCHEMA)}</script>
         <script type="application/ld+json">{JSON.stringify(getWebPageSchema("Technology Consulting and Digital Transformation for Global Organizations", `${BASE_URL}/`, "Twinblueprint provides technology consulting, digital transformation, software development, AI solutions and business automation services for organizations worldwide."))}</script>
+        <script type="application/ld+json">{JSON.stringify(getVideoObjectSchema({
+          name: "Twinblueprint case studies video",
+          description: "Measurable outcomes on live development and infrastructure projects with Digital Twin and immersive visualisation.",
+          thumbnailUrl: `${BASE_URL}/og-image.jpg`,
+          contentUrl: `${BASE_URL}/assets/videos/twinblueprintvid.mp4`,
+          uploadDate: "2026-01-01",
+        }))}</script>
       </Helmet>
       <Navbar />
       <main>

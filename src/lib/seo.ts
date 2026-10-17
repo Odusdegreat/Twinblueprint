@@ -152,3 +152,25 @@ export function getFAQSchema(faqs: Array<{ question: string; answer: string }>, 
     })),
   };
 }
+
+export function getVideoObjectSchema(video: {
+  name: string;
+  description: string;
+  thumbnailUrl: string;
+  contentUrl: string;
+  embedUrl?: string;
+  uploadDate?: string;
+  duration?: string;
+}) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "VideoObject",
+    name: video.name,
+    description: video.description,
+    thumbnailUrl: video.thumbnailUrl,
+    contentUrl: video.contentUrl,
+    ...(video.embedUrl ? { embedUrl: video.embedUrl } : {}),
+    ...(video.uploadDate ? { uploadDate: video.uploadDate } : {}),
+    ...(video.duration ? { duration: video.duration } : {}),
+  };
+}
