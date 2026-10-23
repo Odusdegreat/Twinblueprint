@@ -30,10 +30,11 @@ const CaseStudiesSection = () => (
         className="max-w-4xl mx-auto mb-6 rounded-2xl overflow-hidden border border-border shadow-lg bg-card"
       >
         <video
-          src="/assets/videos/twinblueprintvid.mp4"
+          src="/assets/videos/twinblueprintvid_compressed.mp4"
           controls
           playsInline
-          preload="metadata"
+          preload="none"
+          poster="/images/solutions/architectural-visualisation.webp"
           className="w-full h-auto block"
           aria-label="Twinblueprint case studies video"
         />
