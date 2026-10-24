@@ -10,20 +10,20 @@ import PageNav from "@/components/PageNav";
 import BookDemoDialog from "@/components/BookDemoDialog";
 import ExploreLinks from "@/components/ExploreLinks";
 import { useQuery } from "@tanstack/react-query";
-import { articlesApi, formatArticleDate, calculateReadTime } from "@/lib/articlesApi";
+import { articlesApi, formatArticleDate, calculateReadTime, isPublicArticle } from "@/lib/articlesApi";
 import { BASE_URL } from "@/lib/constants";
 import { ORGANIZATION_SCHEMA, WEBSITE_SCHEMA, getCollectionPageSchema } from "@/lib/seo";
 
-import heroImage from "@/assets/case-studies-hero.jpg";
-import csMegaProjects from "@/assets/cs-mega-projects.jpg";
-import csStadiums from "@/assets/cs-stadiums.jpg";
-import csTransportHubs from "@/assets/cs-transport-hubs.jpg";
-import csIndustrialParks from "@/assets/cs-industrial-parks.jpg";
-import csLifestyleEstates from "@/assets/cs-lifestyle-estates.jpg";
-import csGovernment from "@/assets/cs-government.jpg";
-import csResidentialDevelopers from "@/assets/cs-residential-developers.jpg";
-import csPlanningAuthorities from "@/assets/cs-planning-authorities.jpg";
-import csBimTeams from "@/assets/cs-bim-teams.jpg";
+import heroImage from "@/assets/case-studies-hero.webp";
+import csMegaProjects from "@/assets/cs-mega-projects.webp";
+import csStadiums from "@/assets/cs-stadiums.webp";
+import csTransportHubs from "@/assets/cs-transport-hubs.webp";
+import csIndustrialParks from "@/assets/cs-industrial-parks.webp";
+import csLifestyleEstates from "@/assets/cs-lifestyle-estates.webp";
+import csGovernment from "@/assets/cs-government.webp";
+import csResidentialDevelopers from "@/assets/cs-residential-developers.webp";
+import csPlanningAuthorities from "@/assets/cs-planning-authorities.webp";
+import csBimTeams from "@/assets/cs-bim-teams.webp";
 
 const audienceStudies = [
   {
@@ -186,7 +186,7 @@ const CaseStudies = () => {
     queryKey: ["articles", { page: 1, limit: 3 }],
     queryFn: () => articlesApi.list({ page: 1, limit: 3 }),
     staleTime: 5 * 60 * 1000,
-    select: (data) => data.articles.filter((a) => a.status === "published").slice(0, 3),
+    select: (data) => data.articles.filter((a) => isPublicArticle(a)).slice(0, 3),
   });
 
   const latestPosts = articlesData ?? [];

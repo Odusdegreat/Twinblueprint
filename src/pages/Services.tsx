@@ -8,12 +8,12 @@ import { useDemoDialogStore } from "@/stores/demoDialogStore";
 import Navbar from "@/components/Navbar";
 import PageNav from "@/components/PageNav";
 import ExploreLinks from "@/components/ExploreLinks";
-import svcArchVis from "@/assets/svc-arch-vis.jpg";
-import svcDigitalTwin from "@/assets/svc-digital-twin.jpg";
-import svcPlanningApproval from "@/assets/svc-planning-approval.jpg";
-import svcInfrastructure from "@/assets/svc-infrastructure.jpg";
-import svcUrbanPlanning from "@/assets/svc-urban-planning.jpg";
-import svcWalkthrough from "@/assets/svc-walkthrough.jpg";
+import svcArchVis from "@/assets/svc-arch-vis.webp";
+import svcDigitalTwin from "@/assets/svc-digital-twin.webp";
+import svcPlanningApproval from "@/assets/svc-planning-approval.webp";
+import svcInfrastructure from "@/assets/svc-infrastructure.webp";
+import svcUrbanPlanning from "@/assets/svc-urban-planning.webp";
+import svcWalkthrough from "@/assets/svc-walkthrough.webp";
 import { BASE_URL } from "@/lib/constants";
 import { ORGANIZATION_SCHEMA, WEBSITE_SCHEMA, getWebPageSchema } from "@/lib/seo";
 
@@ -181,7 +181,7 @@ const Services = () => {
                       width={1280}
                       height={720}
                       className="w-full h-44 object-cover"
-                    />
+/>
                     <div className="p-8 pt-0">
                     <div className="w-12 h-12 -mt-6 mb-4 bg-card border border-border rounded-lg flex items-center justify-center relative z-10 shadow-sm">
                       <Icon className="h-6 w-6 text-primary" />

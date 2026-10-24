@@ -163,7 +163,7 @@ export interface Article {
   meta_description: string | null;
   canonical_url: string | null;
   featured?: boolean;
-  status?: 'published' | 'draft';
+  status?: 'published' | 'draft' | 'scheduled';
   created_at?: string;
 }
 

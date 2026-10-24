@@ -8,7 +8,7 @@ import Navbar from "@/components/Navbar";
 import BookDemoDialog from "@/components/BookDemoDialog";
 import { useDemoDialogStore } from "@/stores/demoDialogStore";
 import { useQuery } from "@tanstack/react-query";
-import { articlesApi, formatArticleDate, calculateReadTime, getArticleModifiedDate, isPublicArticle } from "@/lib/articlesApi";
+import { articlesApi, formatArticleDate, calculateReadTime, getArticleModifiedDate, isPublicArticle, getArticleStatusLabel } from "@/lib/articlesApi";
 import { parseISO } from "date-fns";
 import { BASE_URL } from "@/lib/constants";
 import { ORGANIZATION_SCHEMA, WEBSITE_SCHEMA, getArticleSchema, getBreadcrumbSchema } from "@/lib/seo";
@@ -45,7 +45,20 @@ const BlogPost = () => {
     );
   }
 
-  if (isError || !article || !isPublicArticle(article)) {
+  const isArticleVisible = (article: Article) => {
+  if (!article.status || article.status === "published") {
+    return true;
+  }
+  if (article.status === "scheduled") {
+    return true;
+  }
+  if (article.status === "draft") {
+    return false;
+  }
+  return false;
+};
+
+if (isError || !article || !isArticleVisible(article)) {
     return (
       <>
         <Helmet defer={false}>
@@ -55,7 +68,7 @@ const BlogPost = () => {
         <main className="min-h-screen flex items-center justify-center bg-background">
           <div className="text-center px-4">
             <AlertCircle className="h-12 w-12 text-destructive mx-auto mb-4" />
-            <h1 className="text-2xl font-bold text-foreground mb-2">Article Not Found</h1>
+            <h2 className="text-2xl font-bold text-foreground mb-2">Article Not Found</h2>
             <p className="text-muted-foreground mb-6">
               {error instanceof Error ? error.message : "The article you're looking for doesn't exist or has been removed."}
             </p>
@@ -144,6 +157,11 @@ const BlogPost = () => {
                   <h1 className="text-3xl md:text-5xl font-bold text-white mb-6 leading-tight">{article.title}</h1>
                   <div className="flex flex-wrap gap-4 text-sm text-white/80">
                     <span className="flex items-center gap-2"><Calendar className="h-4 w-4" /> {formattedDate}</span>
+                    {getArticleStatusLabel(article) && (
+                      <span className="bg-primary/10 text-primary border-0 text-xs px-2 py-1 rounded">
+                        {getArticleStatusLabel(article)}
+                      </span>
+                    )}
                     <span className="flex items-center gap-2"><User className="h-4 w-4" /> {article.author} · {readTime}</span>
                   </div>
                 </div>
@@ -162,9 +180,14 @@ const BlogPost = () => {
                   transition={{ duration: 0.7 }}
                   className="max-w-3xl"
                 >
-                  <h1 className="text-3xl md:text-5xl font-bold text-hero-foreground mb-6 leading-tight">{article.title}</h1>
+                  <h2 className="text-3xl md:text-5xl font-bold text-hero-foreground mb-6 leading-tight">{article.title}</h2>
                   <div className="flex flex-wrap gap-4 text-sm text-hero-muted">
                     <span className="flex items-center gap-2"><Calendar className="h-4 w-4" /> {formattedDate}</span>
+                    {getArticleStatusLabel(article) && (
+                      <span className="bg-primary/10 text-primary border-0 text-xs px-2 py-1 rounded">
+                        {getArticleStatusLabel(article)}
+                      </span>
+                    )}
                     <span className="flex items-center gap-2"><User className="h-4 w-4" /> {article.author} · {readTime}</span>
                   </div>
                 </motion.div>

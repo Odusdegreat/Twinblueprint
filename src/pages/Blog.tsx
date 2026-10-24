@@ -11,7 +11,7 @@ import Navbar from "@/components/Navbar";
 import PageNav from "@/components/PageNav";
 import BookDemoDialog from "@/components/BookDemoDialog";
 import { useQuery } from "@tanstack/react-query";
-import { articlesApi, formatArticleDate, calculateReadTime, getArticleExcerpt, getFeaturedArticles, getPublicArticles } from "@/lib/articlesApi";
+import { articlesApi, formatArticleDate, calculateReadTime, getArticleExcerpt, getFeaturedArticles, getPublicArticles, getArticleStatusLabel, isArticleScheduled } from "@/lib/articlesApi";
 import { FaBuilding, FaChartLine, FaVrCardboard, FaFileAlt } from "react-icons/fa";
 import { BASE_URL } from "@/lib/constants";
 import { ORGANIZATION_SCHEMA, WEBSITE_SCHEMA, getCollectionPageSchema } from "@/lib/seo";
@@ -94,6 +94,9 @@ const Blog = () => {
 
   const featuredArticles = getFeaturedArticles(featuredQuery.data?.articles ?? []);
   const publicArticles = getPublicArticles(data?.articles ?? []);
+  const scheduledArticles = data?.articles
+    .filter((article) => isArticleScheduled(article))
+    .sort((first, second) => Date.parse(first.published_at) - Date.parse(second.published_at));
   const featuredSlugs = new Set(featuredArticles.map((article) => article.slug));
   const articlesToDisplay = publicArticles.filter((article) => page !== 1 || !featuredSlugs.has(article.slug));
   const totalPages = Math.max(1, data?.totalPages ?? 1);
@@ -251,6 +254,14 @@ const Blog = () => {
                         <h3 className="text-lg sm:text-xl font-bold text-foreground mb-2 leading-snug text-balance group-hover:text-primary transition-colors">
                           {article.title}
                         </h3>
+                        {getArticleStatusLabel(article) && (
+                          <Badge
+                            className="self-start mb-1 bg-primary/10 text-primary border-0 text-xs"
+                            style={{ backgroundColor: "var(--primary)", color: "var(--primary-foreground)" }}
+                          >
+                            {getArticleStatusLabel(article)}
+                          </Badge>
+                        )}
                         <p className="text-muted-foreground text-[0.9375rem] sm:text-sm mb-3 leading-relaxed flex-1 line-clamp-3">
                           {excerpt}
                         </p>
@@ -318,6 +329,11 @@ const Blog = () => {
                       <div className="min-w-0 flex-1">
                         <div className="mb-2 flex flex-wrap items-center gap-x-3 gap-y-1 text-xs text-muted-foreground">
                           <span>{article.category || "Insights"}</span>
+                          {getArticleStatusLabel(article) && (
+                            <span className="bg-primary/10 text-primary border-0 text-xs px-2 py-1 rounded">
+                              {getArticleStatusLabel(article)}
+                            </span>
+                          )}
                           <span className="inline-flex items-center gap-1"><Calendar className="h-3.5 w-3.5" />{formatArticleDate(article.published_at)}</span>
                         </div>
                         <h3 className="text-lg font-semibold leading-snug text-foreground hover:text-primary">

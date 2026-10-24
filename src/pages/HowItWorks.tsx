@@ -9,8 +9,8 @@ import Navbar from "@/components/Navbar";
 import PageNav from "@/components/PageNav";
 import { BASE_URL } from "@/lib/constants";
 import { ORGANIZATION_SCHEMA, WEBSITE_SCHEMA, getWebPageSchema, getVideoObjectSchema } from "@/lib/seo";
-import marketingVideo from "@/assets/marketing-video-ii-clean-2026.mp4.asset.json";
-import cityPlanningVideo from "@/assets/city-planning-clean-2026.mp4.asset.json";
+import marketingVideo from "@/assets/marketingone.mp4";
+import cityPlanningVideo from "@/assets/city-planning.mp4";
 
 const steps = [
   {
@@ -102,7 +102,7 @@ const HowItWorks = () => {
           name: "How Twinblueprint works",
           description: "Watch how Twinblueprint's Digital Twin technology brings projects to life with hyperreal 3D experiences.",
           thumbnailUrl: `${BASE_URL}/og-image.jpg`,
-          contentUrl: `${BASE_URL}/assets/videos/twinblueprintmeta.mp4`,
+          contentUrl: `${BASE_URL}/assets/videos/twinblueprintmeta_compressed.mp4`,
           uploadDate: "2026-01-01",
         }))}</script>
       </Helmet>
@@ -175,7 +175,7 @@ const HowItWorks = () => {
               className="max-w-4xl mx-auto rounded-2xl overflow-hidden border border-border shadow-lg bg-card"
             >
               <video
-                src={marketingVideo.url}
+                src={marketingVideo}
                 controls
                 playsInline
                 preload="metadata"
@@ -203,7 +203,7 @@ const HowItWorks = () => {
               className="max-w-4xl mx-auto rounded-2xl overflow-hidden border border-border shadow-lg bg-card"
             >
               <video
-                src={cityPlanningVideo.url}
+                src={cityPlanningVideo}
                 controls
                 playsInline
                 preload="metadata"

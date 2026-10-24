@@ -30,6 +30,7 @@ export const articlesApi = {
 
   getFeatured: async (limit = 3, category?: string) =>
     normalizeArticlesResponse(await api.get<ArticlesResponse>("/articles", { page: 1, limit, category, search: undefined })),
+
 };
 
 export function isPublicArticle(article: Pick<Article, "published_at" | "status">, now = Date.now()) {
@@ -39,12 +40,23 @@ export function isPublicArticle(article: Pick<Article, "published_at" | "status"
     && publishedAt <= now;
 }
 
-export function getArticleModifiedDate(publishedAt: string, updatedAt?: string | null) {
-  if (!updatedAt) return undefined;
-  const publishedTime = Date.parse(publishedAt);
-  const updatedTime = Date.parse(updatedAt);
-  if (!Number.isFinite(publishedTime) || !Number.isFinite(updatedTime) || updatedTime < publishedTime) return undefined;
-  return new Date(updatedTime).toISOString();
+export function getArticleStatusLabel(article: Article, now = Date.now()) {
+  const publishedAt = Date.parse(article.published_at);
+  const isFuture = Number.isFinite(publishedAt) && publishedAt > now;
+
+  if (article.status === "draft") {
+    return "Draft";
+  }
+  if (article.status === "scheduled" || (article.status === "published" && isFuture)) {
+    return "Scheduled";
+  }
+  return "";
+}
+
+export function isArticleScheduled(article: Article, now = Date.now()) {
+  const publishedAt = Date.parse(article.published_at);
+  const isFuture = Number.isFinite(publishedAt) && publishedAt > now;
+  return isFuture;
 }
 
 export function getPublicArticles(articles: Article[], now = Date.now()) {
@@ -74,6 +86,10 @@ export function calculateReadTime(content: string): string {
   const wordCount = textContent.split(/\s+/).filter(Boolean).length;
   const minutes = Math.ceil(wordCount / wordsPerMinute);
   return `${minutes} min read`;
+}
+
+export function getArticleModifiedDate(article: Article): string {
+  return article.modified_at || article.published_at || "";
 }
 
 export function getArticleExcerpt(content: string, maxLength = 140): string {
